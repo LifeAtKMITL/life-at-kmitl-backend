@@ -3,5 +3,5 @@ import mongoose from 'mongoose';
 
 export abstract class IdentifiableEntitySchema {
   @Prop()
-  readonly _id: mongoose.ObjectId;
+  readonly _id: mongoose.Types.ObjectId;
 }
