@@ -16,7 +16,7 @@ export class SubjectSchemaFactory implements EntitySchemaFactory<SubjectSchema, 
     };
   }
 
-  createFromScehma(subjectSchema: SubjectSchema): Subject {
+  createFromSchema(subjectSchema: SubjectSchema): Subject {
     return new Subject(
       subjectSchema._id.toString(),
       subjectSchema.name,
