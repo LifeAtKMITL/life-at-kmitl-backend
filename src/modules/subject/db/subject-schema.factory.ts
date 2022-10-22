@@ -1,8 +1,10 @@
+import { Injectable } from '@nestjs/common';
 import mongoose from 'mongoose';
 import { EntitySchemaFactory } from 'src/database/entity-schema.factory';
 import { Subject } from '../Subject';
 import { SubjectSchema } from './subject-schema';
 
+@Injectable()
 export class SubjectSchemaFactory implements EntitySchemaFactory<SubjectSchema, Subject> {
   create(subject: Subject): SubjectSchema {
     return {
