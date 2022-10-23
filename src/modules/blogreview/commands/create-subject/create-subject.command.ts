@@ -1,5 +1,5 @@
-import { CreateSubjectRequest } from '../../dtos/request/create-subject-request.dto';
+import { CreateBlogreviewRequest } from '../../dtos/request/create-blog-request.dto';
 
-export class CreateSubjectCommand {
-  constructor(public readonly createSubjectRequest: CreateSubjectRequest) {}
+export class CreateBlogCommand {
+  constructor(public readonly createSubjectRequest: CreateBlogreviewRequest) {}
 }
