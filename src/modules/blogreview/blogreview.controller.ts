@@ -1,10 +1,10 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
-import { CreateBlogCommand } from './commands/create-subject/create-subject.command';
+import { CreateBlogCommand } from './commands/create-subject/create-blogreview.command';
 import { CreateBlogreviewRequest } from './dtos/request/create-blog-request.dto';
 
 @Controller('subject')
-export class SubjectController {
+export class BlogreviewController {
   constructor(private readonly commandBus: CommandBus) {}
 
   @Post()

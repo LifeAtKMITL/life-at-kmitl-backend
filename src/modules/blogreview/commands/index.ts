@@ -1,3 +1,3 @@
-import { CreateSubjectCommandHandler } from './create-subject/create-subject.handler';
+import { CreateBlogreviewCommandHandler } from './create-subject/create-blogreview.handler';
 
-export const SubjectCommandHandlers = [CreateSubjectCommandHandler];
+export const BlogreviewCommandHandlers = [CreateBlogreviewCommandHandler];

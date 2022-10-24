@@ -1,19 +1,19 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { MongooseModule, SchemaFactory } from '@nestjs/mongoose';
-import { SubjectCommandHandlers } from './commands';
+import { BlogreviewCommandHandlers } from './commands';
 import { BlogreviewEntityRepository } from './db/blogreview-entity.repository';
 import { BlogreviewSchema } from './db/blogreview-schema';
 import { BlogreviewSchemaFactory } from './db/blogreview-schema.factory';
-import { SubjectController } from './blogreview.controller';
-import { SubjectFactory } from './blogreview.factory';
+import { BlogreviewController } from './blogreview.controller';
+import { BlogreviewFactory } from './blogreview.factory';
 
 @Module({
   imports: [
     CqrsModule,
     MongooseModule.forFeature([{ name: BlogreviewSchema.name, schema: SchemaFactory.createForClass(BlogreviewSchema) }]),
   ],
-  controllers: [SubjectController],
-  providers: [SubjectFactory, BlogreviewEntityRepository, BlogreviewSchemaFactory, ...SubjectCommandHandlers],
+  controllers: [BlogreviewController],
+  providers: [BlogreviewFactory, BlogreviewEntityRepository, BlogreviewSchemaFactory, ...BlogreviewCommandHandlers],
 })
 export class BlogreviewModule {}
