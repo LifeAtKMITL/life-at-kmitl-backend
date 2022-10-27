@@ -88,6 +88,7 @@ export class FilesController {
       console.log(fileReponse);
       response.push(fileReponse);
     });
+
     return response;
   }
 
