@@ -1,3 +1,4 @@
+import { ConfigModule } from '@nestjs/config';
 import { DatabaseModule } from './../../database/database.module';
 import { Module } from '@nestjs/common';
 import { FilesController } from './files.controller';
@@ -12,6 +13,7 @@ import { SharenoteSchema } from '../sharenote/db/sharenote-schema';
   imports: [
     CqrsModule,
     MongooseModule.forFeature([{ name: SharenoteSchema.name, schema: SchemaFactory.createForClass(SharenoteSchema) }]),
+    ConfigModule.forRoot(),
     // MulterModule.registerAsync({
     //   useClass: GridFsMulterConfigService,
     // }),

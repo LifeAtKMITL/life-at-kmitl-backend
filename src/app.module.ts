@@ -1,3 +1,4 @@
+import { FirebaseModule } from './firebase/firebase.module';
 import { FilesModule } from './modules/file-module/files.module';
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from './database/database.module';
@@ -5,6 +6,6 @@ import { SubjectModule } from './modules/subject/subject.module';
 import { SharenoteModule } from './modules/sharenote/sharenote.module';
 
 @Module({
-  imports: [DatabaseModule, SubjectModule, SharenoteModule, FilesModule],
+  imports: [DatabaseModule, SubjectModule, SharenoteModule, FilesModule, FirebaseModule],
 })
 export class AppModule {}
