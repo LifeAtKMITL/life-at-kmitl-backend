@@ -27,7 +27,7 @@ export class FirebaseController {
         fileSize: 15625000,
       },
       fileFilter: (req: any, file: any, cb: any) => {
-        if (file.mimetype.match(/\/(jpg|jpeg|png)$/)) {
+        if (file.mimetype.match(/\/(jpg|jpeg|png|pdf)$/)) {
           // Allow storage of file
           cb(null, true);
         } else {
