@@ -11,7 +11,7 @@ export class BlogreviewFactory implements EntityFactory<Blogreview> {
 
   async create({ subjectId, textSubjectReview, userId, userName, userId_Liked, rate, date }: BlogreviewProps): Promise<Blogreview> {
     const newBlogreview = new Blogreview(new mongoose.Types.ObjectId().toHexString(), subjectId, textSubjectReview, 
-    userId, userName, userId_Liked, rate, date);
+    userId, userName, userId_Liked, rate, new Date());
     await this.BlogreviewEntityRepository.create(newBlogreview);
     return newBlogreview;
   }
