@@ -3,7 +3,7 @@ import { CommandBus } from '@nestjs/cqrs';
 import { CreateBlogCommand } from './commands/create-subject/create-blogreview.command';
 import { CreateBlogreviewRequest } from './dtos/request/create-blog-request.dto';
 
-@Controller('subject')
+@Controller('blogreview')
 export class BlogreviewController {
   constructor(private readonly commandBus: CommandBus) {}
 
