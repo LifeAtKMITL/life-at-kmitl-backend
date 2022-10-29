@@ -1,4 +1,3 @@
-import { getDownloadURL } from 'firebase/storage';
 import {
   Controller,
   Get,
@@ -40,15 +39,25 @@ export class FirebaseController {
   )
   async uploads(@UploadedFiles() files: Array<Express.Multer.File>) {
     try {
-      await this.fileService.upload(files);
+      let res = [];
+
+      for (let i = 0; i < files.length; i++) {
+        let ans = await this.fileService.upload(files[i]);
+        //console.log('++++', ans);
+        res.push(ans);
+      }
+
+      //console.log(res);
+      return res;
     } catch (e) {
       return HttpStatus.BAD_REQUEST;
     }
-    return HttpStatus.CREATED;
   }
 
   @Get()
-  async getDownloadURL(): Promise<string> {
-    return 'Hello';
+  async getAllFileDownloadURL(): Promise<any> {
+    let res;
+    res = await this.fileService.getALLDownloadURL();
+    return res;
   }
 }
