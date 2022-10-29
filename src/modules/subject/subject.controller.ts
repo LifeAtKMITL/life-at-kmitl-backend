@@ -18,4 +18,6 @@ export class SubjectController {
   async createSubject(@Body() createSubjectRequest: CreateSubjectRequest): Promise<void> {
     await this.commandBus.execute<CreateSubjectCommand, void>(new CreateSubjectCommand(createSubjectRequest));
   }
+
+  //TODO: get subject by id -> combined each sec into one object (array date-time, teachers, sec) same size
 }
