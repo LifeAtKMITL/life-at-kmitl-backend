@@ -22,8 +22,6 @@ export class FileService {
 
   async upload(file): Promise<any> {
     let storageRef = ref(await this.firebaseService.getStorage(), 'Images/userId/collectionName');
-    let res = [];
-    //console.log(file);
 
     file = {
       ...file,
@@ -38,8 +36,7 @@ export class FileService {
     let thisref = ref(storageRef, `${file.filename}`);
     const uploadTask = await uploadBytesResumable(thisref, file.buffer, metadata);
 
-    let url;
-    url = await getDownloadURL(uploadTask.ref).then((downloadURL) => {
+    let url = await getDownloadURL(uploadTask.ref).then((downloadURL) => {
       //console.log('File available at', downloadURL);
       return downloadURL;
     });
