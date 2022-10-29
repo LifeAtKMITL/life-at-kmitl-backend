@@ -1,3 +1,4 @@
+import { FirebaseModule } from './../../firebase/firebase.module';
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { MongooseModule, SchemaFactory } from '@nestjs/mongoose';
@@ -13,6 +14,7 @@ import { FilesModule } from '../file-module/files.module';
   imports: [
     CqrsModule,
     MongooseModule.forFeature([{ name: SharenoteSchema.name, schema: SchemaFactory.createForClass(SharenoteSchema) }]),
+    FirebaseModule,
   ],
   controllers: [SharenoteController],
   providers: [SharenoteFactory, SharenoteEntityRepository, SharenoteSchemaFactory, ...SharenoteCommandHandlers],
