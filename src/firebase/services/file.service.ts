@@ -45,8 +45,8 @@ export class FileService {
     });
 
     let fileResponse = {
-      userId: '1234 DONT FORGET',
-      collectionName: 'collectionName DONT FORGET',
+      userIdMongo: `${_id_mongo_user}`,
+      collectionName: `${sharenoteCollentionName}`,
       filename: file.filename,
       originalname: file.originalname,
       encoding: file.encoding,
