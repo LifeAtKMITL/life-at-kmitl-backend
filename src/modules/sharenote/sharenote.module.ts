@@ -8,7 +8,8 @@ import { SharenoteSchema } from './db/sharenote-schema';
 import { SharenoteSchemaFactory } from './db/sharenote-schema.factory';
 import { SharenoteController } from './sharenote.controller';
 import { SharenoteFactory } from './sharenote.factory';
-import { FilesModule } from '../file-module/files.module';
+import { FileService } from 'src/firebase/services/file.service';
+import { FirebaseService } from 'src/firebase/services/firebase.service';
 
 @Module({
   imports: [
