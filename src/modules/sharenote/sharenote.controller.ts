@@ -54,7 +54,7 @@ export class SharenoteController {
     try {
       // console.log(files.files);
 
-      console.log(body);
+      //console.log(body);
       // console.log(files.sharenoteCollectionName);
 
       let res = [];
