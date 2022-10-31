@@ -6,7 +6,8 @@ export class Sharenote extends AggregateRoot {
     private readonly userId: string,
     private readonly userName: string,
     private readonly sharenoteCollectionName: string,
-    private readonly pathFiles: string[],
+    private readonly sharenoteCollectionNameVersion: string,
+    private readonly files: any[],
     private readonly likeCount: number,
     private readonly dowloadCount: number,
     private readonly teachers: string[],
@@ -29,9 +30,12 @@ export class Sharenote extends AggregateRoot {
   getSharenoteCollectionName(): string {
     return this.sharenoteCollectionName;
   }
+  getSharenoteCollectionNameVersion(): string {
+    return this.sharenoteCollectionNameVersion;
+  }
 
-  getPathFiles(): string[] {
-    return this.pathFiles;
+  getFiles(): any[] {
+    return this.files;
   }
 
   getLikeCount(): number {

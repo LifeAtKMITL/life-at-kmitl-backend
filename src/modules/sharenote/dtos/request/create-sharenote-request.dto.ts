@@ -1,10 +1,5 @@
-export class CreateSharenoteRequest {
-  userId: string;
-  userName: string;
+export class CreateSharenoteRequestDTO {
+  _id_mongo_user: string;
   sharenoteCollectionName: string;
-  pathFiles: string[];
-  likeCount: number;
-  dowloadCount: number;
   teachers: string[];
-  date: Date;
 }
