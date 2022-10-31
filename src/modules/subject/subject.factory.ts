@@ -9,8 +9,27 @@ import { SubjectProps } from './subject.types';
 export class SubjectFactory implements EntityFactory<Subject> {
   constructor(private readonly subjectEntityRepository: SubjectEntityRepository) {}
 
-  async create({ name, sec, credit, teachers }: SubjectProps): Promise<Subject> {
-    const newSubject = new Subject(new mongoose.Types.ObjectId().toHexString(), name, sec, credit, teachers);
+  async create({
+    subjectId,
+    name,
+    classDateTime,
+    midtermDateTime,
+    finalDateTime,
+    sec,
+    credit,
+    teachers,
+  }: SubjectProps): Promise<Subject> {
+    const newSubject = new Subject(
+      new mongoose.Types.ObjectId().toHexString(),
+      subjectId,
+      name,
+      classDateTime,
+      midtermDateTime,
+      finalDateTime,
+      sec,
+      credit,
+      teachers,
+    );
     await this.subjectEntityRepository.create(newSubject);
     return newSubject;
   }
