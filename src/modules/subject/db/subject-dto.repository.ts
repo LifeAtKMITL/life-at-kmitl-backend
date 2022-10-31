@@ -11,7 +11,10 @@ export class SubjectDtoRepository {
   async findAll(): Promise<SubjectsDto[]> {
     const subjects = await this.subjectModel.find({}, {}, { lean: true });
     return subjects.map((subject) => {
-      return { ...subject };
+      return {
+        subjectId: subject.subjectId,
+        name: subject.name,
+      };
     });
   }
 }

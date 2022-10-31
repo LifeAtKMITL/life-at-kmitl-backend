@@ -1,6 +1,4 @@
 export class SubjectsDto {
+  readonly subjectId: string;
   readonly name: string;
-  readonly sec: string;
-  readonly credit: number;
-  readonly teachers: string;
 }
