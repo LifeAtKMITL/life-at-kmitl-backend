@@ -9,24 +9,23 @@ import { SharenoteProps } from './sharenote.types';
 export class SharenoteFactory implements EntityFactory<Sharenote> {
   constructor(private readonly sharenoteEntityRepository: SharenoteEntityRepository) {}
 
-  async create({
+  async create(
     userId,
     userName,
     sharenoteCollectionName,
-    pathFiles,
-    likeCount,
-    dowloadCount,
+    sharenoteCollectionNameVersion,
+    files,
     teachers,
-    date,
-  }: SharenoteProps): Promise<Sharenote> {
+  ): Promise<Sharenote> {
     const newSharenote = new Sharenote(
       new mongoose.Types.ObjectId().toHexString(),
       userId,
       userName,
       sharenoteCollectionName,
-      pathFiles,
-      likeCount,
-      dowloadCount,
+      sharenoteCollectionNameVersion,
+      files,
+      0,
+      0,
       teachers,
       new Date(),
     );

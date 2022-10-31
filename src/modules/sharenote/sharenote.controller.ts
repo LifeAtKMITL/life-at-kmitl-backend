@@ -1,3 +1,4 @@
+import { Sharenote } from './Sharenote';
 import {
   Body,
   Controller,
@@ -11,7 +12,7 @@ import {
 import { CommandBus } from '@nestjs/cqrs';
 import { FileFieldsInterceptor, FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { CreateSharenoteCommand } from './commands/create-sharenote/create-sharenote.command';
-import { CreateSharenoteRequest } from './dtos/request/create-sharenote-request.dto';
+import { CreateSharenoteRequestDTO } from './dtos/request/create-sharenote-request.dto';
 import { extname } from 'path';
 import { FileService } from 'src/firebase/services/file.service';
 import { FirebaseService } from 'src/firebase/services/firebase.service';
@@ -39,35 +40,29 @@ export class SharenoteController {
     private readonly fileService: FileService,
   ) {}
 
-  @Post()
-  async createSharenote(@Body() createSharenoteRequest: CreateSharenoteRequest): Promise<void> {
-    await this.commandBus.execute<CreateSharenoteCommand, void>(new CreateSharenoteCommand(createSharenoteRequest));
-  }
+  // @Post()
+  // async createSharenote(@Body() createSharenoteRequest: CreateSharenoteRequestDTO): Promise<void> {
+  //   await this.commandBus.execute<CreateSharenoteCommand, void>(new CreateSharenoteCommand(createSharenoteRequest));
+  // }
 
   @Post('uploads')
   @UseInterceptors(FilesInterceptor('files', 5, mulOp))
   async uploadFile(
     @UploadedFiles()
     files: Array<Express.Multer.File>,
-    @Body() body,
+    @Body() createSharenoteRequest: CreateSharenoteRequestDTO,
   ) {
     try {
-      // console.log(files.files);
+      const { _id_mongo_user, sharenoteCollectionName, teachers } = createSharenoteRequest;
 
-      //console.log(body);
-      // console.log(files.sharenoteCollectionName);
+      let listObjFile = await this.fileService.uploadsParams(files, _id_mongo_user, sharenoteCollectionName);
+      //let ans = await this.fileService.upload(files[i]);
 
-      let res = [];
-      for (let i = 0; i < files.length; i++) {
-        //console.log(files[i]);
-        let ans = await this.fileService.uploadParams(files[i], body._id_mongo_user, body.sharenoteCollectionName);
-        //let ans = await this.fileService.upload(files[i]);
+      let res: Sharenote;
+      res = await this.commandBus.execute<CreateSharenoteCommand, Sharenote>(
+        new CreateSharenoteCommand(createSharenoteRequest, listObjFile),
+      );
 
-        //console.log('++++', ans);
-        res.push(ans);
-      }
-
-      //console.log(res);
       return res;
     } catch (e) {
       return HttpStatus.BAD_REQUEST;

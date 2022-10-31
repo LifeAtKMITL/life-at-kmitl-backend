@@ -1,3 +1,4 @@
+import { Sharenote } from './../../Sharenote';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { SharenoteFactory } from '../../sharenote.factory';
 import { CreateSharenoteCommand } from './create-sharenote.command';
@@ -6,18 +7,19 @@ import { CreateSharenoteCommand } from './create-sharenote.command';
 export class CreateSharenoteCommandHandler implements ICommandHandler {
   constructor(private readonly sharenoteFactory: SharenoteFactory) {}
 
-  async execute({ createSharenoteRequest }: CreateSharenoteCommand): Promise<void> {
-    const { userId, userName, sharenoteCollectionName, pathFiles, likeCount, dowloadCount, teachers, date } =
-      createSharenoteRequest;
-    const sharenote = this.sharenoteFactory.create({
-      userId,
-      userName,
+  async execute({ createSharenoteRequest, listFileUploaded }: CreateSharenoteCommand): Promise<Sharenote> {
+    const { _id_mongo_user, sharenoteCollectionName, teachers } = createSharenoteRequest;
+    // console.log(_id_mongo_user);
+    // console.log(sharenoteCollectionName);
+    //console.log(listFileUploaded[0].collectionName);
+    const sharenote = this.sharenoteFactory.create(
+      _id_mongo_user,
+      'USERNAME PLACE HERE',
       sharenoteCollectionName,
-      pathFiles,
-      likeCount,
-      dowloadCount,
+      listFileUploaded[0].collectionName,
+      listFileUploaded,
       teachers,
-      date,
-    });
+    );
+    return sharenote;
   }
 }

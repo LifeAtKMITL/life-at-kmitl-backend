@@ -13,7 +13,10 @@ export class SharenoteSchema extends IdentifiableEntitySchema {
   readonly sharenoteCollectionName: string;
 
   @Prop()
-  readonly pathFiles: string[];
+  readonly sharenoteCollectionNameVersion: string;
+
+  @Prop()
+  readonly files: any[];
 
   @Prop()
   readonly likeCount: number;
