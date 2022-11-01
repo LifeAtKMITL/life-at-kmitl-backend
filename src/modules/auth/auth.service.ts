@@ -1,15 +1,30 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { InjectModel } from '@nestjs/mongoose';
+import { Model } from 'mongoose';
 import { CreateAuthDto } from './dto/create-auth.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
+import { User } from './schemas/user.schema';
 
 @Injectable()
 export class AuthService {
-  create(createAuthDto: CreateAuthDto) {
-    return 'This action adds a new auth';
+  constructor(@InjectModel(User.name) private userModel: Model<User>) {}
+
+  async login(createAuthDto: CreateAuthDto) {
+    const { userId } = createAuthDto;
+    const user = await this.userModel.findOne({ userId });
+
+    // Login
+    if (user) {
+      return 'Login';
+    }
+
+    return this.register(userId);
   }
 
-  findAll() {
-    return `This action returns all auth`;
+  register(userId: string) {
+    console.log(userId);
+
+    return 'Register';
   }
 
   findOne(id: number) {
@@ -18,9 +33,5 @@ export class AuthService {
 
   update(id: number, updateAuthDto: UpdateAuthDto) {
     return `This action updates a #${id} auth`;
-  }
-
-  remove(id: number) {
-    return `This action removes a #${id} auth`;
   }
 }

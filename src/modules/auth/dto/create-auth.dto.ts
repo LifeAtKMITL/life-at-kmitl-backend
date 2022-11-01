@@ -1,1 +1,3 @@
-export class CreateAuthDto {}
+export class CreateAuthDto {
+  readonly userId: string;
+}
