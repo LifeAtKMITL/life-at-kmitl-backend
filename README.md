@@ -1,4 +1,4 @@
-# Life@KMITL
+<h1 align="center">Life@KMITL</h1>
 
 ## Description
 
