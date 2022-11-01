@@ -10,6 +10,8 @@ import { SharenoteController } from './sharenote.controller';
 import { SharenoteFactory } from './sharenote.factory';
 import { FileService } from 'src/firebase/services/file.service';
 import { FirebaseService } from 'src/firebase/services/firebase.service';
+import { SharenotesQueryhandlers } from './queries';
+import { SharenoteDtoRepository } from './db/sharenote-dto.repository';
 
 @Module({
   imports: [
@@ -18,6 +20,6 @@ import { FirebaseService } from 'src/firebase/services/firebase.service';
     FirebaseModule,
   ],
   controllers: [SharenoteController],
-  providers: [SharenoteFactory, SharenoteEntityRepository, SharenoteSchemaFactory, ...SharenoteCommandHandlers],
+  providers: [SharenoteFactory, SharenoteEntityRepository, SharenoteSchemaFactory,SharenoteDtoRepository, ...SharenoteCommandHandlers,...SharenotesQueryhandlers],
 })
 export class SharenoteModule {}
