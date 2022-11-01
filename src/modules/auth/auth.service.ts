@@ -1,7 +1,7 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
-import { CreateAuthDto } from './dto/create-auth.dto';
+import { LoginDto } from './dto/login.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
 import { User } from './schemas/user.schema';
 
@@ -9,8 +9,8 @@ import { User } from './schemas/user.schema';
 export class AuthService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
-  async login(createAuthDto: CreateAuthDto) {
-    const { userId } = createAuthDto;
+  async login(loginDto: LoginDto) {
+    const { userId } = loginDto;
     const user = await this.userModel.findOne({ userId });
 
     // Login

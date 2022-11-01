@@ -1,3 +1,3 @@
-export class CreateAuthDto {
+export class LoginDto {
   readonly userId: string;
 }
