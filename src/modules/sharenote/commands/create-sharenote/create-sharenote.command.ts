@@ -6,3 +6,4 @@ export class CreateSharenoteCommand {
     public readonly listFileUploaded: any,
   ) {}
 }
+  

@@ -5,17 +5,20 @@ import {
   HttpException,
   HttpStatus,
   Post,
+  Get,
   UploadedFile,
   UploadedFiles,
   UseInterceptors,
 } from '@nestjs/common';
-import { CommandBus } from '@nestjs/cqrs';
+import { CommandBus ,QueryBus} from '@nestjs/cqrs';
 import { FileFieldsInterceptor, FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { CreateSharenoteCommand } from './commands/create-sharenote/create-sharenote.command';
 import { CreateSharenoteRequestDTO } from './dtos/request/create-sharenote-request.dto';
 import { extname } from 'path';
 import { FileService } from 'src/firebase/services/file.service';
 import { FirebaseService } from 'src/firebase/services/firebase.service';
+import { SharenotesQuery } from './queries/sharenotes.query';
+import { SharenoteDto } from './dtos/sharenote.dto';
 
 let mulOp = {
   limits: {
@@ -38,8 +41,13 @@ export class SharenoteController {
     private readonly commandBus: CommandBus,
     private readonly filebaseService: FirebaseService,
     private readonly fileService: FileService,
+    private readonly queryBus: QueryBus,
   ) {}
-
+  
+  @Get()
+  async getAllNotes():Promise<SharenoteDto[]> {
+    return  this.queryBus.execute<SharenotesQuery, SharenoteDto[]>(new SharenotesQuery());
+  }
   // @Post()
   // async createSharenote(@Body() createSharenoteRequest: CreateSharenoteRequestDTO): Promise<void> {
   //   await this.commandBus.execute<CreateSharenoteCommand, void>(new CreateSharenoteCommand(createSharenoteRequest));
@@ -68,4 +76,6 @@ export class SharenoteController {
       return HttpStatus.BAD_REQUEST;
     }
   }
+
+
 }
