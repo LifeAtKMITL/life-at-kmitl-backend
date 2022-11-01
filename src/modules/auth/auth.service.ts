@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ConflictException, Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { LoginDto } from './dto/login.dto';
@@ -9,22 +9,28 @@ import { User } from './schemas/user.schema';
 export class AuthService {
   constructor(@InjectModel(User.name) private userModel: Model<User>) {}
 
-  async login(loginDto: LoginDto) {
+  async login(loginDto: LoginDto): Promise<{ token: string }> {
     const { userId } = loginDto;
+
     const user = await this.userModel.findOne({ userId });
 
-    // Login
-    if (user) {
-      return 'Login';
+    // Register
+    if (!user) {
+      return this.register(userId);
     }
 
-    return this.register(userId);
+    return { token: userId };
   }
 
-  register(userId: string) {
-    console.log(userId);
+  async register(userId: string): Promise<{ token: string }> {
+    try {
+      const user = await this.userModel.create({ userId });
 
-    return 'Register';
+      return { token: userId };
+    } catch (error) {
+      console.log(error);
+      throw new ConflictException('something error. read log.');
+    }
   }
 
   findOne(id: number) {
