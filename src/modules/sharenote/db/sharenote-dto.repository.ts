@@ -15,7 +15,20 @@ export class SharenoteDtoRepository{
             return {
               userName: sharenote.userName,
               userId: sharenote.userId,
+              sharenoteCollectionName : sharenote.sharenoteCollectionName,
+              sharenoteCollectionNameVersion: sharenote.sharenoteCollectionNameVersion,
+              files: sharenote.files,
+              likeCount : sharenote.likeCount,
+              dowloadCount: sharenote.dowloadCount,
+              teachers:sharenote.teachers,
+              date:sharenote.date,
             };
           });
     }
+
+    // DESC: Filter Subject Collection by subjectId
+  async findById(id: string): Promise<SharenotesDto> {
+    const subject = await this.sharenoteModel.findOne({ userId : id }, {}, { lean: true });
+    return subject;
+  }
 }

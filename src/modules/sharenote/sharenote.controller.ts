@@ -9,6 +9,7 @@ import {
   UploadedFile,
   UploadedFiles,
   UseInterceptors,
+  Param,
 } from '@nestjs/common';
 import { CommandBus ,QueryBus} from '@nestjs/cqrs';
 import { FileFieldsInterceptor, FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
@@ -19,6 +20,8 @@ import { FileService } from 'src/firebase/services/file.service';
 import { FirebaseService } from 'src/firebase/services/firebase.service';
 import { SharenotesQuery } from './queries/sharenotes.query';
 import { SharenoteDto } from './dtos/sharenote.dto';
+import { SharenotesDto } from './dtos/sharenotes.dto';
+import { SharenoteByIdQuery } from './queries/sharenoteById.handler';
 
 let mulOp = {
   limits: {
@@ -47,6 +50,10 @@ export class SharenoteController {
   @Get()
   async getAllNotes():Promise<SharenoteDto[]> {
     return  this.queryBus.execute<SharenotesQuery, SharenoteDto[]>(new SharenotesQuery());
+  }
+  @Get(':id')
+  async getSharenoteById(@Param('id') id: string): Promise<SharenotesDto> {
+    return this.queryBus.execute<SharenoteByIdQuery, SharenoteDto>(new SharenoteByIdQuery(id));
   }
   // @Post()
   // async createSharenote(@Body() createSharenoteRequest: CreateSharenoteRequestDTO): Promise<void> {
