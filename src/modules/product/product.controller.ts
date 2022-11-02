@@ -1,5 +1,7 @@
-import { Controller, Get, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
+import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { User } from '../auth/schemas/user.schema';
 import { ProductService } from './product.service';
 
 @Controller('product')
@@ -15,5 +17,11 @@ export class ProductController {
   @UseGuards(AuthGuard())
   findAllProtected() {
     return this.productService.findAll();
+  }
+
+  @Post()
+  @UseGuards(AuthGuard())
+  create(@CurrentUser() user: User) {
+    return this.productService.create(user);
   }
 }
