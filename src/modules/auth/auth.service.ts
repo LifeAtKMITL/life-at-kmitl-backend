@@ -28,7 +28,10 @@ export class AuthService {
 
   async register(userId: string): Promise<{ token: string }> {
     try {
-      const user = await this.userModel.create({ userId });
+      const username = 'admin';
+      const image =
+        'https://images.pexels.com/photos/1716861/pexels-photo-1716861.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
+      const user = await this.userModel.create({ userId, username, image });
 
       const token = await APIFeatures.assignJwtToken(user.userId, this.jwtService);
 
