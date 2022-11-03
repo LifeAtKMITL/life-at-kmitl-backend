@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { MongooseModule, SchemaFactory } from '@nestjs/mongoose';
+import { AuthModule } from '../auth/auth.module';
 import { SubjectCommandHandlers } from './commands';
 import { SubjectDtoRepository } from './db/subject-dto.repository';
 import { SubjectEntityRepository } from './db/subject-entity.repository';
@@ -14,6 +15,7 @@ import { SubjectFactory } from './subject.factory';
   imports: [
     CqrsModule,
     MongooseModule.forFeature([{ name: SubjectSchema.name, schema: SchemaFactory.createForClass(SubjectSchema) }]),
+    AuthModule,
   ],
   controllers: [SubjectController],
   providers: [
