@@ -1,3 +1,4 @@
+import { DormModule } from './modules/dorm/dorm.module';
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from './database/database.module';
 import { SubjectModule } from './modules/subject/subject.module';
@@ -13,9 +14,9 @@ import { ProductModule } from './modules/product/product.module';
     }),
     DatabaseModule,
     SubjectModule,
-    AuthModule,
-    ProductModule,
+    DormModule,
+    //AuthModule,
+    //ProductModule,
   ],
-
 })
 export class AppModule {}

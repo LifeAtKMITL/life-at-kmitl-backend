@@ -9,8 +9,8 @@ import { DormProps } from './dorm.types';
 export class DormFactory implements EntityFactory<Dorm> {
   constructor(private readonly dormEntityRepository: DormEntityRepository) {}
 
-  async create({ name, description }: DormProps): Promise<Dorm> {
-    const newDorm = new Dorm(new mongoose.Types.ObjectId().toHexString(), name, description);
+  async create({ name }: DormProps): Promise<Dorm> {
+    const newDorm = new Dorm(new mongoose.Types.ObjectId().toHexString(), name);
     await this.dormEntityRepository.create(newDorm);
     return newDorm;
   }

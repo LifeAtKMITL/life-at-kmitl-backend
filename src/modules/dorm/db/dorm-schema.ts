@@ -7,5 +7,26 @@ export class DormSchema extends IdentifiableEntitySchema {
   readonly name: string;
 
   @Prop()
-  readonly description: string;
+  readonly tel: string;
+
+  @Prop()
+  readonly address: string;
+
+  @Prop([Object])
+  readonly room: Object[];
+
+  @Prop()
+  readonly imagePath: string[];
+
+  @Prop()
+  readonly zone: string;
+
+  // @Prop()
+  readonly bills: Object;
+
+  // @Prop()
+  readonly facilities: Object;
+
+  // @Prop([Object])
+  readonly totalScore: Object[];
 }

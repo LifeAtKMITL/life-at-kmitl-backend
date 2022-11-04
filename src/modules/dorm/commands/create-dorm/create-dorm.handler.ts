@@ -7,7 +7,7 @@ export class CreateDormCommandHandler implements ICommandHandler {
   constructor(private readonly dormFactory: DormFactory) {}
 
   async execute({ createDormRequest }: CreateDormCommand): Promise<void> {
-    const { name, description } = createDormRequest;
-    const dorm = this.dormFactory.create({ name, description });
+    const { name } = createDormRequest;
+    const dorm = this.dormFactory.create({ name });
   }
 }

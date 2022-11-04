@@ -1,15 +1,27 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
-import { CommandBus } from '@nestjs/cqrs';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { CreateDormCommand } from './commands/create-dorm/create-dorm.command';
 import { CreateDormRequest } from './dtos/request/create-dorm-request.dto';
+import { DormsQuery } from './queries/dorms.query-handler';
+import { DormByIdQuery } from './queries/dorm-by-id.query-handler';
 
 @Controller('dorm')
 export class DormController {
-  constructor(private readonly commandBus: CommandBus) {}
+  constructor(private readonly commandBus: CommandBus, private readonly queryBus: QueryBus) {}
 
   @Get()
-  async getAll() {
-    return 'hellop';
+  async getAllDorms(): Promise<any> {
+    return await this.queryBus.execute<DormsQuery, any>(new DormsQuery());
+  }
+
+  @Get('filter')
+  async getDormByFilterOptions(@Body body): Promise<any> {
+    return await this.queryBus.execute<DormsQuery, any>(new DormsQuery());
+  }
+
+  @Get(':id')
+  async getDormById(@Param('id') id: string): Promise<any> {
+    return this.queryBus.execute<DormsQuery, any>(new DormByIdQuery(id));
   }
 
   @Post()
