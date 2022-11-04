@@ -1,3 +1,3 @@
-import { CreateBlogreviewCommandHandler } from './create-subject/create-blogreview.handler';
+import { CreateBlogreviewCommandHandler } from './create-blogreview/create-blogreview.handler';
 
 export const BlogreviewCommandHandlers = [CreateBlogreviewCommandHandler];

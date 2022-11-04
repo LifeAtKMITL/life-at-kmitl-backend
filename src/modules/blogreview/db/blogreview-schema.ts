@@ -3,6 +3,7 @@ import { IdentifiableEntitySchema } from 'src/database/identifiable-entity-schem
 
 @Schema({ versionKey: false, collection: 'Blogreview' })
 export class BlogreviewSchema extends IdentifiableEntitySchema {
+
   @Prop()
   readonly subjectID: string;
 

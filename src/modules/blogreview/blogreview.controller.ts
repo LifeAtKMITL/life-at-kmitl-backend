@@ -1,6 +1,6 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { CommandBus } from '@nestjs/cqrs';
-import { CreateBlogCommand } from './commands/create-subject/create-blogreview.command';
+import { CreateBlogCommand } from './commands/create-blogreview/create-blogreview.command';
 import { CreateBlogreviewRequest } from './dtos/request/create-blog-request.dto';
 
 @Controller('blogreview')
