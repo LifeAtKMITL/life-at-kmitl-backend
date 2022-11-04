@@ -18,6 +18,7 @@ export class DormSchemaFactory implements EntitySchemaFactory<DormSchema, Dorm> 
       bills: dorm.getBills(),
       facilities: dorm.getFacilities(),
       totalScore: dorm.getTotalScore(),
+      rangePrice: dorm.getRangePrice(),
     };
   }
 

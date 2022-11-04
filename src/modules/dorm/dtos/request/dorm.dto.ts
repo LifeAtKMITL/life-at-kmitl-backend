@@ -3,10 +3,11 @@ export class DormDto {
   readonly name: string;
   readonly tel: string;
   readonly address: string;
-  readonly room: object[];
+  readonly room: any[];
   readonly imagePath: string[];
-  readonly zone: string;
-  readonly bills: object;
-  readonly facilities: object;
-  readonly totalScore: object[];
+  readonly zone: string[];
+  readonly bills: any;
+  readonly facilities: any;
+  readonly totalScore: any[];
+  readonly rangePrice: number[];
 }

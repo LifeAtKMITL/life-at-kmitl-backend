@@ -1,3 +1,5 @@
+import { DormsByFilterOptionsQuery } from './queries/dorms-by-filterOptions.query-handler ';
+import { FilterOptionsDto } from './dtos/request/filterOptions-query';
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { CreateDormCommand } from './commands/create-dorm/create-dorm.command';
@@ -15,8 +17,8 @@ export class DormController {
   }
 
   @Get('filter')
-  async getDormByFilterOptions(@Body body): Promise<any> {
-    return await this.queryBus.execute<DormsQuery, any>(new DormsQuery());
+  async getDormByFilterOptions(@Body() filterOptionsDto: FilterOptionsDto): Promise<any> {
+    return await this.queryBus.execute<DormsQuery, any>(new DormsByFilterOptionsQuery(filterOptionsDto));
   }
 
   @Get(':id')

@@ -6,12 +6,13 @@ export class Dorm extends AggregateRoot {
     private readonly name?: string,
     private readonly tel?: string,
     private readonly address?: string,
-    private readonly room?: Object[],
+    private readonly room?: any[],
     private readonly imagePath?: string[],
-    private readonly zone?: string,
-    private readonly bills?: Object,
-    private readonly facilities?: Object,
-    private readonly totalScore?: Object[],
+    private readonly zone?: string[],
+    private readonly bills?: any,
+    private readonly facilities?: any,
+    private readonly totalScore?: any[],
+    private readonly rangePrice?: number[],
   ) {
     super();
   }
@@ -31,7 +32,7 @@ export class Dorm extends AggregateRoot {
   getAddress(): string {
     return this.address;
   }
-  getRoom(): Object[] {
+  getRoom(): any[] {
     return this.room;
   }
 
@@ -39,16 +40,20 @@ export class Dorm extends AggregateRoot {
     return this.imagePath;
   }
 
-  getZone(): string {
+  getZone(): string[] {
     return this.zone;
   }
-  getBills(): Object {
+  getBills(): any {
     return this.bills;
   }
-  getFacilities(): Object {
+  getFacilities(): any {
     return this.facilities;
   }
-  getTotalScore(): Object[] {
+  getTotalScore(): any[] {
     return this.totalScore;
+  }
+
+  getRangePrice(): number[] {
+    return this.rangePrice;
   }
 }

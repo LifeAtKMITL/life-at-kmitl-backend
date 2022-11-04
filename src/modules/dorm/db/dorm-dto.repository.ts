@@ -27,7 +27,28 @@ export class DormDtoRepository {
     return dorm;
   }
 
-  async getDormByFilterOptions(fileterOption: Object): Promise<any> {
-    return 1;
+  async findByFilterOptions(fileterOption: any): Promise<any> {
+    console.log(fileterOption);
+    let minMonthly = fileterOption.monthly[0];
+    let maxMonthly = fileterOption.monthly[1];
+    let { aircon, furniture, waterHeater, fan, TV, fridge, parking, freeWifi, keyCard, CCTV, luandry } = fileterOption;
+
+    const dorms = await this.dormModel.find(
+      {
+        $and: [
+          { zone: { $in: fileterOption.zone } },
+          { rangePrice: { $elemMatch: { $gte: minMonthly, $lte: maxMonthly } } },
+          {},
+        ],
+      },
+      {},
+      { lean: true },
+    );
+    return dorms.map((dorm) => {
+      console.log(dorm.name);
+      console.log(dorm.rangePrice);
+      //console.log(dorm.facilities);
+      return dorm;
+    });
   }
 }
