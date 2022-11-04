@@ -1,4 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
+import { BookmarkedReview, FavoriteGenEd, LikedDorm, LikedNote, LikedReview, ScoredDorm } from './value-objects';
 
 export class User extends AggregateRoot {
   constructor(
@@ -6,12 +7,12 @@ export class User extends AggregateRoot {
     private readonly userId: string,
     private readonly username: string,
     private readonly image: string,
-    private readonly genedFaved: string[],
-    private readonly subjectsLiked: string[],
-    private readonly subjectsBookmarked: string[],
-    private readonly dormsLiked: string[],
-    private readonly dormsScored: string[],
-    private readonly notesLiked: string[],
+    private readonly favGenEds: FavoriteGenEd[],
+    private readonly likedReviews: LikedReview[],
+    private readonly bookmarkedReviews: BookmarkedReview[],
+    private readonly likedDorms: LikedDorm[],
+    private readonly scoredDorms: ScoredDorm[],
+    private readonly likedNotes: LikedNote[],
   ) {
     super();
   }
@@ -27,30 +28,32 @@ export class User extends AggregateRoot {
   getUsername(): string {
     return this.username;
   }
+
   getImage(): string {
     return this.image;
   }
-  getGenedFaved(): string[] {
-    return this.genedFaved;
+
+  getFavGenEd(): FavoriteGenEd[] {
+    return this.favGenEds;
   }
 
-  getSubjectsLiked(): string[] {
-    return this.subjectsLiked;
+  getLikedReviews(): LikedReview[] {
+    return this.likedReviews;
   }
 
-  getSubjectsBookmarked(): string[] {
-    return this.subjectsBookmarked;
+  getBookmarkedReviews(): BookmarkedReview[] {
+    return this.bookmarkedReviews;
   }
 
-  getDormsLiked(): string[] {
-    return this.dormsLiked;
+  getLikedDorms(): LikedDorm[] {
+    return this.likedDorms;
   }
 
-  getDormsScored(): string[] {
-    return this.dormsScored;
+  getScoredDorms(): ScoredDorm[] {
+    return this.scoredDorms;
   }
 
-  getNotesLiked(): string[] {
-    return this.notesLiked;
+  getLikedNotes(): LikedNote[] {
+    return this.likedNotes;
   }
 }

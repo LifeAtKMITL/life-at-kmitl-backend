@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Post, Put, UseGuards } from '@nestjs/comm
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { AuthGuard } from '@nestjs/passport';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
-import { User } from '../auth/schemas/user.schema';
+import { UserSchema } from '../user/db/user-schema';
 import { CreateSubjectCommand } from './commands/create-subject/create-subject.command';
 import { CreateSubjectRequest } from './dtos/request/create-subject-request.dto';
 import { SaveFavoriteSubjectRequest } from './dtos/request/save-favorite-subject.dto';
@@ -51,8 +51,8 @@ export class SubjectController {
   @Put('favorite')
   @UseGuards(AuthGuard())
   async saveFavoriteSubject(
-    @CurrentUser() user: User,
-    @Body() saveFavoriteSubjectRequest: SaveFavoriteSubjectRequest[],
+    @CurrentUser() user: UserSchema,
+    @Body() saveFavoriteSubjectRequest: SaveFavoriteSubjectRequest,
   ): Promise<void> {
     console.log(saveFavoriteSubjectRequest);
   }

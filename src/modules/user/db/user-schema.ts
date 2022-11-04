@@ -1,5 +1,6 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { IdentifiableEntitySchema } from 'src/database/identifiable-entity-schema';
+import { BookmarkedReview, FavoriteGenEd, LikedDorm, LikedNote, LikedReview, ScoredDorm } from '../value-objects';
 
 @Schema({ versionKey: false, collection: 'users' })
 export class UserSchema extends IdentifiableEntitySchema {
@@ -13,22 +14,22 @@ export class UserSchema extends IdentifiableEntitySchema {
   image: string;
 
   @Prop()
-  genedFaved: string[];
+  favGenEds: FavoriteGenEd[];
 
   @Prop()
-  subjectsLiked: string[];
+  likedReviews: LikedReview[];
 
   @Prop()
-  subjectsBookmarked: string[];
+  bookmarkedReviews: BookmarkedReview[];
 
   @Prop()
-  dormsLiked: string[];
+  likedDorms: LikedDorm[];
 
   @Prop()
-  dormsScored: string[];
+  scoredDorms: ScoredDorm[];
 
   @Prop()
-  notesLinked: string[];
+  likedNotes: LikedNote[];
 }
 
 export const userSchema = SchemaFactory.createForClass(UserSchema);

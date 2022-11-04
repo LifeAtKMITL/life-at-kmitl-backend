@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { User } from '../auth/schemas/user.schema';
+import { UserSchema } from '../user/db/user-schema';
 
 @Injectable()
 export class ProductService {
@@ -7,7 +7,7 @@ export class ProductService {
     return `This action returns all product`;
   }
 
-  create(user: User) {
+  create(user: UserSchema) {
     console.log(user);
     return `create by ${user.username}`;
   }

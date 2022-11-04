@@ -10,12 +10,12 @@ export class UserSchemaFactory implements EntitySchemaFactory<UserSchema, User> 
       userId: user.getUserId(),
       username: user.getUsername(),
       image: user.getImage(),
-      genedFaved: user.getGenedFaved(),
-      subjectsLiked: user.getSubjectsLiked(),
-      subjectsBookmarked: user.getSubjectsBookmarked(),
-      dormsLiked: user.getDormsLiked(),
-      dormsScored: user.getDormsScored(),
-      notesLinked: user.getNotesLiked(),
+      favGenEds: user.getFavGenEd(),
+      likedReviews: user.getLikedReviews(),
+      bookmarkedReviews: user.getBookmarkedReviews(),
+      likedDorms: user.getLikedDorms(),
+      scoredDorms: user.getScoredDorms(),
+      likedNotes: user.getLikedNotes(),
     };
   }
 
@@ -25,12 +25,12 @@ export class UserSchemaFactory implements EntitySchemaFactory<UserSchema, User> 
       userSchema.userId,
       userSchema.username,
       userSchema.image,
-      userSchema.genedFaved,
-      userSchema.subjectsLiked,
-      userSchema.subjectsBookmarked,
-      userSchema.dormsLiked,
-      userSchema.dormsScored,
-      userSchema.notesLinked,
+      userSchema.favGenEds,
+      userSchema.likedReviews,
+      userSchema.bookmarkedReviews,
+      userSchema.likedDorms,
+      userSchema.scoredDorms,
+      userSchema.likedNotes,
     );
   }
 }
