@@ -1,6 +1,6 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { SubjectDtoRepository } from '../db/subject-dto.repository';
-import { SubjectsDto } from '../dtos/request/subjects.dto';
+import { SubjectsDto } from '../dtos/subjects.dto';
 
 export class SubjectsQuery {}
 
