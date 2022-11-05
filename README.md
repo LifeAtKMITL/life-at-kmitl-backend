@@ -6,7 +6,7 @@
   
 ## Description
 
-A backend repository for [Life@KMITL](https://github.com/LifeAtKMITL)'s project. Which is a part of Software Architecture and Design class of 2022. Implementing Domain Driven Design and Design Patterns. 
+A backend repository for [Life@KMITL](https://github.com/LifeAtKMITL)'s project. Which is a part of Software Architecture and Design class of 2022. Implementing Domain Driven Design and Design Patterns.
 
 ## Installation
 
@@ -47,5 +47,10 @@ Nest is [MIT licensed](LICENSE).
 ## Team members
 
 - [gandastik](https://github.com/gandastik)
+- [zantaclaus](https://github.com/zantaclaus)
+- [chawapon](https://github.com/B-chawapon)
+- [kuroisep](https://github.com/kuroisep)
+- [napat-CoderNo1](https://github.com/napat-CoderNo1)
+- [sumetsm](https://github.com/sumetsm)
 
-made with ❤️
+made with ❤️ and ☕
