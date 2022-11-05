@@ -24,10 +24,7 @@ export class DormDtoRepository {
 
   // DESC: Filter Dorm Collection by dormId
   async findById(id: string): Promise<any> {
-    console.log(id);
     const dorm = await this.dormModel.findOne({ _id: new Types.ObjectId(id) } as FilterQuery<DormSchema>);
-
-    console.log(dorm);
     return dorm;
   }
 

@@ -19,7 +19,7 @@ export class DormController {
 
   @Get('filter')
   async getDormByFilterOptions(@Body() filterOptionsDto: FilterOptionsDto): Promise<any> {
-    return await this.queryBus.execute<DormsQuery, any>(new DormsByFilterOptionsQuery(filterOptionsDto));
+    return await this.queryBus.execute<DormsByFilterOptionsQuery, any>(new DormsByFilterOptionsQuery(filterOptionsDto));
   }
 
   @Get(':id')
