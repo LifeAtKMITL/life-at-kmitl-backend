@@ -1,0 +1,13 @@
+import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
+import { SharenoteFactory } from '../../sharenote.factory';
+import { CreateSharenoteCommand } from './create-sharenote.command';
+
+@CommandHandler(CreateSharenoteCommand)
+export class CreateSharenoteCommandHandler implements ICommandHandler {
+  constructor(private readonly sharenoteFactory: SharenoteFactory) {}
+
+  async execute({ createSharenoteRequest }: CreateSharenoteCommand): Promise<void> {
+    const { name, sec, credit, teachers } = createSharenoteRequest;
+    const sharenote = this.sharenoteFactory.create({ name, sec, credit, teachers });
+  }
+}

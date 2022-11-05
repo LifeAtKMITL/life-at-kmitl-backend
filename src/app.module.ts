@@ -2,6 +2,7 @@ import { DormModule } from './modules/dorm/dorm.module';
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from './database/database.module';
 import { SubjectModule } from './modules/subject/subject.module';
+import { SharenoteModule } from './modules/sharenote/sharenote.module';
 
 import { AuthModule } from './modules/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
@@ -19,6 +20,7 @@ import { UserModule } from './modules/user/user.module';
     AuthModule,
     ProductModule,
     UserModule,
+    SharenoteModule,
   ],
 })
 export class AppModule {}
