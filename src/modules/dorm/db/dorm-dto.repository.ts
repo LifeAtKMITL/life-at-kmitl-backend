@@ -8,6 +8,7 @@ import { retry } from 'rxjs';
 import { DormDto } from './../dtos/request/dorm.dto';
 import { DormsDto } from './../dtos/request/dorms.dto';
 import { DormSchema } from './dorm-schema';
+import * as _ from 'lodash';
 
 @Injectable()
 export class DormDtoRepository {
@@ -23,32 +24,49 @@ export class DormDtoRepository {
 
   // DESC: Filter Dorm Collection by dormId
   async findById(id: string): Promise<any> {
-    const dorm = await this.dormModel.findOne({ dormId: id }, {}, { lean: true });
+    console.log(id);
+
+    const dorm = await this.dormModel.findById(id);
+    console.log(dorm);
     return dorm;
   }
 
   async findByFilterOptions(fileterOption: any): Promise<any> {
-    console.log(fileterOption);
+    // console.log(fileterOption);
     let minMonthly = fileterOption.monthly[0];
     let maxMonthly = fileterOption.monthly[1];
-    let { aircon, furniture, waterHeater, fan, TV, fridge, parking, freeWifi, keyCard, CCTV, luandry } = fileterOption;
-
     const dorms = await this.dormModel.find(
       {
         $and: [
           { zone: { $in: fileterOption.zone } },
           { rangePrice: { $elemMatch: { $gte: minMonthly, $lte: maxMonthly } } },
-          {},
         ],
       },
       {},
       { lean: true },
     );
-    return dorms.map((dorm) => {
-      console.log(dorm.name);
-      console.log(dorm.rangePrice);
-      //console.log(dorm.facilities);
-      return dorm;
+    let listHave = [];
+    for (let i = 0; i < fileterOption.facilities.length; i++) {
+      if (fileterOption.facilities[i].value == true) {
+        listHave.push(fileterOption.facilities[i]);
+      }
+    }
+    let listDorm = [];
+    dorms.map((dorm) => {
+      let countHave = 0;
+      for (let i = 0; i < listHave.length; i++) {
+        for (let j = 0; j < dorm.facilities.length; j++) {
+          if (_.isEqual(dorm.facilities[j], listHave[i])) {
+            countHave += 1;
+            break;
+          }
+        }
+      }
+      if (countHave == listHave.length) {
+        listDorm.push(dorm);
+      }
     });
+    // console.log(listDorm);
+    return listDorm;
   }
 }

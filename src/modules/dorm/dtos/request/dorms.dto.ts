@@ -8,7 +8,7 @@ export class DormsDto {
   readonly imagePath: string[];
   readonly zone: string[];
   readonly bills: any;
-  readonly facilities: any;
+  readonly facilities: any[];
   readonly totalScore: any[];
   readonly rangePrice: number[];
 }

@@ -10,7 +10,7 @@ export class Dorm extends AggregateRoot {
     private readonly imagePath?: string[],
     private readonly zone?: string[],
     private readonly bills?: any,
-    private readonly facilities?: any,
+    private readonly facilities?: any[],
     private readonly totalScore?: any[],
     private readonly rangePrice?: number[],
   ) {
@@ -46,7 +46,7 @@ export class Dorm extends AggregateRoot {
   getBills(): any {
     return this.bills;
   }
-  getFacilities(): any {
+  getFacilities(): any[] {
     return this.facilities;
   }
   getTotalScore(): any[] {
