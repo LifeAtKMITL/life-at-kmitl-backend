@@ -35,4 +35,7 @@ lerna-debug.log*
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
+
+src/config/lifekmitl-firebase-adminsdk-cplra-1c398cf111.json
+src/config/LifeKMITL-firebase-key.json
 src/firebase/config/LifeKMITL-firebase-key.json
