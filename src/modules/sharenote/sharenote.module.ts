@@ -7,6 +7,7 @@ import { SharenoteSchema } from './db/sharenote-schema';
 import { SharenoteSchemaFactory } from './db/sharenote-schema.factory';
 import { SharenoteController } from './sharenote.controller';
 import { SharenoteFactory } from './sharenote.factory';
+import { FilesModule } from '../file-module/files.module';
 
 @Module({
   imports: [
