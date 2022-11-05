@@ -18,6 +18,7 @@ export class DormController {
   }
 
   @Get('filter')
+  // TODO: Please fix <any> to some type (interface or class will do!)
   async getDormByFilterOptions(@Body() filterOptionsDto: FilterOptionsDto): Promise<any> {
     return await this.queryBus.execute<DormsByFilterOptionsQuery, any>(new DormsByFilterOptionsQuery(filterOptionsDto));
   }

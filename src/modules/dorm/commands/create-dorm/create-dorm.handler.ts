@@ -1,4 +1,3 @@
-import { Facilities } from './../../db/facilities-schema';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
 import { DormFactory } from '../../dorm.factory';
 import { CreateDormCommand } from './create-dorm.command';

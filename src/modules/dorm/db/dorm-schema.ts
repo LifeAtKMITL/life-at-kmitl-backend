@@ -1,6 +1,4 @@
-import { Totalscore } from './totalscore-schema';
 import { Bill } from './bill-schema';
-import { Facilities, FacilitiesSchema } from './facilities-schema';
 import { Prop, Schema } from '@nestjs/mongoose';
 import { IdentifiableEntitySchema } from 'src/database/identifiable-entity-schema';
 
@@ -16,7 +14,7 @@ export class DormSchema extends IdentifiableEntitySchema {
   readonly address: string;
 
   @Prop()
-  readonly room: Object[];
+  readonly room: object[];
 
   @Prop()
   readonly imagePath: string[];
@@ -28,10 +26,10 @@ export class DormSchema extends IdentifiableEntitySchema {
   readonly bills: Bill;
 
   @Prop(Object)
-  readonly facilities: Object[];
+  readonly facilities: object[];
 
   @Prop(Object)
-  readonly totalScore: Object[];
+  readonly totalScore: object[];
 
   @Prop()
   readonly rangePrice: number[];

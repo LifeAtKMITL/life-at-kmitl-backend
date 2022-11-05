@@ -1,6 +1,4 @@
-import { FirebaseModule } from './firebase/firebase.module';
 import { DormModule } from './modules/dorm/dorm.module';
-
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from './database/database.module';
 import { SubjectModule } from './modules/subject/subject.module';

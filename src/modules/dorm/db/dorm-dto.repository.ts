@@ -1,14 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { FilterQuery, Model, Types } from 'mongoose';
-import { retry } from 'rxjs';
-// import { SubjectDto } from '../dtos/subject.dto';
-// import { SubjectsDto } from '../dtos/subjects.dto';
-// import { SubjectSchema } from './subject-schema';
-import { DormDto } from './../dtos/request/dorm.dto';
-import { DormsDto } from './../dtos/request/dorms.dto';
 import { DormSchema } from './dorm-schema';
 import * as _ from 'lodash';
+import { FilterOptionsDto } from '../dtos/request/filterOptions-query';
 
 @Injectable()
 export class DormDtoRepository {
@@ -28,10 +23,11 @@ export class DormDtoRepository {
     return dorm;
   }
 
-  async findByFilterOptions(fileterOption: any): Promise<any> {
+  // TODO: Please fix this <any> to some type
+  async findByFilterOptions(fileterOption: FilterOptionsDto): Promise<any> {
     // console.log(fileterOption);
-    let minMonthly = fileterOption.monthly[0];
-    let maxMonthly = fileterOption.monthly[1];
+    const minMonthly = fileterOption.monthly[0];
+    const maxMonthly = fileterOption.monthly[1];
     const dorms = await this.dormModel.find(
       {
         $and: [
@@ -42,13 +38,13 @@ export class DormDtoRepository {
       {},
       { lean: true },
     );
-    let listHave = [];
+    const listHave = [];
     for (let i = 0; i < fileterOption.facilities.length; i++) {
       if (fileterOption.facilities[i].value == true) {
         listHave.push(fileterOption.facilities[i]);
       }
     }
-    let listDorm = [];
+    const listDorm = [];
     dorms.map((dorm) => {
       let countHave = 0;
       for (let i = 0; i < listHave.length; i++) {
