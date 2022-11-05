@@ -1,5 +1,4 @@
 import { DormModule } from './modules/dorm/dorm.module';
-import { FirebaseModule } from './firebase/firebase.module';
 import { Module } from '@nestjs/common';
 import { DatabaseModule } from './database/database.module';
 import { SubjectModule } from './modules/subject/subject.module';
@@ -22,7 +21,6 @@ import { UserModule } from './modules/user/user.module';
     ProductModule,
     UserModule,
     SharenoteModule,
-    FirebaseModule,
   ],
 })
 export class AppModule {}
