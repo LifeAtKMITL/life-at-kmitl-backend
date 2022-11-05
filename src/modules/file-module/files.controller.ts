@@ -24,7 +24,7 @@ import { v4 as uuid } from 'uuid';
 
 const multer = new GridFsMulterConfigService();
 let mOption = multer.createMulterOptions();
-console.log(mOption);
+//console.log(mOption);
 
 @Controller('/attachment/files')
 export class FilesController {
@@ -69,7 +69,7 @@ export class FilesController {
   async upload(@UploadedFiles() files: Array<Express.Multer.File>) {
     const response = [];
     files.forEach((file) => {
-      console.log(file);
+      //console.log(file);
 
       const fileReponse = {
         originalname: file.originalname,
@@ -85,7 +85,7 @@ export class FilesController {
         uploadDate: file.uploadDate,
         contentType: file.contentType,
       };
-      console.log(fileReponse);
+      //console.log(fileReponse);
       response.push(fileReponse);
     });
 
