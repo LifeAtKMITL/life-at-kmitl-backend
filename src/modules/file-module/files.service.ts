@@ -11,11 +11,11 @@ export class FilesService {
   private fileModel: MongoGridFS;
 
   constructor(@InjectConnection() private readonly connection: Connection) {
-    console.log(this.connection.db);
-
-    console.log(this.connection.db.namespace);
-    this.fileModel = new MongoGridFS(this.connection.db, 'fs');
-    console.log(this.fileModel);
+    // console.log(this.connection.db);
+    //console.log(this.connection);
+    // console.log(this.connection.db.namespace);
+    this.fileModel = new MongoGridFS(this.connection.db, 'uploads');
+    // console.log(this.fileModel);
   }
 
   async readStream(id: string): Promise<GridFSBucketReadStream> {
