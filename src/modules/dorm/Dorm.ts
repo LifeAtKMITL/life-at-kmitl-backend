@@ -3,16 +3,16 @@ import { AggregateRoot } from '@nestjs/cqrs';
 export class Dorm extends AggregateRoot {
   constructor(
     private readonly _id: string,
-    private readonly name?: string,
-    private readonly tel?: string,
-    private readonly address?: string,
-    private readonly room?: any[],
-    private readonly imagePath?: string[],
-    private readonly zone?: string[],
-    private readonly bills?: any,
-    private readonly facilities?: any[],
-    private readonly totalScore?: any[],
-    private readonly rangePrice?: number[],
+    private readonly name: string,
+    private readonly tel: string,
+    private readonly address: string,
+    private readonly room: any[],
+    private readonly imagePath: string[],
+    private readonly zone: string[],
+    private readonly bills: any,
+    private readonly facilities: any[],
+    private readonly totalScore: any[],
+    private readonly rangePrice: number[],
   ) {
     super();
   }

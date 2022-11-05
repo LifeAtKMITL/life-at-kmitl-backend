@@ -27,11 +27,11 @@ export class DormSchema extends IdentifiableEntitySchema {
   @Prop(Bill)
   readonly bills: Bill;
 
-  @Prop(Facilities)
-  readonly facilities: Facilities[];
+  @Prop(Object)
+  readonly facilities: Object[];
 
-  @Prop(Totalscore)
-  readonly totalScore: Totalscore[];
+  @Prop(Object)
+  readonly totalScore: Object[];
 
   @Prop()
   readonly rangePrice: number[];

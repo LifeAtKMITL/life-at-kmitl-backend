@@ -5,8 +5,8 @@ import { Document } from 'mongoose';
 @Schema({ _id: false })
 export class Bill extends Document {
   @Prop()
-  readonly waterBill: Boolean;
+  readonly waterBill: number;
   @Prop()
-  readonly electricityBill: Boolean;
+  readonly electricityBill: number;
 }
 export const BillSchema = SchemaFactory.createForClass(Bill);

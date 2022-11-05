@@ -23,6 +23,18 @@ export class DormSchemaFactory implements EntitySchemaFactory<DormSchema, Dorm> 
   }
 
   createFromSchema(dormSchema: DormSchema): Dorm {
-    return new Dorm(dormSchema._id.toString(), dormSchema.name);
+    return new Dorm(
+      dormSchema._id.toString(),
+      dormSchema.name,
+      dormSchema.tel,
+      dormSchema.address,
+      dormSchema.room,
+      dormSchema.imagePath,
+      dormSchema.zone,
+      dormSchema.bills,
+      dormSchema.facilities,
+      dormSchema.totalScore,
+      dormSchema.rangePrice,
+    );
   }
 }

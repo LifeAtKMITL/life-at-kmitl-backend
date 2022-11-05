@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { FilterQuery, Model, Types } from 'mongoose';
 import { retry } from 'rxjs';
 // import { SubjectDto } from '../dtos/subject.dto';
 // import { SubjectsDto } from '../dtos/subjects.dto';
@@ -25,8 +25,8 @@ export class DormDtoRepository {
   // DESC: Filter Dorm Collection by dormId
   async findById(id: string): Promise<any> {
     console.log(id);
+    const dorm = await this.dormModel.findOne({ _id: new Types.ObjectId(id) } as FilterQuery<DormSchema>);
 
-    const dorm = await this.dormModel.findById(id);
     console.log(dorm);
     return dorm;
   }

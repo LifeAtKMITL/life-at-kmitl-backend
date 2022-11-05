@@ -6,6 +6,7 @@ import { CreateDormCommand } from './commands/create-dorm/create-dorm.command';
 import { CreateDormRequest } from './dtos/request/create-dorm-request.dto';
 import { DormsQuery } from './queries/dorms.query-handler';
 import { DormByIdQuery } from './queries/dorm-by-id.query-handler';
+import { DormsDto } from './dtos/request/dorms.dto';
 
 @Controller('dorm')
 export class DormController {
@@ -22,8 +23,8 @@ export class DormController {
   }
 
   @Get(':id')
-  async getDormById(@Param('id') id: string): Promise<any> {
-    return this.queryBus.execute<DormsQuery, any>(new DormByIdQuery(id));
+  async getDormById(@Param('id') id: string): Promise<DormsDto> {
+    return this.queryBus.execute<DormByIdQuery, any>(new DormByIdQuery(id));
   }
 
   @Post()
