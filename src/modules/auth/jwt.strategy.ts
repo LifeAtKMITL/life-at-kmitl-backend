@@ -1,4 +1,4 @@
-import { User } from './schemas/user.schema';
+import { UserSchema } from '../user/db/user-schema';
 import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { PassportStrategy } from '@nestjs/passport';
@@ -8,8 +8,8 @@ import { Model } from 'mongoose';
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(
-    @InjectModel(User.name)
-    private userModel: Model<User>,
+    @InjectModel(UserSchema.name)
+    private userModel: Model<UserSchema>,
   ) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
