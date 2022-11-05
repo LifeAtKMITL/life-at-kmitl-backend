@@ -7,7 +7,17 @@ export class CreateSharenoteCommandHandler implements ICommandHandler {
   constructor(private readonly sharenoteFactory: SharenoteFactory) {}
 
   async execute({ createSharenoteRequest }: CreateSharenoteCommand): Promise<void> {
-    const { name, sec, credit, teachers } = createSharenoteRequest;
-    const sharenote = this.sharenoteFactory.create({ name, sec, credit, teachers });
+    const { userId, userName, sharenoteCollectionName, pathFiles, likeCount, dowloadCount, teachers, date } =
+      createSharenoteRequest;
+    const sharenote = this.sharenoteFactory.create({
+      userId,
+      userName,
+      sharenoteCollectionName,
+      pathFiles,
+      likeCount,
+      dowloadCount,
+      teachers,
+      date,
+    });
   }
 }

@@ -9,7 +9,6 @@ import { AuthModule } from './modules/auth/auth.module';
 import { ConfigModule } from '@nestjs/config';
 import { ProductModule } from './modules/product/product.module';
 import { UserModule } from './modules/user/user.module';
-import { FilesModule } from './modules/file-module/files.module';
 
 @Module({
   imports: [
@@ -23,7 +22,6 @@ import { FilesModule } from './modules/file-module/files.module';
     ProductModule,
     UserModule,
     SharenoteModule,
-    FilesModule,
     FirebaseModule,
   ],
 })

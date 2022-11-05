@@ -9,20 +9,28 @@ export class SharenoteSchemaFactory implements EntitySchemaFactory<SharenoteSche
   create(sharenote: Sharenote): SharenoteSchema {
     return {
       _id: new mongoose.Types.ObjectId(sharenote.getId()),
-      name: sharenote.getName(),
-      sec: sharenote.getSec(),
-      credit: sharenote.getCredit(),
+      userId: sharenote.getUserId(),
+      userName: sharenote.getUserName(),
+      sharenoteCollectionName: sharenote.getSharenoteCollectionName(),
+      pathFiles: sharenote.getPathFiles(),
+      likeCount: sharenote.getLikeCount(),
+      dowloadCount: sharenote.getDowloadCount(),
       teachers: sharenote.getTeachers(),
+      date: sharenote.getDate(),
     };
   }
 
   createFromSchema(sharenoteSchema: SharenoteSchema): Sharenote {
     return new Sharenote(
       sharenoteSchema._id.toString(),
-      sharenoteSchema.name,
-      sharenoteSchema.sec,
-      sharenoteSchema.credit,
+      sharenoteSchema.userId,
+      sharenoteSchema.userName,
+      sharenoteSchema.sharenoteCollectionName,
+      sharenoteSchema.pathFiles,
+      sharenoteSchema.likeCount,
+      sharenoteSchema.dowloadCount,
       sharenoteSchema.teachers,
+      sharenoteSchema.date,
     );
   }
 }

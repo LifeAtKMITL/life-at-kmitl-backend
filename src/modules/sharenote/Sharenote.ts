@@ -3,10 +3,14 @@ import { AggregateRoot } from '@nestjs/cqrs';
 export class Sharenote extends AggregateRoot {
   constructor(
     private readonly _id: string,
-    private readonly name: string,
-    private readonly sec: string,
-    private readonly credit: number,
+    private readonly userId: string,
+    private readonly userName: string,
+    private readonly sharenoteCollectionName: string,
+    private readonly pathFiles: string[],
+    private readonly likeCount: number,
+    private readonly dowloadCount: number,
     private readonly teachers: string[],
+    private readonly date: Date,
   ) {
     super();
   }
@@ -15,19 +19,34 @@ export class Sharenote extends AggregateRoot {
     return this._id;
   }
 
-  getName(): string {
-    return this.name;
+  getUserId(): string {
+    return this.userId;
+  }
+  getUserName(): string {
+    return this.userName;
   }
 
-  getSec(): string {
-    return this.sec;
+  getSharenoteCollectionName(): string {
+    return this.sharenoteCollectionName;
   }
 
-  getCredit(): number {
-    return this.credit;
+  getPathFiles(): string[] {
+    return this.pathFiles;
+  }
+
+  getLikeCount(): number {
+    return this.likeCount;
+  }
+
+  getDowloadCount(): number {
+    return this.dowloadCount;
   }
 
   getTeachers(): string[] {
     return this.teachers;
+  }
+
+  getDate(): Date {
+    return this.date;
   }
 }

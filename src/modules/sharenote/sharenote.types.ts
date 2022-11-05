@@ -1,6 +1,10 @@
 export interface SharenoteProps {
-  name: string;
-  sec: string;
-  credit: number;
+  userId: string;
+  userName: string;
+  sharenoteCollectionName: string;
+  pathFiles: string[];
+  likeCount: number;
+  dowloadCount: number;
   teachers: string[];
+  date: Date;
 }

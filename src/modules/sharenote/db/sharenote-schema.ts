@@ -4,14 +4,26 @@ import { IdentifiableEntitySchema } from 'src/database/identifiable-entity-schem
 @Schema({ versionKey: false, collection: 'Sharenote' })
 export class SharenoteSchema extends IdentifiableEntitySchema {
   @Prop()
-  readonly name: string;
+  readonly userId: string;
 
   @Prop()
-  readonly sec: string;
+  readonly userName: string;
 
   @Prop()
-  readonly credit: number;
+  readonly sharenoteCollectionName: string;
+
+  @Prop()
+  readonly pathFiles: string[];
+
+  @Prop()
+  readonly likeCount: number;
+
+  @Prop()
+  readonly dowloadCount: number;
 
   @Prop([String])
   readonly teachers: string[];
+
+  @Prop()
+  readonly date: Date;
 }
