@@ -1,4 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
+import { AddFavoriteSubjectRequest } from '../subject/dtos/request/add-favorite-subject.dto';
 import { BookmarkedReview, FavoriteGenEd, LikedDorm, LikedNote, LikedReview, ScoredDorm } from './value-objects';
 
 export class User extends AggregateRoot {
@@ -55,5 +56,9 @@ export class User extends AggregateRoot {
 
   getLikedNotes(): LikedNote[] {
     return this.likedNotes;
+  }
+
+  addFavoriteSubject(addFavoriteSubject: AddFavoriteSubjectRequest): void {
+    this.favGenEds.push(addFavoriteSubject);
   }
 }
