@@ -7,7 +7,6 @@ export class Facilities extends Document {
   @Prop()
   readonly utl: string;
   @Prop()
-  readonly value: Boolean;
-  
+  readonly value: boolean;
 }
 export const FacilitiesSchema = SchemaFactory.createForClass(Facilities);

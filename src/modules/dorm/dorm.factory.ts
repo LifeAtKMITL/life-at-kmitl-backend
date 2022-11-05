@@ -4,7 +4,6 @@ import mongoose from 'mongoose';
 import { EntityFactory } from 'src/ddd/EntityFactory';
 import { DormEntityRepository } from './db/dorm-entity.repository';
 import { Dorm } from './Dorm';
-import { DormProps } from './dorm.types';
 
 @Injectable()
 export class DormFactory implements EntityFactory<Dorm> {
