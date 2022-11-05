@@ -1,5 +1,4 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
-import { IdentifiableEntitySchema } from 'src/database/identifiable-entity-schema';
 import { Document } from 'mongoose';
 
 @Schema({ _id: false })
