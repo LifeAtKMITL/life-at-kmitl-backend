@@ -15,7 +15,10 @@ export class BlogreviewDtoRepository {
     return blogreviews.map((blogreview) => {
       return {
         userId: blogreview.userID,
-        textSubjectReview: blogreview.textSubjectReview
+        textSubjectReview: blogreview.textSubjectReview,
+        subjectID: blogreview.subjectID,
+        rate: blogreview.rate,
+        date: blogreview.date
       };
     });
   }

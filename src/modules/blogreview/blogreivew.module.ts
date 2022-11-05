@@ -7,6 +7,8 @@ import { BlogreviewSchema } from './db/blogreview-schema';
 import { BlogreviewSchemaFactory } from './db/blogreview-schema.factory';
 import { BlogreviewController } from './blogreview.controller';
 import { BlogreviewFactory } from './blogreview.factory';
+import { BlogreviewQueryHandlers } from './queries';
+import { BlogreviewDtoRepository } from './db/blogreview-dto.repository';
 
 @Module({
   imports: [
@@ -14,6 +16,7 @@ import { BlogreviewFactory } from './blogreview.factory';
     MongooseModule.forFeature([{ name: BlogreviewSchema.name, schema: SchemaFactory.createForClass(BlogreviewSchema) }]),
   ],
   controllers: [BlogreviewController],
-  providers: [BlogreviewFactory, BlogreviewEntityRepository, BlogreviewSchemaFactory, ...BlogreviewCommandHandlers],
+  providers: [BlogreviewFactory, BlogreviewEntityRepository, BlogreviewSchemaFactory,
+     ...BlogreviewCommandHandlers, ...BlogreviewQueryHandlers, BlogreviewDtoRepository],
 })
 export class BlogreviewModule {}
