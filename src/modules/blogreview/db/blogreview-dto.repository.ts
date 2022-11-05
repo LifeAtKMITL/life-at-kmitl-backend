@@ -9,7 +9,7 @@ import { BlogreviewSchema } from './blogreview-schema';
 export class BlogreviewDtoRepository {
   constructor(@InjectModel(BlogreviewSchema.name) private readonly blogreviewModel: Model<BlogreviewSchema>) {}
 
-  // DESC: find all subjects in Subject collection
+  // DESC: find all
   async findAll(): Promise<BlogreviewsDto[]> {
     const blogreviews = await this.blogreviewModel.find({}, {}, { lean: true });
     return blogreviews.map((blogreview) => {
@@ -23,9 +23,9 @@ export class BlogreviewDtoRepository {
     });
   }
 
-  // DESC: Filter Subject Collection by subjectId
+  // DESC: Filter by userID
   async findById(id: string): Promise<BlogreviewDto> {
-    const subject = await this.blogreviewModel.findOne({ userID: id }, {}, { lean: true });
-    return subject;
+    const blogreview = await this.blogreviewModel.findOne({ userID: id }, {}, { lean: true });
+    return blogreview;
   }
 }
