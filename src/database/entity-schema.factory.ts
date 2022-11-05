@@ -3,5 +3,5 @@ import { IdentifiableEntitySchema } from './identifiable-entity-schema';
 
 export interface EntitySchemaFactory<TSchema extends IdentifiableEntitySchema, TEntity extends AggregateRoot> {
   create(entity: TEntity): TSchema;
-  createFromScehma(entitySchema: TSchema): TEntity;
+  createFromSchema(entitySchema: TSchema): TEntity;
 }

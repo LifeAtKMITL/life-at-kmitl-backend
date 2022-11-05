@@ -17,12 +17,12 @@ export class EntityRepository<TSchema extends IdentifiableEntitySchema, TEntity 
       throw new NotFoundException('Entity was not found.');
     }
 
-    return this.entitySchemaFactory.createFromScehma(entityDocument);
+    return this.entitySchemaFactory.createFromSchema(entityDocument);
   }
 
   protected async find(entityFilterQuery?: FilterQuery<TSchema>): Promise<TEntity[]> {
     return (await this.entityModel.find(entityFilterQuery, {}, { lean: true })).map((entityDocument) =>
-      this.entitySchemaFactory.createFromScehma(entityDocument),
+      this.entitySchemaFactory.createFromSchema(entityDocument),
     );
   }
 

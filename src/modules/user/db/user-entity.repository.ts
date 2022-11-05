@@ -15,4 +15,8 @@ export class UserEntityRepository extends BaseEntityRepository<UserSchema, User>
   async findOneById(id: string): Promise<User> {
     return this.findOne({ userId: id } as FilterQuery<UserSchema>);
   }
+
+  async findOneAndReplaceById(id: string, user: User): Promise<void> {
+    return this.findOneAndReplace({ userId: id } as FilterQuery<UserSchema>, user);
+  }
 }

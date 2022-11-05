@@ -19,7 +19,7 @@ export class UserSchemaFactory implements EntitySchemaFactory<UserSchema, User> 
     };
   }
 
-  createFromScehma(userSchema: UserSchema): User {
+  createFromSchema(userSchema: UserSchema): User {
     return new User(
       userSchema._id.toString(),
       userSchema.userId,

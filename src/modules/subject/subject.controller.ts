@@ -5,11 +5,12 @@ import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { UserSchema } from '../user/db/user-schema';
 import { CreateSubjectCommand } from './commands/create-subject/create-subject.command';
 import { CreateSubjectRequest } from './dtos/request/create-subject-request.dto';
-import { SaveFavoriteSubjectRequest } from './dtos/request/save-favorite-subject.dto';
+import { AddFavoriteSubjectRequest } from './dtos/request/add-favorite-subject.dto';
 import { SubjectDto } from './dtos/subject.dto';
 import { SubjectsDto } from './dtos/subjects.dto';
 import { SubjectByIdQuery } from './queries/subject-by-id.query-handler';
 import { SubjectsQuery } from './queries/subjects.query-handler';
+import { AddFavoriteSubjectCommand } from './commands/add-favorite-gened/add-favorite-subject.handler';
 
 @Controller('subject')
 export class SubjectController {
@@ -48,12 +49,20 @@ export class SubjectController {
     return this.queryBus.execute<SubjectByIdQuery, SubjectDto>(new SubjectByIdQuery(id));
   }
 
+  /*
+   * DESC: API to add subject to user
+   * ROUTE: subject/favorite
+   * METHOD: PUT + with jwt-auth
+   * RES: void
+   */
   @Put('favorite')
   @UseGuards(AuthGuard())
   async saveFavoriteSubject(
     @CurrentUser() user: UserSchema,
-    @Body() saveFavoriteSubjectRequest: SaveFavoriteSubjectRequest,
+    @Body() saveFavoriteSubjectRequest: AddFavoriteSubjectRequest,
   ): Promise<void> {
-    console.log(saveFavoriteSubjectRequest);
+    this.commandBus.execute<AddFavoriteSubjectCommand, void>(
+      new AddFavoriteSubjectCommand(user.userId, saveFavoriteSubjectRequest),
+    );
   }
 }
