@@ -1,7 +1,7 @@
 import { Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
-import { User } from '../auth/schemas/user.schema';
+import { UserSchema } from '../user/db/user-schema';
 import { ProductService } from './product.service';
 
 @Controller('product')
@@ -21,7 +21,7 @@ export class ProductController {
 
   @Post()
   @UseGuards(AuthGuard())
-  create(@CurrentUser() user: User) {
+  create(@CurrentUser() user: UserSchema) {
     return this.productService.create(user);
   }
 }

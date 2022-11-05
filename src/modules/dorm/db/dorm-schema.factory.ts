@@ -10,11 +10,31 @@ export class DormSchemaFactory implements EntitySchemaFactory<DormSchema, Dorm> 
     return {
       _id: new mongoose.Types.ObjectId(dorm.getId()),
       name: dorm.getName(),
-      description: dorm.getDescription(),
+      tel: dorm.getTel(),
+      address: dorm.getAddress(),
+      room: dorm.getRoom(),
+      imagePath: dorm.getImagePath(),
+      zone: dorm.getZone(),
+      bills: dorm.getBills(),
+      facilities: dorm.getFacilities(),
+      totalScore: dorm.getTotalScore(),
+      rangePrice: dorm.getRangePrice(),
     };
   }
 
   createFromSchema(dormSchema: DormSchema): Dorm {
-    return new Dorm(dormSchema._id.toString(), dormSchema.name, dormSchema.description);
+    return new Dorm(
+      dormSchema._id.toString(),
+      dormSchema.name,
+      dormSchema.tel,
+      dormSchema.address,
+      dormSchema.room,
+      dormSchema.imagePath,
+      dormSchema.zone,
+      dormSchema.bills,
+      dormSchema.facilities,
+      dormSchema.totalScore,
+      dormSchema.rangePrice,
+    );
   }
 }

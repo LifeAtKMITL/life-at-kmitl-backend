@@ -1,3 +1,5 @@
+import { DormQueryHandlers } from './queries/index';
+import { DormDtoRepository } from './db/dorm-dto.repository';
 import { Module } from '@nestjs/common';
 import { CqrsModule } from '@nestjs/cqrs';
 import { MongooseModule, SchemaFactory } from '@nestjs/mongoose';
@@ -14,6 +16,13 @@ import { DormFactory } from './dorm.factory';
     MongooseModule.forFeature([{ name: DormSchema.name, schema: SchemaFactory.createForClass(DormSchema) }]),
   ],
   controllers: [DormController],
-  providers: [DormFactory, DormEntityRepository, DormSchemaFactory, ...DormCommandHandlers],
+  providers: [
+    DormFactory,
+    DormEntityRepository,
+    DormSchemaFactory,
+    DormDtoRepository,
+    ...DormCommandHandlers,
+    ...DormQueryHandlers,
+  ],
 })
 export class DormModule {}

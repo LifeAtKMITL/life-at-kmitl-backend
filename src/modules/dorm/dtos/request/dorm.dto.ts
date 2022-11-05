@@ -1,4 +1,5 @@
-export class CreateDormRequest {
+export class DormDto {
+  readonly dormId: string;
   readonly name: string;
   readonly tel: string;
   readonly address: string;
@@ -7,5 +8,6 @@ export class CreateDormRequest {
   readonly zone: string[];
   readonly bills: any;
   readonly facilities: any[];
+  readonly totalScore: any[];
   readonly rangePrice: number[];
 }

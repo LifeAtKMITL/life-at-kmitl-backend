@@ -13,7 +13,7 @@ export class EntityRepository<TSchema extends IdentifiableEntitySchema, TEntity 
   protected async findOne(entityFilterQuery?: FilterQuery<TSchema>): Promise<TEntity> {
     const entityDocument = await this.entityModel.findOne(entityFilterQuery, {}, { lean: true });
 
-    if (entityDocument) {
+    if (!entityDocument) {
       throw new NotFoundException('Entity was not found.');
     }
 
