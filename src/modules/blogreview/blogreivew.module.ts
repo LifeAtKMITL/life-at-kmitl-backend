@@ -13,10 +13,18 @@ import { BlogreviewDtoRepository } from './db/blogreview-dto.repository';
 @Module({
   imports: [
     CqrsModule,
-    MongooseModule.forFeature([{ name: BlogreviewSchema.name, schema: SchemaFactory.createForClass(BlogreviewSchema) }]),
+    MongooseModule.forFeature([
+      { name: BlogreviewSchema.name, schema: SchemaFactory.createForClass(BlogreviewSchema) },
+    ]),
   ],
   controllers: [BlogreviewController],
-  providers: [BlogreviewFactory, BlogreviewEntityRepository, BlogreviewSchemaFactory,
-     ...BlogreviewCommandHandlers, ...BlogreviewQueryHandlers, BlogreviewDtoRepository],
+  providers: [
+    BlogreviewFactory,
+    BlogreviewEntityRepository,
+    BlogreviewSchemaFactory,
+    BlogreviewDtoRepository,
+    ...BlogreviewCommandHandlers,
+    ...BlogreviewQueryHandlers,
+  ],
 })
 export class BlogreviewModule {}
