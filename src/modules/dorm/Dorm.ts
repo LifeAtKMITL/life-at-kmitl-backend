@@ -56,8 +56,6 @@ export class Dorm extends AggregateRoot {
   }
 
   setTotalScore(userId, score): any {
-    // let listTotalScore = this.getTotalScore();
-
     for (let i = 0; i < this.totalScore.length; i++) {
       if (userId == this.totalScore[i].userID) {
         this.totalScore[i].score = score;

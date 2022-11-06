@@ -17,21 +17,8 @@ export class DormEntityRepository extends BaseEntityRepository<DormSchema, Dorm>
     super(dormModel, dormSchemaFactory);
   }
 
-  async findAll(): Promise<any> {
-    const dorms = await this.dormModel.find({}, {}, { lean: true });
-    return dorms.map((dorm) => {
-      return dorm;
-    });
-  }
-
-  // DESC: Filter Dorm Collection by dormId
-  async findById(id: string): Promise<any> {
-    const dorm = await this.dormModel.findOne({ _id: new Types.ObjectId(id) } as FilterQuery<DormSchema>);
-    return dorm;
-  }
-
   // TODO: Please fix this <any> to some type
-  async findByFilterOptions(fileterOption: FilterOptionsDto): Promise<any> {
+  async findByFilterOptions(fileterOption: FilterOptionsDto): Promise<any[]> {
     // console.log(fileterOption);
     const minMonthly = fileterOption.monthly[0];
     const maxMonthly = fileterOption.monthly[1];
@@ -66,7 +53,7 @@ export class DormEntityRepository extends BaseEntityRepository<DormSchema, Dorm>
         listDorm.push(dorm);
       }
     });
-    // console.log(listDorm);
+
     return listDorm;
   }
 }
