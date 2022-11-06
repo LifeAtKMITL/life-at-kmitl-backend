@@ -1,3 +1,4 @@
+import { Totalscore } from './db/totalscore-schema';
 import { CreateDormRequest } from './dtos/request/create-dorm-request.dto';
 import { Injectable } from '@nestjs/common';
 import mongoose from 'mongoose';
