@@ -8,8 +8,8 @@ export class Sharenote extends AggregateRoot {
     private readonly sharenoteCollectionName: string,
     private readonly sharenoteCollectionNameVersion: string,
     private readonly files: any[],
-    private readonly likeCount: number,
-    private readonly dowloadCount: number,
+    private likeCount: number,
+    private dowloadCount: number,
     private readonly teachers: string[],
     private readonly date: Date,
   ) {
@@ -52,5 +52,15 @@ export class Sharenote extends AggregateRoot {
 
   getDate(): Date {
     return this.date;
+  }
+
+  addLikeCount(): any {
+    this.likeCount = this.getLikeCount() + 1;
+  }
+
+  minusLikeCount(): any {
+    if (this.likeCount > 0) {
+      this.likeCount = this.getLikeCount() - 1;
+    }
   }
 }

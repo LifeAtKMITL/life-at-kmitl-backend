@@ -1,3 +1,5 @@
+import { LikeSharenoteCommand } from './commands/like-sharenote/like-sharenote.command';
+import { LikeSharenoteDto } from './dtos/likeSharenote/likeSharenote.dto';
 import { Sharenote } from './Sharenote';
 import {
   Body,
@@ -10,8 +12,10 @@ import {
   UploadedFiles,
   UseInterceptors,
   Param,
+  Put,
+  UseGuards,
 } from '@nestjs/common';
-import { CommandBus ,QueryBus} from '@nestjs/cqrs';
+import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { FileFieldsInterceptor, FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { CreateSharenoteCommand } from './commands/create-sharenote/create-sharenote.command';
 import { CreateSharenoteRequestDTO } from './dtos/request/create-sharenote-request.dto';
@@ -22,8 +26,11 @@ import { SharenotesQuery } from './queries/sharenotes.query';
 import { SharenoteDto } from './dtos/sharenote.dto';
 import { SharenotesDto } from './dtos/sharenotes.dto';
 import { SharenoteByIdQuery } from './queries/sharenoteById.handler';
+import { AuthGuard } from '@nestjs/passport';
+import { UserSchema } from '../user/db/user-schema';
+import { CurrentUser } from '../auth/decorators/current-user.decorator';
 
-let mulOp = {
+const mulOp = {
   limits: {
     fileSize: 15625000,
   },
@@ -46,10 +53,10 @@ export class SharenoteController {
     private readonly fileService: FileService,
     private readonly queryBus: QueryBus,
   ) {}
-  
+
   @Get()
-  async getAllNotes():Promise<SharenoteDto[]> {
-    return  this.queryBus.execute<SharenotesQuery, SharenoteDto[]>(new SharenotesQuery());
+  async getAllNotes(): Promise<SharenoteDto[]> {
+    return this.queryBus.execute<SharenotesQuery, SharenoteDto[]>(new SharenotesQuery());
   }
   @Get(':id')
   async getSharenoteById(@Param('id') id: string): Promise<SharenotesDto> {
@@ -84,5 +91,9 @@ export class SharenoteController {
     }
   }
 
-
+  @Put('like')
+  @UseGuards(AuthGuard())
+  async likeSharenote(@CurrentUser() user: UserSchema, @Body() likeSharenoteDto: LikeSharenoteDto): Promise<any> {
+    this.commandBus.execute<LikeSharenoteCommand, void>(new LikeSharenoteCommand(user.userId, likeSharenoteDto));
+  }
 }

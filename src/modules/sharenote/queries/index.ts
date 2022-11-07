@@ -1,2 +1,2 @@
 import { SharenotesQueryHandler } from './sharenotes.handler';
-export const SharenotesQueryhandlers = [SharenotesQueryHandler]
+export const SharenotesQueryhandlers = [SharenotesQueryHandler];
