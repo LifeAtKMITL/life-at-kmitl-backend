@@ -45,8 +45,8 @@ export class SubjectController {
    * RES: SubjectDto
    */
   @Get(':id')
-  async getSubjectById(@Param('id') id: string): Promise<SubjectsDto> {
-    return this.queryBus.execute<SubjectByIdQuery, SubjectDto>(new SubjectByIdQuery(id));
+  async getSubjectById(@Param('id') id: string): Promise<SubjectDto[]> {
+    return this.queryBus.execute<SubjectByIdQuery, SubjectDto[]>(new SubjectByIdQuery(id));
   }
 
   /*

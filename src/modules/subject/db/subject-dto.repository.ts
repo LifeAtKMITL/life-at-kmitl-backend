@@ -21,8 +21,8 @@ export class SubjectDtoRepository {
   }
 
   // DESC: Filter Subject Collection by subjectId
-  async findById(id: string): Promise<SubjectDto> {
-    const subject = await this.subjectModel.findOne({ subjectId: id }, {}, { lean: true });
+  async findById(id: string): Promise<SubjectDto[]> {
+    const subject = await this.subjectModel.find({ subjectId: id }, {}, { lean: true });
     return subject;
   }
 }
