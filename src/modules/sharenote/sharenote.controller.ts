@@ -29,6 +29,7 @@ import { SharenoteByIdQuery } from './queries/sharenoteById.handler';
 import { AuthGuard } from '@nestjs/passport';
 import { UserSchema } from '../user/db/user-schema';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
+import { ViewSharenoteCommand } from './commands/view-sharenote/view-sharenote.command';
 
 const mulOp = {
   limits: {
@@ -95,5 +96,11 @@ export class SharenoteController {
   @UseGuards(AuthGuard())
   async likeSharenote(@CurrentUser() user: UserSchema, @Body() likeSharenoteDto: LikeSharenoteDto): Promise<any> {
     this.commandBus.execute<LikeSharenoteCommand, void>(new LikeSharenoteCommand(user.userId, likeSharenoteDto));
+  }
+
+  @Put('view')
+  @UseGuards(AuthGuard())
+  async viewSharenote(@CurrentUser() user: UserSchema, @Body() likeSharenoteDto: LikeSharenoteDto): Promise<any> {
+    this.commandBus.execute<ViewSharenoteCommand, void>(new ViewSharenoteCommand(user.userId, likeSharenoteDto));
   }
 }

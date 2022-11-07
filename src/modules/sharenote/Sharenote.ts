@@ -63,4 +63,7 @@ export class Sharenote extends AggregateRoot {
       this.likeCount = this.getLikeCount() - 1;
     }
   }
+  addDowloadCount(): any {
+    this.dowloadCount = this.getDowloadCount() + 1;
+  }
 }
