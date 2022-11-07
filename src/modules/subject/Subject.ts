@@ -1,4 +1,5 @@
 import { AggregateRoot } from '@nestjs/cqrs';
+import { IExamDateTime } from './subject.types';
 
 export class Subject extends AggregateRoot {
   constructor(
@@ -6,8 +7,8 @@ export class Subject extends AggregateRoot {
     private readonly subjectId: string,
     private readonly name: string,
     private readonly classDateTime: string,
-    private readonly midtermDateTime: string,
-    private readonly finalDateTime: string,
+    private readonly midtermDateTime: IExamDateTime,
+    private readonly finalDateTime: IExamDateTime,
     private readonly sec: string,
     private readonly credit: number,
     private readonly teachers: string,
@@ -31,11 +32,11 @@ export class Subject extends AggregateRoot {
     return this.classDateTime;
   }
 
-  getMidtermDateTime(): string {
+  getMidtermDateTime(): IExamDateTime {
     return this.midtermDateTime;
   }
 
-  getFinalDateTime(): string {
+  getFinalDateTime(): IExamDateTime {
     return this.finalDateTime;
   }
 
