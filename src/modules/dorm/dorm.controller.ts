@@ -13,6 +13,8 @@ import { CreateDormRequest } from './dtos/request/create-dorm-request.dto';
 import { DormsQuery } from './queries/dorms.query-handler';
 import { DormByIdQuery } from './queries/dorm-by-id.query-handler';
 import { DormsDto } from './dtos/request/dorms.dto';
+import { CreateDormReviewCommand } from './commands/create-dormReview/create-dormReview.command';
+import { CreateDormReviewDto } from './dtos/command/create-dormReview';
 
 @Controller('dorm')
 export class DormController {
