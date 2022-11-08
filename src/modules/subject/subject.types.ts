@@ -2,14 +2,14 @@ export interface SubjectProps {
   subjectId: string;
   name: string;
   classDateTime: string;
-  midtermDateTime: IExamDateTime;
-  finalDateTime: IExamDateTime;
+  midtermDateTime: IDateTime;
+  finalDateTime: IDateTime;
   sec: string;
   credit: number;
   teachers: string;
 }
 
-export interface IExamDateTime {
+export interface IDateTime {
   start: string;
   end: string;
 }
