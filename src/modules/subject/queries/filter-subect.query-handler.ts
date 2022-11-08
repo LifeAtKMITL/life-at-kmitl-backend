@@ -2,6 +2,7 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { GenEdRepository } from '../db/gened.repository';
 import { SubjectEntityRepository } from '../db/subject-entity.repository';
 import { FilterSubjectRequest } from '../dtos/request/filter-subject-request.dto';
+import { SubjectDto } from '../dtos/subject.dto';
 import { Subject } from '../Subject';
 
 export class FilterSubjectQuery {
@@ -15,7 +16,7 @@ export class FilterSubjectQueryHandler implements IQueryHandler {
     private readonly genedEntityRepository: GenEdRepository,
   ) {}
 
-  async execute({ filterSubjectRequest }: FilterSubjectQuery): Promise<Subject[]> {
+  async execute({ filterSubjectRequest }: FilterSubjectQuery): Promise<SubjectDto[]> {
     const requestSubjects: Subject[] = [];
     for (let i = 0; i < filterSubjectRequest.length; i++) {
       const subject = await this.subjectEntityRepository.findByIdAndSec(
@@ -36,6 +37,21 @@ export class FilterSubjectQueryHandler implements IQueryHandler {
       }
     });
     console.log(allSubjects.length);
-    return allSubjects;
+
+    return allSubjects.map((subject) => {
+      return {
+        subjectId: subject.getSubjectId(),
+        name: subject.getName(),
+        sec: subject.getSec(),
+        classDateTime: subject.getClassDateTime(),
+        midtermDateTime: subject.getMidtermDateTime(),
+        finalDateTime: subject.getFinalDateTime(),
+        credit: subject.getCredit(),
+        teachers: subject.getTeachers(),
+        classDateTime_v: subject.classDateTimeToString(),
+        midtermDateTime_v: subject.examDateTimeToString(subject.getMidtermDateTime()),
+        finalDateTime_v: subject.examDateTimeToString(subject.getFinalDateTime()),
+      };
+    });
   }
 }
