@@ -2,10 +2,11 @@ import { ConflictException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { InjectModel } from '@nestjs/mongoose';
 import mongoose, { Model } from 'mongoose';
-import APIFeatures from 'src/utils/apiFeatures.utils';
 import { LoginDto } from './dto/login.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
 import { UserSchema } from '../user/db/user-schema';
+import APIFeatures from 'src/utils/apiFeatures.utils';
+import { images, usernames } from 'src/utils/fakeData.utils';
 
 @Injectable()
 export class AuthService {
@@ -28,9 +29,9 @@ export class AuthService {
 
   async register(userId: string): Promise<{ token: string }> {
     try {
-      const username = 'admin';
-      const image =
-        'https://images.pexels.com/photos/1716861/pexels-photo-1716861.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2';
+      const username = usernames[Math.floor(Math.random() * usernames.length)];
+      const image = images[Math.floor(Math.random() * images.length)];
+
       const user = await this.userModel.create({ _id: new mongoose.Types.ObjectId(), userId, username, image });
 
       const token = await APIFeatures.assignJwtToken(user.userId, this.jwtService);
