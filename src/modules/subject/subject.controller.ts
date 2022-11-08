@@ -11,6 +11,8 @@ import { SubjectsDto } from './dtos/subjects.dto';
 import { SubjectByIdQuery } from './queries/subject-by-id.query-handler';
 import { SubjectsQuery } from './queries/subjects.query-handler';
 import { AddFavoriteSubjectCommand } from './commands/add-favorite-gened/add-favorite-subject.handler';
+import { FilterSubjectRequest } from './dtos/request/filter-subject-request.dto';
+import { FilterSubjectQuery } from './queries/filter-subect.query-handler';
 
 @Controller('subject')
 export class SubjectController {
@@ -45,8 +47,8 @@ export class SubjectController {
    * RES: SubjectDto
    */
   @Get(':id')
-  async getSubjectById(@Param('id') id: string): Promise<SubjectsDto> {
-    return this.queryBus.execute<SubjectByIdQuery, SubjectDto>(new SubjectByIdQuery(id));
+  async getSubjectById(@Param('id') id: string): Promise<SubjectDto[]> {
+    return this.queryBus.execute<SubjectByIdQuery, SubjectDto[]>(new SubjectByIdQuery(id));
   }
 
   /*
@@ -64,5 +66,10 @@ export class SubjectController {
     this.commandBus.execute<AddFavoriteSubjectCommand, void>(
       new AddFavoriteSubjectCommand(user.userId, saveFavoriteSubjectRequest),
     );
+  }
+
+  @Post('filter')
+  async filterSubject(@Body() filterSubjectRequest: FilterSubjectRequest[]): Promise<SubjectDto[]> {
+    return this.queryBus.execute<FilterSubjectQuery, SubjectDto[]>(new FilterSubjectQuery(filterSubjectRequest));
   }
 }

@@ -14,8 +14,8 @@ export class ExamDateTime extends Document {
 
 export const ExamDateSchema = SchemaFactory.createForClass(ExamDateTime);
 
-@Schema({ versionKey: false, collection: 'Subject' })
-export class SubjectSchema extends IdentifiableEntitySchema {
+@Schema({ versionKey: false, collection: 'GenEd' })
+export class GenEdSchema extends IdentifiableEntitySchema {
   @Prop()
   readonly subjectId: string;
 

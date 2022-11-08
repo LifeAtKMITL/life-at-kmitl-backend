@@ -10,7 +10,7 @@ export class SubjectByIdQuery {
 export class SubjectByIdQueryHandler implements IQueryHandler {
   constructor(private readonly subjectDtoRepository: SubjectDtoRepository) {}
 
-  async execute({ id }: SubjectByIdQuery): Promise<SubjectDto> {
+  async execute({ id }: SubjectByIdQuery): Promise<SubjectDto[]> {
     return this.subjectDtoRepository.findById(id);
   }
 }
