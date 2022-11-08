@@ -1,6 +1,8 @@
+import { Dorm } from './../Dorm';
 import { DormDtoRepository } from '../db/dorm-dto.repository';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { FilterOptionsDto } from '../dtos/request/filterOptions-query';
+import { DormEntityRepository } from '../db/dorm-entity.repository';
 
 export class DormsByFilterOptionsQuery {
   constructor(public readonly filterOptions: FilterOptionsDto) {}
@@ -8,9 +10,13 @@ export class DormsByFilterOptionsQuery {
 
 @QueryHandler(DormsByFilterOptionsQuery)
 export class DormsByFilterOptionsQueryHandler implements IQueryHandler<DormsByFilterOptionsQuery> {
-  constructor(private readonly dormDtoRepository: DormDtoRepository) {}
+  constructor(
+    private readonly dormDtoRepository: DormDtoRepository,
+    private readonly dormRepository: DormEntityRepository,
+  ) {}
 
   async execute({ filterOptions }: DormsByFilterOptionsQuery): Promise<any> {
-    return this.dormDtoRepository.findByFilterOptions(filterOptions);
+    const dorms = await this.dormRepository.findByFilterOptions(filterOptions);
+    return dorms;
   }
 }

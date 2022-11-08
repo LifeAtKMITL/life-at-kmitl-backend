@@ -10,7 +10,6 @@ import { ProductModule } from './modules/product/product.module';
 import { UserModule } from './modules/user/user.module';
 import { BlogreviewModule } from './modules/blogreview/blogreivew.module';
 
-
 @Module({
   imports: [
     ConfigModule.forRoot({
