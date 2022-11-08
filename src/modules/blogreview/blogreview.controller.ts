@@ -1,8 +1,10 @@
-import { Body, Controller, Post, Get } from '@nestjs/common';
+import { Body, Controller, Post, Get, Param } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { CreateBlogCommand } from './commands/create-blogreview/create-blogreview.command';
 import { CreateBlogreviewRequest } from './dtos/request/create-blog-request.dto';
+import { BlogreviewByUserQuery } from './queries/blogreview-byID-query-handler';
 import { BlogreviewsDto } from '../blogreview/dtos/blogreviews.dto';
+import { BlogreviewDto } from './dtos/blogreview.dto';
 import { BlogreviewsQuery } from './queries/blogreview.query-handler';
 
 @Controller('blogreview')
@@ -17,5 +19,10 @@ export class BlogreviewController {
   @Get()
   async getAllBlogreviews(): Promise<BlogreviewsDto[]> {
     return await this.queryBus.execute<BlogreviewsQuery, BlogreviewsDto[]>(new BlogreviewsQuery());
+  }
+
+  @Get(':id')
+  async getBlogreviewById(@Param('userID') id: string): Promise<BlogreviewsDto> {
+    return this.queryBus.execute<BlogreviewByUserQuery, BlogreviewDto>(new BlogreviewByUserQuery(id));
   }
 }
