@@ -118,4 +118,70 @@ export class Subject extends AggregateRoot {
   toString(): string {
     return `${this.subjectId} ${this.name} ${this.sec}\n class time: ${this.classDateTime}\n midterm date: ${this.midtermDateTime.start} ${this.midtermDateTime.end}\n final date: ${this.finalDateTime.start} ${this.finalDateTime.end}\n ${this.credit}`;
   }
+
+  classDateTimeToString(): string {
+    const [date, time] = this.classDateTime.split(' ');
+    let finalDate = '';
+    if (date === '2020-03-01' || date === '2020-03-1' || date === '2020-3-1') {
+      finalDate = 'Sunday, ';
+    } else if (date === '2020-03-02' || date === '2020-03-2' || date === '2020-3-2') {
+      finalDate = 'Monday, ';
+    } else if (date === '2020-03-03' || date === '2020-03-3' || date === '2020-3-3') {
+      finalDate = 'Tuesday, ';
+    } else if (date === '2020-03-04' || date === '2020-03-4' || date === '2020-3-4') {
+      finalDate = 'Wednesday, ';
+    } else if (date === '2020-03-05' || date === '2020-03-5' || date === '2020-3-5') {
+      finalDate = 'Thursday, ';
+    } else if (date === '2020-03-06' || date === '2020-03-6' || date === '2020-3-6') {
+      finalDate = 'Friday, ';
+    } else if (date === '2020-03-07' || date === '2020-03-7' || date === '2020-3-7') {
+      finalDate = 'Saturday, ';
+    }
+    return `${finalDate}${time.split('-').join(' - ')}`;
+  }
+
+  examDateTimeToString(dateTime: IDateTime): string {
+    if (dateTime.start === null) {
+      return null;
+    }
+    const date = new Date(dateTime.start);
+    const noDate = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    const startTime = dateTime.start.split(' ')[1].slice(0, 5);
+    const endTime = dateTime.end.split(' ')[1].slice(0, 5);
+
+    let dateExt: string;
+    switch (noDate.toString().at(-1)) {
+      case '1':
+        dateExt = 'st';
+        break;
+      case '2':
+        dateExt = 'nd';
+        break;
+      case '3':
+        dateExt = 'rd';
+        break;
+      default:
+        dateExt = 'th';
+        break;
+    }
+
+    const months = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December',
+    ];
+
+    return `${noDate}${dateExt} ${months[month]} ${year}, ${startTime} - ${endTime}`;
+  }
 }
