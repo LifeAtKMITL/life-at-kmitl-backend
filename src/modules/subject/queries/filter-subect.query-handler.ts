@@ -1,5 +1,4 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
-import { request } from 'http';
 import { GenEdRepository } from '../db/gened.repository';
 import { SubjectEntityRepository } from '../db/subject-entity.repository';
 import { FilterSubjectRequest } from '../dtos/request/filter-subject-request.dto';
@@ -16,7 +15,7 @@ export class FilterSubjectQueryHandler implements IQueryHandler {
     private readonly genedEntityRepository: GenEdRepository,
   ) {}
 
-  async execute({ filterSubjectRequest }: FilterSubjectQuery): Promise<any> {
+  async execute({ filterSubjectRequest }: FilterSubjectQuery): Promise<Subject[]> {
     const requestSubjects: Subject[] = [];
     for (let i = 0; i < filterSubjectRequest.length; i++) {
       const subject = await this.subjectEntityRepository.findByIdAndSec(
@@ -27,14 +26,16 @@ export class FilterSubjectQueryHandler implements IQueryHandler {
     }
 
     const allSubjects = await this.genedEntityRepository.findAll();
+    console.log(allSubjects.length);
     requestSubjects.forEach((subject) => {
-      console.log(`${subject.toString()}`);
-      allSubjects.forEach((checkSubject) => {
-        // console.log(`and ${checkSubject.toString()} ${subject.checkAvailability(checkSubject)}`);
-        if (subject.checkAvailability(checkSubject)) {
+      // console.log(`${subject.toString()}`);
+      for (let i = 0; i < allSubjects.length; i++) {
+        if (!subject.checkAvailability(allSubjects[i])) {
+          allSubjects.splice(i, 1);
         }
-      });
+      }
     });
-    return;
+    console.log(allSubjects.length);
+    return allSubjects;
   }
 }

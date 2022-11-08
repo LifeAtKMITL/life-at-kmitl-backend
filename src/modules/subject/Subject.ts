@@ -68,7 +68,7 @@ export class Subject extends AggregateRoot {
     if (
       this.dateRangeOverlaps(classDateTime.start, classDateTime.end, classDateTimeSubj.start, classDateTimeSubj.end)
     ) {
-      console.log('class overlaps');
+      // console.log('class overlaps');
       return false;
     }
     if (
@@ -81,7 +81,7 @@ export class Subject extends AggregateRoot {
           new Date(subject.getMidtermDateTime().end),
         ))
     ) {
-      console.log('midterm overlaps');
+      // console.log('midterm overlaps');
       return false;
     }
     if (
@@ -94,7 +94,7 @@ export class Subject extends AggregateRoot {
           new Date(subject.getFinalDateTime().end),
         ))
     ) {
-      console.log('final overlaps');
+      // console.log('final overlaps');
       return false;
     }
 
