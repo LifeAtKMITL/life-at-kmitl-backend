@@ -8,5 +8,4 @@ export interface ILineProfile {
   amr: string[];
   name: string;
   picture: string;
-  email?: string;
 }

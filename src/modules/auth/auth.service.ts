@@ -19,23 +19,23 @@ export class AuthService {
   ) {}
 
   async login(loginDto: LoginDto): Promise<{ token: string }> {
-    console.log('login route');
-    const { userId: tokenId } = loginDto;
+    const { userId } = loginDto;
 
-    this.getLineProfileByTokenId(tokenId);
+    // Get sub from Line
+    const { sub: tokenId } = await this.getLineProfileByTokenId(userId);
 
+    // Find user in DB
     const user = await this.userModel.findOne({ tokenId });
 
-    // Register
+    // Register if no user
     if (!user) {
       return this.register(tokenId);
     }
 
+    // Generate Token
     const token = await APIFeatures.assignJwtToken(user.userId, this.jwtService);
-    console.log(token);
 
-    // return { token };
-    return { token: '' };
+    return { token };
   }
 
   async register(userId: string): Promise<{ token: string }> {
@@ -79,12 +79,9 @@ export class AuthService {
         await firstValueFrom(this.httpService.post('https://api.line.me/oauth2/v2.1/verify', profilePayload, config))
       ).data;
 
-      console.log(profile);
-
       return profile;
     } catch (error) {
-      console.log(error);
-      // throw new ConflictException(error);
+      throw new ConflictException(error);
     }
   }
 }
