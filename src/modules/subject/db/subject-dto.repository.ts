@@ -5,6 +5,7 @@ import { SubjectDto } from '../dtos/subject.dto';
 import { SubjectsDto } from '../dtos/subjects.dto';
 import { GenEdSchema } from './gened-schema';
 import { GenEdSchemaFactory } from './gened-schema.factory';
+import { SubjectDtoFactory } from './subject-dto.factory';
 import { SubjectSchema } from './subject-schema';
 import { SubjectSchemaFactory } from './subject-schema.factory';
 
@@ -15,6 +16,7 @@ export class SubjectDtoRepository {
     @InjectModel(GenEdSchema.name) private readonly genedModel: Model<GenEdSchema>,
     private readonly subjectShemaFactory: SubjectSchemaFactory,
     private readonly genedSchemaFactory: GenEdSchemaFactory,
+    private readonly subjectDtoFactory: SubjectDtoFactory,
   ) {}
 
   // DESC: find all subjects in Subject collection
@@ -36,21 +38,6 @@ export class SubjectDtoRepository {
     const subjectE = subjects.map((sub) => this.subjectShemaFactory.createFromSchema(sub));
     const subjectFromGenEd = genEds.map((subject) => this.genedSchemaFactory.createFromSchema(subject));
 
-    // made this better
-    return [...subjectE, ...subjectFromGenEd].map((subject) => {
-      return {
-        subjectId: subject.getSubjectId(),
-        name: subject.getName(),
-        sec: subject.getSec(),
-        classDateTime: subject.getClassDateTime(),
-        midtermDateTime: subject.getMidtermDateTime(),
-        finalDateTime: subject.getFinalDateTime(),
-        credit: subject.getCredit(),
-        teachers: subject.getTeachers(),
-        classDateTime_v: subject.classDateTimeToString(),
-        midtermDateTime_v: subject.examDateTimeToString(subject.getMidtermDateTime()),
-        finalDateTime_v: subject.examDateTimeToString(subject.getFinalDateTime()),
-      };
-    });
+    return this.subjectDtoFactory.create([...subjectE, ...subjectFromGenEd]);
   }
 }
