@@ -38,7 +38,6 @@ export class SubjectDtoRepository {
     const subjectE = subjects.map((sub) => this.subjectShemaFactory.createFromSchema(sub));
     const subjectFromGenEd = genEds.map((subject) => this.genedSchemaFactory.createFromSchema(subject));
 
-    // made this better
     return this.subjectDtoFactory.create([...subjectE, ...subjectFromGenEd]);
   }
 }
