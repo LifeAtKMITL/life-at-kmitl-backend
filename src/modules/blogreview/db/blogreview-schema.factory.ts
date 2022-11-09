@@ -9,12 +9,11 @@ export class BlogreviewSchemaFactory implements EntitySchemaFactory<BlogreviewSc
   create(blogreview: Blogreview): BlogreviewSchema {
     return {
       _id: new mongoose.Types.ObjectId(blogreview.getId()),
-      subjectID: blogreview.getSubjectId(),
+      subjectId: blogreview.getSubjectId(),
+      subjectName: blogreview.getSubjectName(),
       textSubjectReview: blogreview.getTextSubjectReview(),
-      userID: blogreview.getUserId(),
-      userName: blogreview.getUserName(),
-      userID_Liked: blogreview.getUserId_Liked(),
-      rate: blogreview.getRate(),
+      userId: blogreview.getUserId(),
+      likeCount: blogreview.getLikeCount(),
       date: blogreview.getDate(),
     };
   }
@@ -22,12 +21,11 @@ export class BlogreviewSchemaFactory implements EntitySchemaFactory<BlogreviewSc
   createFromSchema(BlogreviewSchema: BlogreviewSchema): Blogreview {
     return new Blogreview(
       BlogreviewSchema._id.toString(),
-      BlogreviewSchema.subjectID,
+      BlogreviewSchema.subjectId,
+      BlogreviewSchema.subjectName,
       BlogreviewSchema.textSubjectReview,
-      BlogreviewSchema.userID,
-      BlogreviewSchema.userName,
-      BlogreviewSchema.userID_Liked,
-      BlogreviewSchema.rate,
+      BlogreviewSchema.userId,
+      BlogreviewSchema.likeCount,
       BlogreviewSchema.date,
     );
   }

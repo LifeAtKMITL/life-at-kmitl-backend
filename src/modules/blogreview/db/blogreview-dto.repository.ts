@@ -14,17 +14,16 @@ export class BlogreviewDtoRepository {
     const blogreviews = await this.blogreviewModel.find({}, {}, { lean: true });
     return blogreviews.map((blogreview) => {
       return {
-        userId: blogreview.userID,
+        userId: blogreview.userId,
         textSubjectReview: blogreview.textSubjectReview,
-        subjectID: blogreview.subjectID,
-        rate: blogreview.rate,
+        subjectID: blogreview.subjectId,
         date: blogreview.date,
       };
     });
   }
 
   // DESC: Filter by userID
-  async findById(id: string): Promise<BlogreviewDto> {
+  async findById(id: string): Promise<any> {
     const blogreview = await this.blogreviewModel.findOne({ userID: id }, {}, { lean: true });
     return blogreview;
   }

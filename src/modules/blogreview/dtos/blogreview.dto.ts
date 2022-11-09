@@ -1,11 +1,11 @@
-import { ObjectId } from "mongoose";
+import { ObjectId } from 'mongoose';
 
 export class BlogreviewDto {
-    readonly subjectID: string;
-    readonly textSubjectReview: string;
-    readonly userID: string;
-    readonly userName: string;
-    readonly userID_Liked: string[];
-    readonly rate: number;
-    readonly date: Date;
-  }
+  readonly subjectId: string;
+  readonly subjectName: string;
+  readonly textSubjectReview: string;
+  readonly userId: string;
+  readonly userName: string;
+  readonly likeCount: number;
+  readonly date: Date;
+}

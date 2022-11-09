@@ -3,24 +3,19 @@ import { IdentifiableEntitySchema } from 'src/database/identifiable-entity-schem
 
 @Schema({ versionKey: false, collection: 'Blogreview' })
 export class BlogreviewSchema extends IdentifiableEntitySchema {
-
   @Prop()
-  readonly subjectID: string;
+  readonly subjectId: string;
+  @Prop()
+  readonly subjectName: string;
 
   @Prop()
   readonly textSubjectReview: string;
 
   @Prop()
-  readonly userID: string;
+  readonly userId: string;
 
   @Prop()
-  readonly userName: string;
-
-  @Prop([String])
-  readonly userID_Liked: string[];
-
-  @Prop()
-  readonly rate: number;
+  readonly likeCount: number;
 
   @Prop()
   readonly date: Date;

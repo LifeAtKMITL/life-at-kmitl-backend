@@ -1,7 +1,11 @@
 export class BlogreviewsDto {
-  readonly userID: string;
+  readonly _id: string;
+  readonly subjectId: string;
+  readonly subjectName: string;
   readonly textSubjectReview: string;
-  readonly subjectID: string;
-  readonly rate: number;
+  readonly userId: string;
+  readonly likeCount: number;
   readonly date: Date;
+  readonly userName: string;
+  readonly imagePath: string;
 }
