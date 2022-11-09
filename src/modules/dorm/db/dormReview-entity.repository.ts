@@ -20,6 +20,7 @@ export class DormReviewEntityRepository extends BaseEntityRepository<DormReviewS
   //async find function here
   async findAllById(id: string): Promise<any[]> {
     const reviews = await this.dormReviewModel.find({ dormId: id }, {}, { lean: true });
+
     return reviews;
   }
 }
