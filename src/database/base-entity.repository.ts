@@ -8,7 +8,7 @@ export abstract class BaseEntityRepository<
   TEntity extends AggregateRoot,
 > extends EntityRepository<TSchema, TEntity> {
   async findOneById(id: string): Promise<TEntity> {
-    return await this.findOne({ _id: new Types.ObjectId(id) } as FilterQuery<TSchema>);
+    return this.findOne({ _id: new Types.ObjectId(id) } as FilterQuery<TSchema>);
   }
 
   async findOneAndReplaceById(id: string, entity: TEntity): Promise<void> {
