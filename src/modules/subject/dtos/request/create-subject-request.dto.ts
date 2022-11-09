@@ -7,6 +7,8 @@ export class CreateSubjectRequest {
   midtermDateTime: IDateTime;
   finalDateTime: IDateTime;
   sec: string;
+  secPair: string;
+  lectOrPrac: string;
   credit: number;
   teachers: string;
 }

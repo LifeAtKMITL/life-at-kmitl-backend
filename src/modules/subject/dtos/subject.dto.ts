@@ -4,6 +4,8 @@ export class SubjectDto {
   readonly subjectId: string;
   readonly name: string;
   readonly sec: string;
+  readonly secPair: string;
+  readonly lectOrPrac: string;
   readonly credit: number;
   readonly teachers: string;
   readonly classDateTime: string;
