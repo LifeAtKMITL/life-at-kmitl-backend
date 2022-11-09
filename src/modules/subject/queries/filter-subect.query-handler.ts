@@ -1,5 +1,6 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { GenEdRepository } from '../db/gened.repository';
+import { SubjectDtoFactory } from '../db/subject-dto.factory';
 import { SubjectEntityRepository } from '../db/subject-entity.repository';
 import { FilterSubjectRequest } from '../dtos/request/filter-subject-request.dto';
 import { SubjectDto } from '../dtos/subject.dto';
@@ -14,6 +15,7 @@ export class FilterSubjectQueryHandler implements IQueryHandler {
   constructor(
     private readonly subjectEntityRepository: SubjectEntityRepository,
     private readonly genedEntityRepository: GenEdRepository,
+    private readonly subjectDtoFactory: SubjectDtoFactory,
   ) {}
 
   async execute({ filterSubjectRequest }: FilterSubjectQuery): Promise<SubjectDto[]> {
@@ -38,20 +40,6 @@ export class FilterSubjectQueryHandler implements IQueryHandler {
     });
     console.log(allSubjects.length);
 
-    return allSubjects.map((subject) => {
-      return {
-        subjectId: subject.getSubjectId(),
-        name: subject.getName(),
-        sec: subject.getSec(),
-        classDateTime: subject.getClassDateTime(),
-        midtermDateTime: subject.getMidtermDateTime(),
-        finalDateTime: subject.getFinalDateTime(),
-        credit: subject.getCredit(),
-        teachers: subject.getTeachers(),
-        classDateTime_v: subject.classDateTimeToString(),
-        midtermDateTime_v: subject.examDateTimeToString(subject.getMidtermDateTime()),
-        finalDateTime_v: subject.examDateTimeToString(subject.getFinalDateTime()),
-      };
-    });
+    return this.subjectDtoFactory.create(allSubjects);
   }
 }

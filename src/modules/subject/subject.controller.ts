@@ -68,6 +68,12 @@ export class SubjectController {
     );
   }
 
+  /*
+   * DESC: API to filter out available gened from given subject
+   * ROUTE: subject/filter
+   * METHOD: Post
+   * RES: SubjectDto[] (for the gened class that is available)
+   */
   @Post('filter')
   async filterSubject(@Body() filterSubjectRequest: FilterSubjectRequest[]): Promise<SubjectDto[]> {
     return this.queryBus.execute<FilterSubjectQuery, SubjectDto[]>(new FilterSubjectQuery(filterSubjectRequest));

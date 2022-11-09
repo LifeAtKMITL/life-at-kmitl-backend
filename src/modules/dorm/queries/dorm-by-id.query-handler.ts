@@ -3,6 +3,7 @@ import { DormEntityRepository } from './../db/dorm-entity.repository';
 import { DormDto } from './../dtos/request/dorm.dto';
 import { DormDtoRepository } from './../db/dorm-dto.repository';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+import { Types } from 'mongoose';
 
 export class DormByIdQuery {
   constructor(public readonly id: string) {}
