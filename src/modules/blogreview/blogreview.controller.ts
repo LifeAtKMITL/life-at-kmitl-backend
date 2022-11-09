@@ -2,7 +2,7 @@ import { Body, Controller, Post, Get, Param } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { CreateBlogCommand } from './commands/create-blogreview/create-blogreview.command';
 import { CreateBlogreviewRequest } from './dtos/request/create-blog-request.dto';
-import { BlogreviewByUserQuery } from './queries/blogreview-byID-query-handler';
+import { BlogreviewByUserQuery } from './queries/blogreview-by-id.query-handler';
 import { BlogreviewsDto } from '../blogreview/dtos/blogreviews.dto';
 import { BlogreviewDto } from './dtos/blogreview.dto';
 import { BlogreviewsQuery } from './queries/blogreview.query-handler';
