@@ -23,9 +23,10 @@ export class AuthService {
 
     // Get sub from Line
     const { sub: tokenId } = await this.getLineProfileByTokenId(userId);
+    // console.log(name, tokenId);
 
     // Find user in DB
-    const user = await this.userModel.findOne({ tokenId });
+    const user = await this.userModel.findOne({ userId: tokenId });
 
     // Register if no user
     if (!user) {
@@ -40,11 +41,14 @@ export class AuthService {
 
   async register(userId: string): Promise<{ token: string }> {
     try {
+      // Generate Username, image
       const username = usernames[Math.floor(Math.random() * usernames.length)];
       const image = images[Math.floor(Math.random() * images.length)];
 
+      // Create User
       const user = await this.userModel.create({ _id: new mongoose.Types.ObjectId(), userId, username, image });
 
+      // Generate Token
       const token = await APIFeatures.assignJwtToken(user.userId, this.jwtService);
 
       return { token };
