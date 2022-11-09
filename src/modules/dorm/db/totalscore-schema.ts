@@ -6,6 +6,6 @@ export class Totalscore extends Document {
   @Prop()
   readonly userID: string;
   @Prop()
-  readonly score: number;
+  public score: number;
 }
 export const TotalscoreSchema = SchemaFactory.createForClass(Totalscore);

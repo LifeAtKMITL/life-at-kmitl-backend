@@ -19,7 +19,7 @@ export class BlogreviewSchemaFactory implements EntitySchemaFactory<BlogreviewSc
     };
   }
 
-  createFromScehma(BlogreviewSchema: BlogreviewSchema): Blogreview {
+  createFromSchema(BlogreviewSchema: BlogreviewSchema): Blogreview {
     return new Blogreview(
       BlogreviewSchema._id.toString(),
       BlogreviewSchema.subjectID,

@@ -1,3 +1,5 @@
+import { Totalscore } from './db/totalscore-schema';
+import { AddScoreDto } from './dtos/command/add-score-dorm.dto';
 import { AggregateRoot } from '@nestjs/cqrs';
 
 export class Dorm extends AggregateRoot {
@@ -11,7 +13,7 @@ export class Dorm extends AggregateRoot {
     private readonly zone: string[],
     private readonly bills: any,
     private readonly facilities: any[],
-    private readonly totalScore: any[],
+    private totalScore: Totalscore[],
     private readonly rangePrice: number[],
   ) {
     super();
@@ -49,11 +51,35 @@ export class Dorm extends AggregateRoot {
   getFacilities(): any[] {
     return this.facilities;
   }
-  getTotalScore(): any[] {
+  getTotalScore(): Totalscore[] {
     return this.totalScore;
+  }
+
+  setTotalScore(userId, score): any {
+    for (let i = 0; i < this.totalScore.length; i++) {
+      if (userId == this.totalScore[i].userID) {
+        this.totalScore[i].score = score;
+        return;
+      }
+    }
+    this.addScore(userId, score);
+  }
+
+  getAvgScore(): number {
+    let sum = 0;
+    for (let i = 0; i < this.totalScore.length; i++) {
+      sum = sum + this.totalScore[i].score;
+    }
+    if (sum != 0) {
+      return sum / this.totalScore.length;
+    }
+    return 0;
   }
 
   getRangePrice(): number[] {
     return this.rangePrice;
+  }
+  addScore(userId: string, score: number): void {
+    this.totalScore.push({ userID: userId, score: score } as Totalscore);
   }
 }

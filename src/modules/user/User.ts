@@ -1,3 +1,4 @@
+import { LikeSharenoteDto } from './../sharenote/dtos/likeSharenote/likeSharenote.dto';
 import { AggregateRoot } from '@nestjs/cqrs';
 import { AddFavoriteSubjectRequest } from '../subject/dtos/request/add-favorite-subject.dto';
 import { BookmarkedReview, FavoriteGenEd, LikedDorm, LikedNote, LikedReview, ScoredDorm } from './value-objects';
@@ -60,5 +61,26 @@ export class User extends AggregateRoot {
 
   addFavoriteSubject(addFavoriteSubject: AddFavoriteSubjectRequest): void {
     this.favGenEds.push(addFavoriteSubject);
+  }
+
+  setLikedNotes(likeSharenoteDto: LikeSharenoteDto): boolean {
+    let founded = false;
+    this.likedNotes.forEach((element, index) => {
+      if (likeSharenoteDto.sharenoteId == <string>(<unknown>this.likedNotes[index])) {
+        this.likedNotes.splice(index, 1);
+        founded = true;
+      }
+    });
+    if (founded) {
+      return false;
+    }
+
+    this.likeSharenote(likeSharenoteDto);
+    return true;
+  }
+
+  likeSharenote(likeSharenoteDto: LikeSharenoteDto): void {
+    const temp = <LikedNote>(<unknown>likeSharenoteDto.sharenoteId);
+    this.likedNotes.push(temp);
   }
 }

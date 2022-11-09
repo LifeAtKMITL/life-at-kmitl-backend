@@ -18,4 +18,8 @@ export abstract class BaseEntityRepository<
   async findAll(): Promise<TEntity[]> {
     return this.find({});
   }
+
+  async findByIdAndSec(subjectId: string, sec: string): Promise<TEntity> {
+    return this.findOne({ subjectId: subjectId, sec: sec } as FilterQuery<TSchema>);
+  }
 }

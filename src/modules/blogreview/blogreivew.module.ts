@@ -22,6 +22,7 @@ import { BlogreviewDtoRepository } from './db/blogreview-dto.repository';
     BlogreviewFactory,
     BlogreviewEntityRepository,
     BlogreviewSchemaFactory,
+
     ...BlogreviewCommandHandlers,
     ...BlogreviewQueryHandlers,
     BlogreviewDtoRepository,
