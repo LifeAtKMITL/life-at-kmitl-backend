@@ -10,7 +10,7 @@ export class BlogreviewDtoRepository {
   constructor(@InjectModel(BlogreviewSchema.name) private readonly blogreviewModel: Model<BlogreviewSchema>) {}
 
   // DESC: find all
-  async findAll(): Promise<BlogreviewsDto[]> {
+  async findAll(): Promise<any[]> {
     const blogreviews = await this.blogreviewModel.find({}, {}, { lean: true });
     return blogreviews.map((blogreview) => {
       return {
@@ -18,7 +18,7 @@ export class BlogreviewDtoRepository {
         textSubjectReview: blogreview.textSubjectReview,
         subjectID: blogreview.subjectID,
         rate: blogreview.rate,
-        date: blogreview.date
+        date: blogreview.date,
       };
     });
   }

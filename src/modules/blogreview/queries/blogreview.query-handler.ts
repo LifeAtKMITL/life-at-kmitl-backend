@@ -8,7 +8,7 @@ export class BlogreviewsQuery {}
 export class BlogreviewsQueryHandler implements IQueryHandler<BlogreviewsQuery> {
   constructor(private readonly blogreviewDtoRepository: BlogreviewDtoRepository) {}
 
-  async execute(): Promise<BlogreviewsDto[]> {
+  async execute(): Promise<any[]> {
     return this.blogreviewDtoRepository.findAll();
   }
 }
