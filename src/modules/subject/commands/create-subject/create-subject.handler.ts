@@ -7,8 +7,18 @@ export class CreateSubjectCommandHandler implements ICommandHandler {
   constructor(private readonly subjectFactory: SubjectFactory) {}
 
   async execute({ createSubjectRequest }: CreateSubjectCommand): Promise<void> {
-    const { subjectId, name, classDateTime, midtermDateTime, finalDateTime, sec, credit, teachers } =
-      createSubjectRequest;
+    const {
+      subjectId,
+      name,
+      classDateTime,
+      midtermDateTime,
+      finalDateTime,
+      sec,
+      secPair,
+      lectOrPrac,
+      credit,
+      teachers,
+    } = createSubjectRequest;
     const subject = this.subjectFactory.create({
       subjectId,
       name,
@@ -16,6 +26,8 @@ export class CreateSubjectCommandHandler implements ICommandHandler {
       midtermDateTime,
       finalDateTime,
       sec,
+      secPair,
+      lectOrPrac,
       credit,
       teachers,
     });

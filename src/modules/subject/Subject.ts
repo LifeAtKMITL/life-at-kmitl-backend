@@ -10,6 +10,8 @@ export class Subject extends AggregateRoot {
     private readonly midtermDateTime: IDateTime,
     private readonly finalDateTime: IDateTime,
     private readonly sec: string,
+    private readonly secPair: string,
+    private readonly lectOrPrac: string,
     private readonly credit: number,
     private readonly teachers: string,
   ) {
@@ -42,6 +44,14 @@ export class Subject extends AggregateRoot {
 
   getSec(): string {
     return this.sec;
+  }
+
+  getSecPair(): string {
+    return this.secPair;
+  }
+
+  getLectOrPrac(): string {
+    return this.lectOrPrac;
   }
 
   getCredit(): number {

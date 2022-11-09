@@ -16,6 +16,8 @@ export class SubjectFactory implements EntityFactory<Subject> {
     midtermDateTime,
     finalDateTime,
     sec,
+    secPair,
+    lectOrPrac,
     credit,
     teachers,
   }: SubjectProps): Promise<Subject> {
@@ -27,6 +29,8 @@ export class SubjectFactory implements EntityFactory<Subject> {
       midtermDateTime,
       finalDateTime,
       sec,
+      secPair,
+      lectOrPrac,
       credit,
       teachers,
     );

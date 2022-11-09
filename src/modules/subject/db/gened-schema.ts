@@ -26,6 +26,12 @@ export class GenEdSchema extends IdentifiableEntitySchema {
   readonly sec: string;
 
   @Prop()
+  readonly secPair: string;
+
+  @Prop()
+  readonly lectOrPrac: string;
+
+  @Prop()
   readonly classDateTime: string;
 
   @Prop({ type: ExamDateTime })

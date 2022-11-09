@@ -15,6 +15,8 @@ export class GenEdSchemaFactory implements EntitySchemaFactory<GenEdSchema, Subj
       midtermDateTime: subject.getMidtermDateTime(),
       finalDateTime: subject.getFinalDateTime(),
       sec: subject.getSec(),
+      secPair: subject.getSecPair(),
+      lectOrPrac: subject.getLectOrPrac(),
       credit: subject.getCredit(),
       teachers: subject.getTeachers(),
     };
@@ -29,6 +31,8 @@ export class GenEdSchemaFactory implements EntitySchemaFactory<GenEdSchema, Subj
       subjectSchema.midtermDateTime,
       subjectSchema.finalDateTime,
       subjectSchema.sec,
+      subjectSchema.secPair,
+      subjectSchema.lectOrPrac,
       subjectSchema.credit,
       subjectSchema.teachers,
     );

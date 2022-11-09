@@ -10,6 +10,8 @@ export class SubjectDtoFactory {
         subjectId: subject.getSubjectId(),
         name: subject.getName(),
         sec: subject.getSec(),
+        secPair: subject.getSecPair(),
+        lectOrPrac: subject.getLectOrPrac(),
         classDateTime: subject.getClassDateTime(),
         midtermDateTime: subject.getMidtermDateTime(),
         finalDateTime: subject.getFinalDateTime(),
