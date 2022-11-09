@@ -23,10 +23,8 @@ export class DormReviewByIdQueryHandler implements IQueryHandler {
       return reviews;
     }
     const user = await this.userRepository.findOneById(reviews[0].userId);
-    console.log(user);
+    //console.log(user);
     const temp = {
-      _id: user.getId(),
-      userId: user.getUserId(),
       username: user.getUsername(),
       image: user.getImage(),
       ...reviews,
