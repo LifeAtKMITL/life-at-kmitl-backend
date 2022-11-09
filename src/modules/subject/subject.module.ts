@@ -10,6 +10,7 @@ import { SubjectCommandHandlers } from './commands';
 import { GenEdSchema } from './db/gened-schema';
 import { GenEdSchemaFactory } from './db/gened-schema.factory';
 import { GenEdRepository } from './db/gened.repository';
+import { SubjectDtoFactory } from './db/subject-dto.factory';
 import { SubjectDtoRepository } from './db/subject-dto.repository';
 import { SubjectEntityRepository } from './db/subject-entity.repository';
 import { SubjectSchema } from './db/subject-schema';
@@ -38,6 +39,7 @@ import { SubjectFactory } from './subject.factory';
     GenEdSchema,
     GenEdRepository,
     GenEdSchemaFactory,
+    SubjectDtoFactory,
     ...SubjectCommandHandlers,
     ...SubjectQueryHandlers,
   ],
