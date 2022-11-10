@@ -2,6 +2,7 @@ import { LikeSharenoteDto } from './../sharenote/dtos/likeSharenote/likeSharenot
 import { AggregateRoot } from '@nestjs/cqrs';
 import { AddFavoriteSubjectRequest } from '../subject/dtos/request/add-favorite-subject.dto';
 import { BookmarkedReview, FavoriteGenEd, LikedDorm, LikedNote, LikedReview, ScoredDorm } from './value-objects';
+import { AddBookmarkBlogreviewRequest } from '../blogreview/dtos/request/add-bookmark-blogreview.dto';
 
 export class User extends AggregateRoot {
   constructor(
@@ -82,5 +83,9 @@ export class User extends AggregateRoot {
   likeSharenote(likeSharenoteDto: LikeSharenoteDto): void {
     const temp = <LikedNote>(<unknown>likeSharenoteDto.sharenoteId);
     this.likedNotes.push(temp);
+  }
+
+  addBookmarkBlogreview(addBookmarkBlogreview: AddBookmarkBlogreviewRequest): void {
+    this.bookmarkedReviews.push(addBookmarkBlogreview);
   }
 }
