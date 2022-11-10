@@ -48,8 +48,9 @@ export class BlogreviewController {
     return await this.queryBus.execute<BlogreviewsQuery, BlogreviewsDto[]>(new BlogreviewsQuery());
   }
 
-  @Get(':userId')
-  async getBlogreviewById(@Param('userId') userId: string): Promise<BlogreviewsDto> {
-    return this.queryBus.execute<BlogreviewByIdQuery, any>(new BlogreviewByIdQuery(userId));
+  @Get('profile')
+  @UseGuards(AuthGuard())
+  async getBlogreviewById(@CurrentUser() user: UserSchema): Promise<any> {
+    return this.queryBus.execute<BlogreviewByIdQuery, any>(new BlogreviewByIdQuery(user.userId));
   }
 }
