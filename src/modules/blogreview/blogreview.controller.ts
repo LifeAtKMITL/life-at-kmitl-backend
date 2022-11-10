@@ -14,7 +14,7 @@ import {
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { CreateBlogCommand } from './commands/create-blogreview/create-blogreview.command';
 import { CreateBlogreviewRequest } from './dtos/request/create-blog-request.dto';
-import { BlogreviewByUserQuery } from './queries/blogreview-by-id.query-handler';
+import { BlogreviewByIdQuery } from './queries/blogreview-by-id.query-handler';
 import { BlogreviewsDto } from '../blogreview/dtos/blogreviews.dto';
 import { BlogreviewDto } from './dtos/blogreview.dto';
 import { BlogreviewsQuery } from './queries/blogreview.query-handler';
@@ -48,8 +48,8 @@ export class BlogreviewController {
     return await this.queryBus.execute<BlogreviewsQuery, BlogreviewsDto[]>(new BlogreviewsQuery());
   }
 
-  @Get(':id')
-  async getBlogreviewById(@Param('userID') id: string): Promise<any> {
-    return this.queryBus.execute<BlogreviewByUserQuery, any>(new BlogreviewByUserQuery(id));
+  @Get(':userId')
+  async getBlogreviewById(@Param('userId') userId: string): Promise<BlogreviewsDto> {
+    return this.queryBus.execute<BlogreviewByIdQuery, any>(new BlogreviewByIdQuery(userId));
   }
 }

@@ -3,18 +3,18 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { BlogreviewDtoRepository } from '../db/blogreview-dto.repository';
 import { BlogreviewDto } from '../dtos/blogreview.dto';
 
-export class BlogreviewByUserQuery {
-  constructor(public readonly id: string) {}
+export class BlogreviewByIdQuery {
+  constructor(public readonly userId: string) {}
 }
 
-@QueryHandler(BlogreviewByUserQuery)
+@QueryHandler(BlogreviewByIdQuery)
 export class BlogreviewByUserQueryHandler implements IQueryHandler {
   constructor(
     private readonly blogreviewDtoRepository: BlogreviewDtoRepository,
     private readonly blogreviewRepository: BlogreviewEntityRepository,
   ) {}
 
-  async execute({ id }: BlogreviewByUserQuery): Promise<any> {
-    return this.blogreviewRepository.findOneById(id);
+  async execute({ userId }: BlogreviewByIdQuery): Promise<BlogreviewDto> {
+    return this.blogreviewRepository.findById(userId);
   }
 }

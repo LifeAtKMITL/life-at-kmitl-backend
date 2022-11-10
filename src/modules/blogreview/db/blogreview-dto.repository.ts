@@ -23,8 +23,8 @@ export class BlogreviewDtoRepository {
   }
 
   // DESC: Filter by userID
-  async findById(id: string): Promise<any> {
-    const blogreview = await this.blogreviewModel.findOne({ userID: id }, {}, { lean: true });
+  async findById(userID: string): Promise<any> {
+    const blogreview = await this.blogreviewModel.findOne({ _id: userID }, {}, { lean: true });
     return blogreview;
   }
 }
