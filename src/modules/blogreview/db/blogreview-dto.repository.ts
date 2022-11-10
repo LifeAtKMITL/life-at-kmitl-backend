@@ -10,22 +10,21 @@ export class BlogreviewDtoRepository {
   constructor(@InjectModel(BlogreviewSchema.name) private readonly blogreviewModel: Model<BlogreviewSchema>) {}
 
   // DESC: find all
-  async findAll(): Promise<BlogreviewsDto[]> {
+  async findAll(): Promise<any[]> {
     const blogreviews = await this.blogreviewModel.find({}, {}, { lean: true });
     return blogreviews.map((blogreview) => {
       return {
-        userId: blogreview.userID,
+        userId: blogreview.userId,
         textSubjectReview: blogreview.textSubjectReview,
-        subjectID: blogreview.subjectID,
-        rate: blogreview.rate,
-        date: blogreview.date
+        subjectID: blogreview.subjectId,
+        date: blogreview.date,
       };
     });
   }
 
   // DESC: Filter by userID
-  async findById(id: string): Promise<BlogreviewDto> {
-    const blogreview = await this.blogreviewModel.findOne({ userID: id }, {}, { lean: true });
+  async findById(userID: string): Promise<any> {
+    const blogreview = await this.blogreviewModel.findOne({ _id: userID }, {}, { lean: true });
     return blogreview;
   }
 }
