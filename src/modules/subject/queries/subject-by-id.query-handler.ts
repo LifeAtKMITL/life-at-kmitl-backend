@@ -25,6 +25,11 @@ export class SubjectByIdQueryHandler implements IQueryHandler {
           theory: subject,
           lab: null,
         });
+      } else if (subject.lectOrPrac === 'ป' && subject.secPair === null) {
+        ret.push({
+          theory: null,
+          lab: subject,
+        });
       }
     });
     return ret;
