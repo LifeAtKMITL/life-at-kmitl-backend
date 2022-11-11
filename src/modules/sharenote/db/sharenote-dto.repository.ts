@@ -13,15 +13,18 @@ export class SharenoteDtoRepository {
     const sharenotes = await this.sharenoteModel.find({}, {}, { lean: true });
     return sharenotes.map((sharenote) => {
       return {
-        userName: sharenote.userName,
         userId: sharenote.userId,
+        subjectId: sharenote.subjectId,
         sharenoteCollectionName: sharenote.sharenoteCollectionName,
         sharenoteCollectionNameVersion: sharenote.sharenoteCollectionNameVersion,
         files: sharenote.files,
         likeCount: sharenote.likeCount,
-        dowloadCount: sharenote.dowloadCount,
+        viewCount: sharenote.viewCount,
         teachers: sharenote.teachers,
         date: sharenote.date,
+        exam: sharenote.exam,
+        year: sharenote.year,
+        description: sharenote.description,
       };
     });
   }

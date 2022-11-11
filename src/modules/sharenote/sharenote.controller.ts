@@ -63,27 +63,26 @@ export class SharenoteController {
   async getSharenoteById(@Param('id') id: string): Promise<SharenotesDto> {
     return this.queryBus.execute<SharenoteByIdQuery, SharenoteDto>(new SharenoteByIdQuery(id));
   }
-  // @Post()
-  // async createSharenote(@Body() createSharenoteRequest: CreateSharenoteRequestDTO): Promise<void> {
-  //   await this.commandBus.execute<CreateSharenoteCommand, void>(new CreateSharenoteCommand(createSharenoteRequest));
-  // }
 
   @Post('uploads')
+  @UseGuards(AuthGuard())
   @UseInterceptors(FilesInterceptor('files', 5, mulOp))
   async uploadFile(
+    @CurrentUser() user: UserSchema,
     @UploadedFiles()
     files: Array<Express.Multer.File>,
     @Body() createSharenoteRequest: CreateSharenoteRequestDTO,
   ) {
     try {
-      const { _id_mongo_user, sharenoteCollectionName, teachers } = createSharenoteRequest;
+      const { _id_mongo_user, userId, subjectId, sharenoteCollectionName, teachers, exam, year, description } =
+        createSharenoteRequest;
 
-      let listObjFile = await this.fileService.uploadsParams(files, _id_mongo_user, sharenoteCollectionName);
+      let listObjFile = await this.fileService.uploadsParams(files, user.userId, sharenoteCollectionName);
       //let ans = await this.fileService.upload(files[i]);
 
       let res: Sharenote;
       res = await this.commandBus.execute<CreateSharenoteCommand, Sharenote>(
-        new CreateSharenoteCommand(createSharenoteRequest, listObjFile),
+        new CreateSharenoteCommand(user.userId, createSharenoteRequest, listObjFile),
       );
 
       return res;

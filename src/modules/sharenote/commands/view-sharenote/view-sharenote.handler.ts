@@ -12,7 +12,7 @@ export class ViewSharenoteCommandHandler implements ICommandHandler {
   async execute({ userId, likeSharenoteDto }: ViewSharenoteCommand): Promise<any> {
     const sharenote = await this.sharenoteEntityRepository.findOneById(likeSharenoteDto.sharenoteId);
 
-    sharenote.addDowloadCount();
+    sharenote.addviewCount();
 
     await this.sharenoteEntityRepository.findOneAndReplaceById(sharenote.getId(), sharenote);
 

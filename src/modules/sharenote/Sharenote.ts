@@ -4,14 +4,17 @@ export class Sharenote extends AggregateRoot {
   constructor(
     private readonly _id: string,
     private readonly userId: string,
-    private readonly userName: string,
+    private readonly subjectId: string,
     private readonly sharenoteCollectionName: string,
     private readonly sharenoteCollectionNameVersion: string,
     private readonly files: any[],
     private likeCount: number,
-    private dowloadCount: number,
+    private viewCount: number,
     private readonly teachers: string[],
     private readonly date: Date,
+    private readonly description: string,
+    private readonly exam: string,
+    private readonly year: string,
   ) {
     super();
   }
@@ -22,9 +25,6 @@ export class Sharenote extends AggregateRoot {
 
   getUserId(): string {
     return this.userId;
-  }
-  getUserName(): string {
-    return this.userName;
   }
 
   getSharenoteCollectionName(): string {
@@ -42,8 +42,8 @@ export class Sharenote extends AggregateRoot {
     return this.likeCount;
   }
 
-  getDowloadCount(): number {
-    return this.dowloadCount;
+  getviewCount(): number {
+    return this.viewCount;
   }
 
   getTeachers(): string[] {
@@ -63,7 +63,21 @@ export class Sharenote extends AggregateRoot {
       this.likeCount = this.getLikeCount() - 1;
     }
   }
-  addDowloadCount(): any {
-    this.dowloadCount = this.getDowloadCount() + 1;
+  addviewCount(): any {
+    this.viewCount = this.getviewCount() + 1;
+  }
+
+  getSubjectId(): string {
+    return this.subjectId;
+  }
+
+  getDescription(): string {
+    return this.description;
+  }
+  getExam(): string {
+    return this.exam;
+  }
+  getYear(): string {
+    return this.year;
   }
 }

@@ -7,18 +7,18 @@ import { CreateSharenoteCommand } from './create-sharenote.command';
 export class CreateSharenoteCommandHandler implements ICommandHandler {
   constructor(private readonly sharenoteFactory: SharenoteFactory) {}
 
-  async execute({ createSharenoteRequest, listFileUploaded }: CreateSharenoteCommand): Promise<Sharenote> {
-    const { _id_mongo_user, sharenoteCollectionName, teachers } = createSharenoteRequest;
-    // console.log(_id_mongo_user);
-    // console.log(sharenoteCollectionName);
-    //console.log(listFileUploaded[0].collectionName);
+  async execute({ userId, createSharenoteRequest, listFileUploaded }: CreateSharenoteCommand): Promise<Sharenote> {
+    const { subjectId, exam, year, description, sharenoteCollectionName, teachers } = createSharenoteRequest;
     const sharenote = this.sharenoteFactory.create(
-      _id_mongo_user,
-      'USERNAME PLACE HERE',
+      userId,
+      subjectId,
       sharenoteCollectionName,
       listFileUploaded[0].collectionName,
       listFileUploaded,
       teachers,
+      exam,
+      year,
+      description,
     );
     return sharenote;
   }
