@@ -13,6 +13,7 @@ import { SubjectsQuery } from './queries/subjects.query-handler';
 import { AddFavoriteSubjectCommand } from './commands/add-favorite-gened/add-favorite-subject.handler';
 import { FilterSubjectRequest } from './dtos/request/filter-subject-request.dto';
 import { FilterSubjectQuery } from './queries/filter-subect.query-handler';
+import { SubjectByIdResponseDto } from './dtos/subject-by-id-response.dto';
 
 @Controller('subject')
 export class SubjectController {
@@ -47,8 +48,8 @@ export class SubjectController {
    * RES: SubjectDto
    */
   @Get(':id')
-  async getSubjectById(@Param('id') id: string): Promise<SubjectDto[]> {
-    return this.queryBus.execute<SubjectByIdQuery, SubjectDto[]>(new SubjectByIdQuery(id));
+  async getSubjectById(@Param('id') id: string): Promise<SubjectByIdResponseDto[]> {
+    return this.queryBus.execute<SubjectByIdQuery, SubjectByIdResponseDto[]>(new SubjectByIdQuery(id));
   }
 
   /*
