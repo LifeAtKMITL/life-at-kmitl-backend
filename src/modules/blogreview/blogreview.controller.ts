@@ -25,6 +25,8 @@ import { UserSchema } from '../user/db/user-schema';
 import { User } from '../user/User';
 import { AddBookmarkBlogreviewRequest } from './dtos/request/add-bookmark-blogreview.dto';
 import { AddBookmarkBlogreviewCommand } from './commands/add-bookmark-blogreview/add-bookmark-blogreview.handler';
+import { LikeBlogreviewDto } from './dtos/request/like-blogreview.dto';
+import { LikeBlogreviewCommand } from './commands/like-blogreview/like-blogreview.command';
 
 @Controller('blogreview')
 export class BlogreviewController {
@@ -65,7 +67,13 @@ export class BlogreviewController {
     @Body() saveBookmarkBlogreview: AddBookmarkBlogreviewRequest,
   ): Promise<void> {
     this.commandBus.execute<AddBookmarkBlogreviewCommand, void>(
-      new AddBookmarkBlogreviewCommand(user.userId, saveBookmarkBlogreview)
+      new AddBookmarkBlogreviewCommand(user.userId, saveBookmarkBlogreview),
     );
+  }
+
+  @Put('like')
+  @UseGuards(AuthGuard())
+  async likeBlogreview(@CurrentUser() user: UserSchema, @Body() likeBlogreviewDto: LikeBlogreviewDto): Promise<any> {
+    this.commandBus.execute<LikeBlogreviewCommand, void>(new LikeBlogreviewCommand(user.userId, likeBlogreviewDto));
   }
 }

@@ -7,7 +7,7 @@ export class Blogreview extends AggregateRoot {
     private readonly subjectName: string,
     private readonly textSubjectReview: string,
     private readonly userId: string,
-    private readonly likeCount: number,
+    private likeCount: number,
     private readonly date: Date,
   ) {
     super();
@@ -36,5 +36,15 @@ export class Blogreview extends AggregateRoot {
 
   getDate(): Date {
     return this.date;
+  }
+
+  addLikeCount(): any {
+    this.likeCount = this.getLikeCount() + 1;
+  }
+
+  minusLikeCount(): any {
+    if (this.likeCount > 0) {
+      this.likeCount = this.getLikeCount() - 1;
+    }
   }
 }

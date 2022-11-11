@@ -6,6 +6,7 @@ import { AddBookmarkBlogreviewRequest } from '../blogreview/dtos/request/add-boo
 import { RemoveFavoriteSubjectRequest } from './dtos/request/remove-favorite-subject.dto';
 import { BadRequestException } from '@nestjs/common';
 import { remove } from 'lodash';
+import { LikeBlogreviewDto } from '../blogreview/dtos/request/like-blogreview.dto';
 
 export class User extends AggregateRoot {
   constructor(
@@ -99,5 +100,19 @@ export class User extends AggregateRoot {
 
   addBookmarkBlogreview(addBookmarkBlogreview: AddBookmarkBlogreviewRequest): void {
     this.bookmarkedReviews.push(addBookmarkBlogreview);
+  }
+
+  setLikedReviews(likeblogreviewDto: LikeBlogreviewDto): boolean {
+    let founded = false;
+    this.likedReviews.forEach((element, index) => {
+      if (likeblogreviewDto.reviewId == <string>(<unknown>this.likedReviews[index])) {
+        this.likedReviews.slice(index, 1);
+        founded = true;
+      }
+    });
+
+    if (founded) {
+      return true;
+    }
   }
 }
