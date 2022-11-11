@@ -7,7 +7,7 @@ export class SharenoteSchema extends IdentifiableEntitySchema {
   readonly userId: string;
 
   @Prop()
-  readonly userName: string;
+  readonly subjectId: string;
 
   @Prop()
   readonly sharenoteCollectionName: string;
@@ -22,11 +22,20 @@ export class SharenoteSchema extends IdentifiableEntitySchema {
   readonly likeCount: number;
 
   @Prop()
-  readonly dowloadCount: number;
+  readonly viewCount: number;
 
   @Prop([String])
   readonly teachers: string[];
 
   @Prop()
   readonly date: Date;
+
+  @Prop()
+  readonly exam: string;
+
+  @Prop()
+  readonly year: string;
+
+  @Prop()
+  readonly description: string;
 }

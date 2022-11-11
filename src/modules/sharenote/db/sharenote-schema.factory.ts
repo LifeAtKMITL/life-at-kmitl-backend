@@ -10,14 +10,17 @@ export class SharenoteSchemaFactory implements EntitySchemaFactory<SharenoteSche
     return {
       _id: new mongoose.Types.ObjectId(sharenote.getId()),
       userId: sharenote.getUserId(),
-      userName: sharenote.getUserName(),
+      subjectId: sharenote.getSubjectId(),
       sharenoteCollectionName: sharenote.getSharenoteCollectionName(),
       sharenoteCollectionNameVersion: sharenote.getSharenoteCollectionNameVersion(),
       files: sharenote.getFiles(),
       likeCount: sharenote.getLikeCount(),
-      dowloadCount: sharenote.getDowloadCount(),
+      viewCount: sharenote.getviewCount(),
       teachers: sharenote.getTeachers(),
       date: sharenote.getDate(),
+      exam: sharenote.getExam(),
+      year: sharenote.getYear(),
+      description: sharenote.getDescription(),
     };
   }
 
@@ -25,14 +28,17 @@ export class SharenoteSchemaFactory implements EntitySchemaFactory<SharenoteSche
     return new Sharenote(
       sharenoteSchema._id.toString(),
       sharenoteSchema.userId,
-      sharenoteSchema.userName,
+      sharenoteSchema.subjectId,
       sharenoteSchema.sharenoteCollectionName,
       sharenoteSchema.sharenoteCollectionNameVersion,
       sharenoteSchema.files,
       sharenoteSchema.likeCount,
-      sharenoteSchema.dowloadCount,
+      sharenoteSchema.viewCount,
       sharenoteSchema.teachers,
       sharenoteSchema.date,
+      sharenoteSchema.exam,
+      sharenoteSchema.year,
+      sharenoteSchema.description,
     );
   }
 }

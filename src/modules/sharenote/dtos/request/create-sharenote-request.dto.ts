@@ -3,12 +3,13 @@ export class CreateSharenoteRequestDTO {
   sharenoteCollectionName: string;
   teachers: string[];
   userId: string;
-  userName: string;
-  // sharenoteCollectionName: string;
+  subjectId: string;
   sharenoteCollectionNameVersion: string;
   files: any[];
   likeCount: number;
-  dowloadCount: number;
-  // teachers: string[];
+  viewCount: number;
   date: Date;
+  exam: string;
+  year: string;
+  description: string;
 }
