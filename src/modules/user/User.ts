@@ -1,6 +1,6 @@
 import { LikeSharenoteDto } from './../sharenote/dtos/likeSharenote/likeSharenote.dto';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { AddFavoriteSubjectRequest } from '../subject/dtos/request/add-favorite-subject.dto';
+import { AddFavoriteSubjectRequest } from './dtos/add-favorite-subject.dto';
 import { BookmarkedReview, FavoriteGenEd, LikedDorm, LikedNote, LikedReview, ScoredDorm } from './value-objects';
 
 export class User extends AggregateRoot {
@@ -9,12 +9,12 @@ export class User extends AggregateRoot {
     private readonly userId: string,
     private readonly username: string,
     private readonly image: string,
-    private readonly favGenEds: FavoriteGenEd[],
-    private readonly likedReviews: LikedReview[],
-    private readonly bookmarkedReviews: BookmarkedReview[],
-    private readonly likedDorms: LikedDorm[],
-    private readonly scoredDorms: ScoredDorm[],
-    private readonly likedNotes: LikedNote[],
+    private favGenEds: FavoriteGenEd[],
+    private likedReviews: LikedReview[],
+    private bookmarkedReviews: BookmarkedReview[],
+    private likedDorms: LikedDorm[],
+    private scoredDorms: ScoredDorm[],
+    private likedNotes: LikedNote[],
   ) {
     super();
   }
@@ -59,8 +59,8 @@ export class User extends AggregateRoot {
     return this.likedNotes;
   }
 
-  addFavoriteSubject(addFavoriteSubject: AddFavoriteSubjectRequest): void {
-    this.favGenEds.push(addFavoriteSubject);
+  addFavoriteSubject(addFavoriteSubjectRequest: AddFavoriteSubjectRequest): void {
+    this.favGenEds.push(addFavoriteSubjectRequest);
   }
 
   setLikedNotes(likeSharenoteDto: LikeSharenoteDto): boolean {

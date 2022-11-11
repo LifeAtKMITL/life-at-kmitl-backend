@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { FilterQuery, Model } from 'mongoose';
 import { BaseEntityRepository } from 'src/database/base-entity.repository';
-import { SubjectDto } from '../dtos/subject.dto';
 import { SubjectsDto } from '../dtos/subjects.dto';
 import { Subject } from '../Subject';
 import { GenEdSchema } from './gened-schema';

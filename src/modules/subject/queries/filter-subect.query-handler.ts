@@ -37,16 +37,13 @@ export class FilterSubjectQueryHandler implements IQueryHandler {
     }
 
     const allSubjects = await this.genedEntityRepository.findAll();
-    console.log(allSubjects.length);
     requestSubjects.forEach((subject) => {
-      // console.log(`${subject.toString()}`);
       for (let i = 0; i < allSubjects.length; i++) {
         if (!subject.checkAvailability(allSubjects[i])) {
           allSubjects.splice(i, 1);
         }
       }
     });
-    console.log(allSubjects.length);
 
     return this.subjectDtoFactory.create(allSubjects);
   }
