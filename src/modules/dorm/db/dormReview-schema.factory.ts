@@ -13,7 +13,7 @@ export class DormReviewSchemaFactory implements EntitySchemaFactory<DormReviewSc
     return {
       _id: new mongoose.Types.ObjectId(dormReview.getId()),
       dormId: dormReview.getDorm_Id(),
-      userId: dormReview.getuserId(),
+      userId: dormReview.getUserId(),
       textReview: dormReview.getTextReview(),
     };
   }

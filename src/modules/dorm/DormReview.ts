@@ -4,7 +4,7 @@ export class DormReview extends AggregateRoot {
   constructor(
     private readonly _id: string,
     private readonly dorm_Id: string,
-    private userId: string,
+    public readonly userId: string,
     private textReview: string,
   ) {
     super();
@@ -14,7 +14,7 @@ export class DormReview extends AggregateRoot {
     return this._id;
   }
 
-  getuserId(): string {
+  getUserId(): string {
     return this.userId;
   }
 

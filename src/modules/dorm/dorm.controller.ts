@@ -32,7 +32,7 @@ export class DormController {
   }
 
   @Get(':id')
-  async getDormById(@Param('id') id: string): Promise<DormsDto> {
+  async getDormById(@Param('id') id: string): Promise<any> {
     return this.queryBus.execute<DormByIdQuery, any>(new DormByIdQuery(id));
   }
 
