@@ -114,5 +114,13 @@ export class User extends AggregateRoot {
     if (founded) {
       return true;
     }
+
+    this.likeReviews(likeblogreviewDto);
+    return true;
+  }
+
+  likeReviews(likeBlogreviewDto: LikeBlogreviewDto): void {
+    const review = <LikedReview>(<unknown>likeBlogreviewDto.reviewId);
+    this.likedReviews.push(review)
   }
 }
