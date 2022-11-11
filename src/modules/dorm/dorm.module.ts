@@ -1,3 +1,5 @@
+import { DormReviewEntityRepository } from './db/dormreview-entity.repository';
+import { DormReviewFactory } from './dormReview.factory';
 import { CreateDormReviewCommandHandler } from './commands/create-dormReview/create-dormReview.handler';
 
 import { DormReviewController } from './dorm-review.controller';
@@ -18,8 +20,6 @@ import { UserModule } from '../user/user.module';
 import { UserEntityRepository } from '../user/db/user-entity.repository';
 import { UserSchemaFactory } from '../user/db/user-schema.factory';
 import { DormReviewSchema } from './db/dormReview-schema';
-import { DormReviewFactory } from './dormReview.factory';
-import { DormReviewEntityRepository } from './db/dormReview-entity.repository';
 import { DormReviewSchemaFactory } from './db/dormReview-schema.factory';
 
 @Module({
@@ -39,6 +39,7 @@ import { DormReviewSchemaFactory } from './db/dormReview-schema.factory';
     DormEntityRepository,
     DormSchemaFactory,
     DormDtoRepository,
+    DormReviewSchema,
     DormReviewFactory,
     DormReviewEntityRepository,
     DormReviewSchemaFactory,
