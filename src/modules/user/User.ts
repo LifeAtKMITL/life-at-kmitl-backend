@@ -1,7 +1,10 @@
 import { LikeSharenoteDto } from './../sharenote/dtos/likeSharenote/likeSharenote.dto';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { AddFavoriteSubjectRequest } from './dtos/add-favorite-subject.dto';
+import { AddFavoriteSubjectRequest } from './dtos/request/add-favorite-subject.dto';
 import { BookmarkedReview, FavoriteGenEd, LikedDorm, LikedNote, LikedReview, ScoredDorm } from './value-objects';
+import { RemoveFavoriteSubjectRequest } from './dtos/request/remove-favorite-subject.dto';
+import { BadRequestException } from '@nestjs/common';
+import { remove } from 'lodash';
 
 export class User extends AggregateRoot {
   constructor(
@@ -61,6 +64,15 @@ export class User extends AggregateRoot {
 
   addFavoriteSubject(addFavoriteSubjectRequest: AddFavoriteSubjectRequest): void {
     this.favGenEds.push(addFavoriteSubjectRequest);
+  }
+
+  removeFavoriteSubject(subject: RemoveFavoriteSubjectRequest): void {
+    const removedSubject = remove(this.favGenEds, ({ subjectId, sec }) => {
+      return subjectId === subject.subjectId && sec === subject.sec;
+    });
+    if (removedSubject.length === 0) {
+      throw new BadRequestException('Invalid Input');
+    }
   }
 
   setLikedNotes(likeSharenoteDto: LikeSharenoteDto): boolean {
