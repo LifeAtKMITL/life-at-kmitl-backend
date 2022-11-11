@@ -26,4 +26,8 @@ export class GenEdRepository extends BaseEntityRepository<GenEdSchema, Subject> 
   async findOneBySubjectId(subjectId: string): Promise<Subject> {
     return this.findOne({ subjectId: subjectId } as FilterQuery<GenEdSchema>);
   }
+
+  async findByIdAndSec(subjectId: string, sec: string): Promise<Subject> {
+    return this.findOne({ subjectId: subjectId, sec: sec } as FilterQuery<GenEdSchema>);
+  }
 }
