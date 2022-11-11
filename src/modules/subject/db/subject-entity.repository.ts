@@ -18,4 +18,8 @@ export class SubjectEntityRepository extends BaseEntityRepository<SubjectSchema,
   async findOneBySubjectId(subjectId: string): Promise<Subject> {
     return this.findOne({ subjectId: subjectId } as FilterQuery<SubjectSchema>);
   }
+
+  async findByIdAndSec(subjectId: string, sec: string): Promise<Subject> {
+    return this.findOne({ subjectId: subjectId, sec: sec } as FilterQuery<SubjectSchema>);
+  }
 }

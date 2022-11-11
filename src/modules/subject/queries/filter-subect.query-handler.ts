@@ -21,10 +21,18 @@ export class FilterSubjectQueryHandler implements IQueryHandler {
   async execute({ filterSubjectRequest }: FilterSubjectQuery): Promise<SubjectDto[]> {
     const requestSubjects: Subject[] = [];
     for (let i = 0; i < filterSubjectRequest.length; i++) {
-      const subject = await this.subjectEntityRepository.findByIdAndSec(
-        filterSubjectRequest[i].subjectId,
-        filterSubjectRequest[i].sec,
-      );
+      let subject: Subject = null;
+      try {
+        subject = await this.subjectEntityRepository.findByIdAndSec(
+          filterSubjectRequest[i].subjectId,
+          filterSubjectRequest[i].sec,
+        );
+      } catch (e) {
+        subject = await this.genedEntityRepository.findByIdAndSec(
+          filterSubjectRequest[i].subjectId,
+          filterSubjectRequest[i].sec,
+        );
+      }
       requestSubjects.push(subject);
     }
 
