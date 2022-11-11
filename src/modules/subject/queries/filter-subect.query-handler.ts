@@ -21,24 +21,29 @@ export class FilterSubjectQueryHandler implements IQueryHandler {
   async execute({ filterSubjectRequest }: FilterSubjectQuery): Promise<SubjectDto[]> {
     const requestSubjects: Subject[] = [];
     for (let i = 0; i < filterSubjectRequest.length; i++) {
-      const subject = await this.subjectEntityRepository.findByIdAndSec(
-        filterSubjectRequest[i].subjectId,
-        filterSubjectRequest[i].sec,
-      );
+      let subject: Subject = null;
+      try {
+        subject = await this.subjectEntityRepository.findByIdAndSec(
+          filterSubjectRequest[i].subjectId,
+          filterSubjectRequest[i].sec,
+        );
+      } catch (e) {
+        subject = await this.genedEntityRepository.findByIdAndSec(
+          filterSubjectRequest[i].subjectId,
+          filterSubjectRequest[i].sec,
+        );
+      }
       requestSubjects.push(subject);
     }
 
     const allSubjects = await this.genedEntityRepository.findAll();
-    console.log(allSubjects.length);
     requestSubjects.forEach((subject) => {
-      // console.log(`${subject.toString()}`);
       for (let i = 0; i < allSubjects.length; i++) {
         if (!subject.checkAvailability(allSubjects[i])) {
           allSubjects.splice(i, 1);
         }
       }
     });
-    console.log(allSubjects.length);
 
     return this.subjectDtoFactory.create(allSubjects);
   }

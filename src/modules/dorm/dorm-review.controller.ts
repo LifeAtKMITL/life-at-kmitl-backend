@@ -1,7 +1,7 @@
 import { CreateDormReviewCommand } from './commands/create-dormReview/create-dormReview.command';
 import { CreateDormReviewDto } from './dtos/command/create-dormReview';
 import { AddScoreDormCommand } from './commands/add-score-dorm/add-dorm.command';
-import { AddFavoriteSubjectCommand } from '../subject/commands/add-favorite-gened/add-favorite-subject.handler';
+import { AddFavoriteSubjectCommand } from '../user/commands/add-favorite-gened/add-favorite-subject.handler';
 import { AddScoreDto } from './dtos/command/add-score-dorm.dto';
 import { UserSchema } from '../user/db/user-schema';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';

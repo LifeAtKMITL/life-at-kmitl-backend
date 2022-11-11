@@ -1,12 +1,15 @@
-import { ObjectId } from "mongoose";
-export class SharenoteDto{
-    readonly userId: string;
-    readonly userName: string;
-    readonly sharenoteCollectionName: string;
-    readonly sharenoteCollectionNameVersion: string;
-    readonly files: any[];
-    readonly likeCount: number;
-    readonly dowloadCount: number;
-    readonly teachers: string[];
-    readonly date: Date;
+import { ObjectId } from 'mongoose';
+export class SharenoteDto {
+  readonly userId: string;
+  readonly subjectId: string;
+  readonly sharenoteCollectionName: string;
+  readonly sharenoteCollectionNameVersion: string;
+  readonly files: any[];
+  readonly likeCount: number;
+  readonly viewCount: number;
+  readonly teachers: string[];
+  readonly date: Date;
+  readonly exam: string;
+  readonly year: string;
+  readonly description: string;
 }

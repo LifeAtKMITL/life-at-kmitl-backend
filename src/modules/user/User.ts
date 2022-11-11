@@ -1,8 +1,11 @@
 import { LikeSharenoteDto } from './../sharenote/dtos/likeSharenote/likeSharenote.dto';
 import { AggregateRoot } from '@nestjs/cqrs';
-import { AddFavoriteSubjectRequest } from '../subject/dtos/request/add-favorite-subject.dto';
+import { AddFavoriteSubjectRequest } from './dtos/request/add-favorite-subject.dto';
 import { BookmarkedReview, FavoriteGenEd, LikedDorm, LikedNote, LikedReview, ScoredDorm } from './value-objects';
 import { AddBookmarkBlogreviewRequest } from '../blogreview/dtos/request/add-bookmark-blogreview.dto';
+import { RemoveFavoriteSubjectRequest } from './dtos/request/remove-favorite-subject.dto';
+import { BadRequestException } from '@nestjs/common';
+import { remove } from 'lodash';
 
 export class User extends AggregateRoot {
   constructor(
@@ -10,12 +13,12 @@ export class User extends AggregateRoot {
     private readonly userId: string,
     private readonly username: string,
     private readonly image: string,
-    private readonly favGenEds: FavoriteGenEd[],
-    private readonly likedReviews: LikedReview[],
-    private readonly bookmarkedReviews: BookmarkedReview[],
-    private readonly likedDorms: LikedDorm[],
-    private readonly scoredDorms: ScoredDorm[],
-    private readonly likedNotes: LikedNote[],
+    private favGenEds: FavoriteGenEd[],
+    private likedReviews: LikedReview[],
+    private bookmarkedReviews: BookmarkedReview[],
+    private likedDorms: LikedDorm[],
+    private scoredDorms: ScoredDorm[],
+    private likedNotes: LikedNote[],
   ) {
     super();
   }
@@ -60,8 +63,17 @@ export class User extends AggregateRoot {
     return this.likedNotes;
   }
 
-  addFavoriteSubject(addFavoriteSubject: AddFavoriteSubjectRequest): void {
-    this.favGenEds.push(addFavoriteSubject);
+  addFavoriteSubject(addFavoriteSubjectRequest: AddFavoriteSubjectRequest): void {
+    this.favGenEds.push(addFavoriteSubjectRequest);
+  }
+
+  removeFavoriteSubject(subject: RemoveFavoriteSubjectRequest): void {
+    const removedSubject = remove(this.favGenEds, ({ subjectId, sec }) => {
+      return subjectId === subject.subjectId && sec === subject.sec;
+    });
+    if (removedSubject.length === 0) {
+      throw new BadRequestException('Invalid Input');
+    }
   }
 
   setLikedNotes(likeSharenoteDto: LikeSharenoteDto): boolean {

@@ -1,18 +1,14 @@
-import { Body, Controller, Get, Param, Post, Put, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { AuthGuard } from '@nestjs/passport';
-import { CurrentUser } from '../auth/decorators/current-user.decorator';
-import { UserSchema } from '../user/db/user-schema';
 import { CreateSubjectCommand } from './commands/create-subject/create-subject.command';
 import { CreateSubjectRequest } from './dtos/request/create-subject-request.dto';
-import { AddFavoriteSubjectRequest } from './dtos/request/add-favorite-subject.dto';
 import { SubjectDto } from './dtos/subject.dto';
 import { SubjectsDto } from './dtos/subjects.dto';
 import { SubjectByIdQuery } from './queries/subject-by-id.query-handler';
 import { SubjectsQuery } from './queries/subjects.query-handler';
-import { AddFavoriteSubjectCommand } from './commands/add-favorite-gened/add-favorite-subject.handler';
 import { FilterSubjectRequest } from './dtos/request/filter-subject-request.dto';
 import { FilterSubjectQuery } from './queries/filter-subect.query-handler';
+import { SubjectByIdResponseDto } from './dtos/subject-by-id-response.dto';
 
 @Controller('subject')
 export class SubjectController {
@@ -47,25 +43,8 @@ export class SubjectController {
    * RES: SubjectDto
    */
   @Get(':id')
-  async getSubjectById(@Param('id') id: string): Promise<SubjectDto[]> {
-    return this.queryBus.execute<SubjectByIdQuery, SubjectDto[]>(new SubjectByIdQuery(id));
-  }
-
-  /*
-   * DESC: API to add subject to user
-   * ROUTE: subject/favorite
-   * METHOD: PUT + with jwt-auth
-   * RES: void
-   */
-  @Put('favorite')
-  @UseGuards(AuthGuard())
-  async saveFavoriteSubject(
-    @CurrentUser() user: UserSchema,
-    @Body() saveFavoriteSubjectRequest: AddFavoriteSubjectRequest,
-  ): Promise<void> {
-    this.commandBus.execute<AddFavoriteSubjectCommand, void>(
-      new AddFavoriteSubjectCommand(user.userId, saveFavoriteSubjectRequest),
-    );
+  async getSubjectById(@Param('id') id: string): Promise<SubjectByIdResponseDto[]> {
+    return this.queryBus.execute<SubjectByIdQuery, SubjectByIdResponseDto[]>(new SubjectByIdQuery(id));
   }
 
   /*
