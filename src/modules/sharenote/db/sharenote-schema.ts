@@ -10,6 +10,9 @@ export class SharenoteSchema extends IdentifiableEntitySchema {
   readonly subjectId: string;
 
   @Prop()
+  readonly subjectName: string;
+
+  @Prop()
   readonly sharenoteCollectionName: string;
 
   @Prop()
@@ -31,11 +34,11 @@ export class SharenoteSchema extends IdentifiableEntitySchema {
   readonly date: Date;
 
   @Prop()
+  readonly description: string;
+
+  @Prop()
   readonly exam: string;
 
   @Prop()
   readonly year: string;
-
-  @Prop()
-  readonly description: string;
 }

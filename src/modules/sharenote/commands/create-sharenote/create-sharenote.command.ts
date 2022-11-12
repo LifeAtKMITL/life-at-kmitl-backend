@@ -2,9 +2,8 @@ import { CreateSharenoteRequestDTO } from '../../dtos/request/create-sharenote-r
 
 export class CreateSharenoteCommand {
   constructor(
-    public readonly userId : string,
+    public readonly userId: string,
     public readonly createSharenoteRequest: CreateSharenoteRequestDTO,
     public readonly listFileUploaded: any,
   ) {}
 }
-  

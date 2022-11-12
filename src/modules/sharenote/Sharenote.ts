@@ -5,6 +5,7 @@ export class Sharenote extends AggregateRoot {
     private readonly _id: string,
     private readonly userId: string,
     private readonly subjectId: string,
+    private readonly subjectName: string,
     private readonly sharenoteCollectionName: string,
     private readonly sharenoteCollectionNameVersion: string,
     private readonly files: any[],
@@ -69,6 +70,9 @@ export class Sharenote extends AggregateRoot {
 
   getSubjectId(): string {
     return this.subjectId;
+  }
+  getSubjectName(): string {
+    return this.subjectName;
   }
 
   getDescription(): string {

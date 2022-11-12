@@ -2,6 +2,7 @@ import { ObjectId } from 'mongoose';
 export class SharenoteDto {
   readonly userId: string;
   readonly subjectId: string;
+  readonly subjectName: string;
   readonly sharenoteCollectionName: string;
   readonly sharenoteCollectionNameVersion: string;
   readonly files: any[];

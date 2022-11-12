@@ -4,6 +4,7 @@ export class CreateSharenoteRequestDTO {
   teachers: string[];
   userId: string;
   subjectId: string;
+  subjectName: string;
   sharenoteCollectionNameVersion: string;
   files: any[];
   likeCount: number;
