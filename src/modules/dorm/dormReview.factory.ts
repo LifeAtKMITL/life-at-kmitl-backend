@@ -7,7 +7,7 @@ import mongoose from 'mongoose';
 import { EntityFactory } from 'src/ddd/EntityFactory';
 import { DormEntityRepository } from './db/dorm-entity.repository';
 import { Dorm } from './Dorm';
-import { DormReviewEntityRepository } from './db/dormreview-entity.repository';
+import { DormReviewEntityRepository } from './db/dormReview-entity.repository';
 
 CreateDormReviewDto;
 
