@@ -76,10 +76,8 @@ export class SharenoteController {
     try {
       const { _id_mongo_user, userId, subjectId, sharenoteCollectionName, teachers, exam, year, description } =
         createSharenoteRequest;
-
       let listObjFile = await this.fileService.uploadsParams(files, user.userId, sharenoteCollectionName);
       //let ans = await this.fileService.upload(files[i]);
-
       let res: Sharenote;
       res = await this.commandBus.execute<CreateSharenoteCommand, Sharenote>(
         new CreateSharenoteCommand(user.userId, createSharenoteRequest, listObjFile),
