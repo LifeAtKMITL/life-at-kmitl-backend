@@ -82,7 +82,6 @@ export class SharenoteController {
       res = await this.commandBus.execute<CreateSharenoteCommand, Sharenote>(
         new CreateSharenoteCommand(user.userId, createSharenoteRequest, listObjFile),
       );
-
       return res;
     } catch (e) {
       return HttpStatus.BAD_REQUEST;
