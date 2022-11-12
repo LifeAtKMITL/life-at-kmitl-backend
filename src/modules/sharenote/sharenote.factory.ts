@@ -31,9 +31,9 @@ export class SharenoteFactory implements EntityFactory<Sharenote> {
       0,
       teachers,
       new Date(),
+      description,
       exam,
       year,
-      description,
     );
     await this.sharenoteEntityRepository.create(newSharenote);
     return newSharenote;
