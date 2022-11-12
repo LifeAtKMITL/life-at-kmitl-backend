@@ -1,4 +1,4 @@
-import { DormReviewEntityRepository } from './db/dormreview-entity.repository';
+import { DormReviewEntityRepository } from './db/dormReview-entity.repository';
 import { DormReviewFactory } from './dormReview.factory';
 import { CreateDormReviewCommandHandler } from './commands/create-dormReview/create-dormReview.handler';
 

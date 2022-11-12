@@ -1,5 +1,5 @@
 import { UserEntityRepository } from 'src/modules/user/db/user-entity.repository';
-import { DormReviewEntityRepository } from '../../db/dormreview-entity.repository';
+import { DormReviewEntityRepository } from '../../db/dormReview-entity.repository';
 
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { DormEntityRepository } from '../../db/dorm-entity.repository';
