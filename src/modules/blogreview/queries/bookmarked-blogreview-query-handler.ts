@@ -25,7 +25,6 @@ export class GetBookmarkedReviewQueryHandler implements IQueryHandler {
     });
 
     const bookmarkedreviews = await this.blogreviewRepository.findByIds(temp);
-   // console.log(bookmarkedreviews);
 
     return bookmarkedreviews.map((blogreview) => {
       const temp = {
