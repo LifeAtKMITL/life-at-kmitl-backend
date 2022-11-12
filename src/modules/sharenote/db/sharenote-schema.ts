@@ -10,6 +10,9 @@ export class SharenoteSchema extends IdentifiableEntitySchema {
   readonly subjectId: string;
 
   @Prop()
+  readonly subjectName: string;
+
+  @Prop()
   readonly sharenoteCollectionName: string;
 
   @Prop()
