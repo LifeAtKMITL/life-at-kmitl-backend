@@ -63,6 +63,11 @@ export class SharenoteController {
   async getSharenoteById(@Param('id') id: string): Promise<SharenotesDto> {
     return this.queryBus.execute<SharenoteByIdQuery, SharenoteDto>(new SharenoteByIdQuery(id));
   }
+  @Get('profile')
+  @UseGuards(AuthGuard())
+  async getAllProfileSharenotes(): Promise<Sharenote[]> {
+    return this.queryBus.execute<SharenotesQuery, Sharenote[]>(new SharenotesQuery());
+  }
 
   @Post('uploads')
   @UseGuards(AuthGuard())
@@ -76,7 +81,7 @@ export class SharenoteController {
     try {
       const { _id_mongo_user, userId, subjectId, sharenoteCollectionName, teachers, exam, year, description } =
         createSharenoteRequest;
-      let listObjFile = await this.fileService.uploadsParams(files, user.userId, sharenoteCollectionName);
+      const listObjFile = await this.fileService.uploadsParams(files, user.userId, sharenoteCollectionName);
       //let ans = await this.fileService.upload(files[i]);
       let res: Sharenote;
       res = await this.commandBus.execute<CreateSharenoteCommand, Sharenote>(
