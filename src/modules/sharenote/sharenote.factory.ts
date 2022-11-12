@@ -12,6 +12,7 @@ export class SharenoteFactory implements EntityFactory<Sharenote> {
   async create(
     userId,
     subjectId,
+    subjectName,
     sharenoteCollectionName,
     sharenoteCollectionNameVersion,
     files,
@@ -24,6 +25,7 @@ export class SharenoteFactory implements EntityFactory<Sharenote> {
       new mongoose.Types.ObjectId().toHexString(),
       userId,
       subjectId,
+      subjectName,
       sharenoteCollectionName,
       sharenoteCollectionNameVersion,
       files,

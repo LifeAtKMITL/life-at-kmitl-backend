@@ -15,6 +15,7 @@ export class SharenoteDtoRepository {
       return {
         userId: sharenote.userId,
         subjectId: sharenote.subjectId,
+        subjectName: sharenote.subjectName,
         sharenoteCollectionName: sharenote.sharenoteCollectionName,
         sharenoteCollectionNameVersion: sharenote.sharenoteCollectionNameVersion,
         files: sharenote.files,

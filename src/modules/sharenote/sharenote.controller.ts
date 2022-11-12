@@ -56,8 +56,8 @@ export class SharenoteController {
   ) {}
 
   @Get()
-  async getAllNotes(): Promise<SharenoteDto[]> {
-    return this.queryBus.execute<SharenotesQuery, SharenoteDto[]>(new SharenotesQuery());
+  async getAllNotes(): Promise<Sharenote[]> {
+    return this.queryBus.execute<SharenotesQuery, Sharenote[]>(new SharenotesQuery());
   }
   @Get(':id')
   async getSharenoteById(@Param('id') id: string): Promise<SharenotesDto> {
