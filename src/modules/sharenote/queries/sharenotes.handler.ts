@@ -14,6 +14,6 @@ export class SharenotesQueryHandler implements IQueryHandler<SharenotesQuery> {
   ) {}
 
   async execute(): Promise<Sharenote[]> {
-    return this.sharenoteRepository.findAll();
+    return await this.sharenoteRepository.findAll();
   }
 }
