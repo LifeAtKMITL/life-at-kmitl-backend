@@ -16,9 +16,7 @@ export class SharenoteProfileQueryHandler implements IQueryHandler {
 
   async execute({ userId }: SharenoteProfileQuery): Promise<ProfileSharenoteDto> {
     const sharenotes = await this.sharenoteRepository.findById(userId);
-    if (sharenotes.length == 0 || sharenotes == undefined) {
-      return;
-    }
+
     let totalViewCount = 0;
     let likeCount = 0;
 
