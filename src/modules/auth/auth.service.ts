@@ -7,7 +7,7 @@ import { LoginDto } from './dto/login.dto';
 import { UpdateAuthDto } from './dto/update-auth.dto';
 import { UserSchema } from '../user/db/user-schema';
 import APIFeatures from 'src/utils/apiFeatures.utils';
-import { images, usernames } from 'src/utils/fakeData.utils';
+import { usernames } from 'src/utils/fakeData.utils';
 import { firstValueFrom } from 'rxjs';
 
 @Injectable()
@@ -42,8 +42,9 @@ export class AuthService {
   async register(userId: string): Promise<{ token: string }> {
     try {
       // Generate Username, image
-      const username = usernames[Math.floor(Math.random() * usernames.length)];
-      const image = images[Math.floor(Math.random() * images.length)];
+      const number = Math.floor(Math.random() * 905);
+      const username = usernames[number];
+      const image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${number}.png`;
 
       // Create User
       const user = await this.userModel.create({ _id: new mongoose.Types.ObjectId(), userId, username, image });
