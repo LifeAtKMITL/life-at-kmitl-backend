@@ -9,9 +9,12 @@ import { SharenoteSchemaFactory } from './sharenote-schema.factory';
 @Injectable()
 export class SharenoteEntityRepository extends BaseEntityRepository<SharenoteSchema, Sharenote> {
   constructor(
-    @InjectModel(SharenoteSchema.name) sharenoteModel: Model<SharenoteSchema>,
+    @InjectModel(SharenoteSchema.name) private readonly sharenoteModel: Model<SharenoteSchema>,
     sharenoteSchemaFactory: SharenoteSchemaFactory,
   ) {
     super(sharenoteModel, sharenoteSchemaFactory);
+  }
+  async findById(id: string): Promise<Sharenote[]> {
+    return await this.sharenoteModel.find({ userId: id }, {}, { lean: true });
   }
 }
