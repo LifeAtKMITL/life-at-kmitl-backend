@@ -1,4 +1,5 @@
 export const usernames = [
+  'Zantaclaus',
   'Bulbasaur',
   'Ivysaur',
   'Venusaur',
