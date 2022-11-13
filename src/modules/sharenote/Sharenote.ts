@@ -43,7 +43,7 @@ export class Sharenote extends AggregateRoot {
     return this.likeCount;
   }
 
-  getviewCount(): number {
+  public getViewCount(): number {
     return this.viewCount;
   }
 
@@ -65,7 +65,7 @@ export class Sharenote extends AggregateRoot {
     }
   }
   addviewCount(): any {
-    this.viewCount = this.getviewCount() + 1;
+    this.viewCount = this.getViewCount() + 1;
   }
 
   getSubjectId(): string {

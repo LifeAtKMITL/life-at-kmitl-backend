@@ -16,7 +16,7 @@ export class SharenoteSchemaFactory implements EntitySchemaFactory<SharenoteSche
       sharenoteCollectionNameVersion: sharenote.getSharenoteCollectionNameVersion(),
       files: sharenote.getFiles(),
       likeCount: sharenote.getLikeCount(),
-      viewCount: sharenote.getviewCount(),
+      viewCount: sharenote.getViewCount(),
       teachers: sharenote.getTeachers(),
       date: sharenote.getDate(),
       exam: sharenote.getExam(),
@@ -38,9 +38,9 @@ export class SharenoteSchemaFactory implements EntitySchemaFactory<SharenoteSche
       sharenoteSchema.viewCount,
       sharenoteSchema.teachers,
       sharenoteSchema.date,
+      sharenoteSchema.description,
       sharenoteSchema.exam,
       sharenoteSchema.year,
-      sharenoteSchema.description,
     );
   }
 }

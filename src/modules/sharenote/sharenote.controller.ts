@@ -8,7 +8,6 @@ import {
   HttpStatus,
   Post,
   Get,
-  UploadedFile,
   UploadedFiles,
   UseInterceptors,
   Param,
@@ -16,7 +15,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { FileFieldsInterceptor, FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { FilesInterceptor } from '@nestjs/platform-express';
 import { CreateSharenoteCommand } from './commands/create-sharenote/create-sharenote.command';
 import { CreateSharenoteRequestDTO } from './dtos/request/create-sharenote-request.dto';
 import { extname } from 'path';
@@ -30,6 +29,8 @@ import { AuthGuard } from '@nestjs/passport';
 import { UserSchema } from '../user/db/user-schema';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { ViewSharenoteCommand } from './commands/view-sharenote/view-sharenote.command';
+import { SharenoteProfileQuery } from './queries/sharenote-profile-query';
+import { ProfileSharenoteDto } from './dtos/profileSharenote/profile-sharenote.dto';
 
 const mulOp = {
   limits: {
@@ -59,6 +60,18 @@ export class SharenoteController {
   async getAllNotes(): Promise<Sharenote[]> {
     return this.queryBus.execute<SharenotesQuery, Sharenote[]>(new SharenotesQuery());
   }
+
+  @Get('profile')
+  @UseGuards(AuthGuard())
+  async getAllProfileSharenotes(@CurrentUser() user: UserSchema): Promise<ProfileSharenoteDto[]> {
+    const res = this.queryBus.execute<SharenoteProfileQuery, ProfileSharenoteDto[]>(
+      new SharenoteProfileQuery(user.userId),
+    );
+    if (res === undefined) {
+      throw new HttpException('NOT FOUND', HttpStatus.NOT_FOUND);
+    }
+    return res;
+  }
   @Get(':id')
   async getSharenoteById(@Param('id') id: string): Promise<SharenotesDto> {
     return this.queryBus.execute<SharenoteByIdQuery, SharenoteDto>(new SharenoteByIdQuery(id));
@@ -76,10 +89,10 @@ export class SharenoteController {
     try {
       const { _id_mongo_user, userId, subjectId, sharenoteCollectionName, teachers, exam, year, description } =
         createSharenoteRequest;
-      let listObjFile = await this.fileService.uploadsParams(files, user.userId, sharenoteCollectionName);
+      const listObjFile = await this.fileService.uploadsParams(files, user.userId, sharenoteCollectionName);
       //let ans = await this.fileService.upload(files[i]);
-      let res: Sharenote;
-      res = await this.commandBus.execute<CreateSharenoteCommand, Sharenote>(
+      // const res: Sharenote;
+      const res = await this.commandBus.execute<CreateSharenoteCommand, Sharenote>(
         new CreateSharenoteCommand(user.userId, createSharenoteRequest, listObjFile),
       );
       return res;
