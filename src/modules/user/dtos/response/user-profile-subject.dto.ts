@@ -1,8 +1,8 @@
-import { FavoriteGenEd } from '../../value-objects';
+import { SubjectDto } from 'src/modules/subject/dtos/subject.dto';
 
 export class UserProfileSubjectDto {
   userId: string;
   username: string;
   image: string;
-  favGenEd: FavoriteGenEd[];
+  favGenEd: SubjectDto[];
 }

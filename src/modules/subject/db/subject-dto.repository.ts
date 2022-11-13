@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { FilterQuery, Model } from 'mongoose';
 import { SubjectDto } from '../dtos/subject.dto';
 import { SubjectsDto } from '../dtos/subjects.dto';
 import { GenEdSchema } from './gened-schema';
@@ -39,5 +39,13 @@ export class SubjectDtoRepository {
     const subjectFromGenEd = genEds.map((subject) => this.genedSchemaFactory.createFromSchema(subject));
 
     return this.subjectDtoFactory.create([...subjectE, ...subjectFromGenEd]);
+  }
+
+  async findOneByIdAndSec(subjectId: string, sec: string): Promise<SubjectDto> {
+    const genEd = await this.genedModel.findOne({ subjectId: subjectId, sec: sec } as FilterQuery<SubjectSchema>);
+
+    const subjectE = this.subjectShemaFactory.createFromSchema(genEd);
+
+    return this.subjectDtoFactory.createOne(subjectE);
   }
 }
