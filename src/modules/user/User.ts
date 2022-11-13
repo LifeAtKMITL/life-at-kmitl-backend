@@ -7,6 +7,7 @@ import { RemoveFavoriteSubjectRequest } from './dtos/request/remove-favorite-sub
 import { BadRequestException } from '@nestjs/common';
 import { remove } from 'lodash';
 import { LikeBlogreviewDto } from '../blogreview/dtos/request/like-blogreview.dto';
+import { RemoveBookmarkedReviewRequest } from '../blogreview/dtos/remove-bookmarked-blogreview.dto';
 
 export class User extends AggregateRoot {
   constructor(
@@ -102,6 +103,15 @@ export class User extends AggregateRoot {
     this.bookmarkedReviews.push(addBookmarkBlogreview);
   }
 
+  removeBookmarkBlogreview(blogreview: RemoveBookmarkedReviewRequest): void {
+    const removedReviews = remove(this.bookmarkedReviews, ({ reviewId }) => {
+      return reviewId === blogreview.reviewId;
+    });
+    if (removedReviews.length === 0) {
+      throw new BadRequestException('Invalid Input');
+    }
+  }
+
   setLikedReviews(likeblogreviewDto: LikeBlogreviewDto): boolean {
     let founded = false;
     this.likedReviews.forEach((element, index) => {
@@ -121,6 +131,6 @@ export class User extends AggregateRoot {
 
   likeReviews(likeBlogreviewDto: LikeBlogreviewDto): void {
     const review = <LikedReview>(<unknown>likeBlogreviewDto.reviewId);
-    this.likedReviews.push(review)
+    this.likedReviews.push(review);
   }
 }

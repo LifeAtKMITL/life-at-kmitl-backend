@@ -11,6 +11,7 @@ import {
   HttpException,
   HttpStatus,
   Put,
+  Delete,
 } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
 import { CreateBlogCommand } from './commands/create-blogreview/create-blogreview.command';
@@ -28,6 +29,9 @@ import { AddBookmarkBlogreviewCommand } from './commands/add-bookmark-blogreview
 import { LikeBlogreviewDto } from './dtos/request/like-blogreview.dto';
 import { LikeBlogreviewCommand } from './commands/like-blogreview/like-blogreview.command';
 import { GetBookmarkedReviewQuery } from './queries/bookmarked-blogreview-query-handler';
+import { UserBlogreviewQuery } from './queries/user-blogreview-query-handler';
+import { RemoveBookmarkedReviewRequest } from './dtos/remove-bookmarked-blogreview.dto';
+import { RemoveBookmarkedReviewCommand } from './commands/remove-bookmark-blogreview/remove-bookmark-blogreview.handler';
 
 @Controller('blogreview')
 export class BlogreviewController {
@@ -81,5 +85,22 @@ export class BlogreviewController {
   @UseGuards(AuthGuard())
   async getBookmarkedReviews(@CurrentUser() user: UserSchema): Promise<void> {
     return this.queryBus.execute<GetBookmarkedReviewQuery, any>(new GetBookmarkedReviewQuery(user.userId));
+  }
+
+  @Get('userreviews')
+  @UseGuards(AuthGuard())
+  async getUserReviews(@CurrentUser() user: UserSchema): Promise<void> {
+    return this.queryBus.execute<UserBlogreviewQuery, any>(new UserBlogreviewQuery(user.userId));
+  }
+
+  @Delete('bookmark')
+  @UseGuards(AuthGuard())
+  async removeBookmarkedReview(
+    @CurrentUser() user: UserSchema,
+    @Body() removeBookmarkedReviewRequest: RemoveBookmarkedReviewRequest,
+  ): Promise<void> {
+    return this.commandBus.execute<RemoveBookmarkedReviewCommand, void>(
+      new RemoveBookmarkedReviewCommand(user.userId, removeBookmarkedReviewRequest),
+    );
   }
 }
