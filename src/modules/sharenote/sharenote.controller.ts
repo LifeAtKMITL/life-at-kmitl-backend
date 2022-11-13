@@ -31,6 +31,7 @@ import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { ViewSharenoteCommand } from './commands/view-sharenote/view-sharenote.command';
 import { SharenoteProfileQuery } from './queries/sharenote-profile-query';
 import { ProfileSharenoteDto } from './dtos/profileSharenote/profile-sharenote.dto';
+import { GetAllSharenoteDto } from './dtos/getAll Sharenote/getall-sharenote.dto';
 
 const mulOp = {
   limits: {
@@ -57,8 +58,8 @@ export class SharenoteController {
   ) {}
 
   @Get()
-  async getAllNotes(): Promise<Sharenote[]> {
-    return this.queryBus.execute<SharenotesQuery, Sharenote[]>(new SharenotesQuery());
+  async getAllNotes(): Promise<GetAllSharenoteDto[]> {
+    return this.queryBus.execute<SharenotesQuery, GetAllSharenoteDto[]>(new SharenotesQuery());
   }
 
   @Get('profile')
