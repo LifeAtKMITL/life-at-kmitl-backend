@@ -46,7 +46,7 @@ export class AuthService {
       const username = usernames[number];
       const image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${number}.png`;
 
-      // Create User
+      // Create User YO YO
       const user = await this.userModel.create({ _id: new mongoose.Types.ObjectId(), userId, username, image });
 
       // Generate Token
