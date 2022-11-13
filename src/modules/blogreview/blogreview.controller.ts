@@ -28,6 +28,7 @@ import { AddBookmarkBlogreviewCommand } from './commands/add-bookmark-blogreview
 import { LikeBlogreviewDto } from './dtos/request/like-blogreview.dto';
 import { LikeBlogreviewCommand } from './commands/like-blogreview/like-blogreview.command';
 import { GetBookmarkedReviewQuery } from './queries/bookmarked-blogreview-query-handler';
+import { UserBlogreviewQuery } from './queries/user-blogreview-query-handler';
 
 @Controller('blogreview')
 export class BlogreviewController {
@@ -81,5 +82,11 @@ export class BlogreviewController {
   @UseGuards(AuthGuard())
   async getBookmarkedReviews(@CurrentUser() user: UserSchema): Promise<void> {
     return this.queryBus.execute<GetBookmarkedReviewQuery, any>(new GetBookmarkedReviewQuery(user.userId));
+  }
+
+  @Get('userreviews')
+  @UseGuards(AuthGuard())
+  async getUserReviews(@CurrentUser() user: UserSchema): Promise<void>{
+    return this.queryBus.execute<UserBlogreviewQuery, any>(new UserBlogreviewQuery(user.userId));
   }
 }
