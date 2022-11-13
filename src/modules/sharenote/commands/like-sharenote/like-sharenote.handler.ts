@@ -1,11 +1,7 @@
 import { SharenoteEntityRepository } from './../../db/sharenote-entity.repository';
-import { Sharenote } from '../../Sharenote';
 import { CommandHandler, ICommandHandler } from '@nestjs/cqrs';
-import { SharenoteFactory } from '../../sharenote.factory';
 import { LikeSharenoteCommand } from './like-sharenote.command';
 import { UserEntityRepository } from 'src/modules/user/db/user-entity.repository';
-import { LikedNote } from 'src/modules/user/value-objects';
-import { share } from 'rxjs';
 
 @CommandHandler(LikeSharenoteCommand)
 export class LikeSharenoteCommandHandler implements ICommandHandler {

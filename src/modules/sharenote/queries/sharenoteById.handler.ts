@@ -7,10 +7,10 @@ export class SharenoteByIdQuery {
 }
 
 @QueryHandler(SharenoteByIdQuery)
-export class SubjectByIdQueryHandler implements IQueryHandler {
-  constructor(private readonly subjectDtoRepository: SharenoteDtoRepository) {}
+export class SharenoteByIdQueryHandler implements IQueryHandler {
+  constructor(private readonly sharenoteDtoRepository: SharenoteDtoRepository) {}
 
   async execute({ id }: SharenoteByIdQuery): Promise<SharenoteDto[]> {
-    return this.subjectDtoRepository.findById(id);
+    return this.sharenoteDtoRepository.findById(id);
   }
 }
