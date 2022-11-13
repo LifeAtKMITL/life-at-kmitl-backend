@@ -75,37 +75,40 @@ export class Subject extends AggregateRoot {
       end: parsedDateSubj[1],
     };
 
+    // console.log(subject.getName(), classDateTimeSubj);
+
     if (
       this.dateRangeOverlaps(classDateTime.start, classDateTime.end, classDateTimeSubj.start, classDateTimeSubj.end)
     ) {
       // console.log('class overlaps');
       return false;
     }
-    if (
-      this.midtermDateTime !== null ||
-      (subject.getMidtermDateTime() !== null &&
+
+    if (this.getMidtermDateTime() !== null && subject.getMidtermDateTime() !== null) {
+      if (
         this.dateRangeOverlaps(
           new Date(this.midtermDateTime.start),
           new Date(this.midtermDateTime.end),
           new Date(subject.getMidtermDateTime().start),
           new Date(subject.getMidtermDateTime().end),
-        ))
-    ) {
-      // console.log('midterm overlaps');
-      return false;
+        )
+      ) {
+        // console.log('midterm overlaps');
+        return false;
+      }
     }
-    if (
-      this.finalDateTime !== null ||
-      (subject.getFinalDateTime() !== null &&
+    if (this.getFinalDateTime() !== null && subject.getFinalDateTime() !== null) {
+      if (
         this.dateRangeOverlaps(
           new Date(this.finalDateTime.start),
           new Date(this.finalDateTime.end),
           new Date(subject.getFinalDateTime().start),
           new Date(subject.getFinalDateTime().end),
-        ))
-    ) {
-      // console.log('final overlaps');
-      return false;
+        )
+      ) {
+        // console.log('final overlaps');
+        return false;
+      }
     }
 
     return true;
