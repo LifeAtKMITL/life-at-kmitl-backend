@@ -31,6 +31,7 @@ import { UserSchema } from '../user/db/user-schema';
 import { CurrentUser } from '../auth/decorators/current-user.decorator';
 import { ViewSharenoteCommand } from './commands/view-sharenote/view-sharenote.command';
 import { SharenoteProfileQuery } from './queries/sharenote-profile-query';
+import { ProfileSharenoteDto } from './dtos/profileSharenote/profile-sharenote.dto';
 
 const mulOp = {
   limits: {
@@ -63,10 +64,10 @@ export class SharenoteController {
 
   @Get('profile')
   @UseGuards(AuthGuard())
-  async getAllProfileSharenotes(@CurrentUser() user: UserSchema): Promise<any[]> {
-    console.log('dog');
-    console.log('TES');
-    const res = this.queryBus.execute<SharenoteProfileQuery, Sharenote[]>(new SharenoteProfileQuery(user.userId));
+  async getAllProfileSharenotes(@CurrentUser() user: UserSchema): Promise<ProfileSharenoteDto[]> {
+    const res = this.queryBus.execute<SharenoteProfileQuery, ProfileSharenoteDto[]>(
+      new SharenoteProfileQuery(user.userId),
+    );
     if (res === undefined) {
       throw new HttpException('NOT FOUND', HttpStatus.NOT_FOUND);
     }

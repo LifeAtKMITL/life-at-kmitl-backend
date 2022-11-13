@@ -8,10 +8,7 @@ import { Sharenote } from '../Sharenote';
 
 @QueryHandler(SharenotesQuery)
 export class SharenotesQueryHandler implements IQueryHandler<SharenotesQuery> {
-  constructor(
-    private readonly sharenoteDtoRepository: SharenoteDtoRepository,
-    private readonly sharenoteRepository: SharenoteEntityRepository,
-  ) {}
+  constructor(private readonly sharenoteRepository: SharenoteEntityRepository) {}
 
   async execute(): Promise<Sharenote[]> {
     return await this.sharenoteRepository.findAll();
