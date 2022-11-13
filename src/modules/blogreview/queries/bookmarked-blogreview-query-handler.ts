@@ -3,26 +3,30 @@ import { Blogreview } from './../Blogreview';
 import { BlogreviewEntityRepository } from './../db/blogreview-entity.repository';
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { BlogreviewDtoRepository } from '../db/blogreview-dto.repository';
-import { BlogreviewDto } from '../dtos/blogreview.dto';
 
-export class BlogreviewByIdQuery {
+export class GetBookmarkedReviewQuery {
   constructor(public readonly userId: string) {}
 }
 
-@QueryHandler(BlogreviewByIdQuery)
-export class BlogreviewByUserQueryHandler implements IQueryHandler {
+@QueryHandler(GetBookmarkedReviewQuery)
+export class GetBookmarkedReviewQueryHandler implements IQueryHandler {
   constructor(
     private readonly userRepository: UserEntityRepository,
-
     private readonly blogreviewRepository: BlogreviewEntityRepository,
   ) {}
 
-  async execute({ userId }: BlogreviewByIdQuery): Promise<any[]> {
-    const blogreviews = await this.blogreviewRepository.findByUserId(userId);
+  async execute({ userId }: GetBookmarkedReviewQuery): Promise<any> {
     const user = await this.userRepository.findOneById(userId);
-    //console.log(blogreviews);
+    const bookmarks = user.getBookmarkedReviews();
+    const temp = [];
 
-    return blogreviews.map((blogreview) => {
+    bookmarks.forEach(async (reviewId) => {
+      temp.push(reviewId.reviewId);
+    });
+
+    const bookmarkedreviews = await this.blogreviewRepository.findByIds(temp);
+
+    return bookmarkedreviews.map((blogreview) => {
       const temp = {
         _id: blogreview.getId(),
         subjectId: blogreview.getSubjectId(),
