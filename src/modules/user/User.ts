@@ -105,7 +105,7 @@ export class User extends AggregateRoot {
   setLikedReviews(likeblogreviewDto: LikeBlogreviewDto): boolean {
     let founded = false;
     this.likedReviews.forEach((element, index) => {
-      if (likeblogreviewDto.reviewId == <string>(<unknown>this.likedReviews[index])) {
+      if (likeblogreviewDto.reviewId === <string>(<unknown>this.likedReviews[index])) {
         this.likedReviews.slice(index, 1);
         founded = true;
       }

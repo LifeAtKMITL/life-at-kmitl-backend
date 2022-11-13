@@ -10,12 +10,12 @@ export class LikeBlogreviewCommandHandler implements ICommandHandler {
     private readonly blogreviewEntityRepository: BlogreviewEntityRepository,
   ) {}
 
-  async execute({ userId, likeBlogreviewDto }: LikeBlogreviewCommand): Promise<any> {
+  async execute({ userId, likeBlogreviewDto }: LikeBlogreviewCommand): Promise<void> {
     const newUser = await this.userEntityRepository.findOneById(userId);
 
     const isNewUser = newUser.setLikedReviews(likeBlogreviewDto);
 
-    const blogreview = await this.blogreviewEntityRepository.findOneById(likeBlogreviewDto.reviewId);
+    const blogreview = await this.blogreviewEntityRepository.findById(likeBlogreviewDto.reviewId);
     if (isNewUser) {
       blogreview.addLikeCount();
     } else {

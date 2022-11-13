@@ -73,13 +73,13 @@ export class BlogreviewController {
 
   @Put('like')
   @UseGuards(AuthGuard())
-  async likeBlogreview(@CurrentUser() user: UserSchema, @Body() likeBlogreviewDto: LikeBlogreviewDto): Promise<any> {
+  async likeBlogreview(@CurrentUser() user: UserSchema, @Body() likeBlogreviewDto: LikeBlogreviewDto): Promise<void> {
     this.commandBus.execute<LikeBlogreviewCommand, void>(new LikeBlogreviewCommand(user.userId, likeBlogreviewDto));
   }
 
   @Get('bookmarkedreview')
   @UseGuards(AuthGuard())
-  async getBookmarkedReviews(@CurrentUser() user: UserSchema): Promise<any> {
+  async getBookmarkedReviews(@CurrentUser() user: UserSchema): Promise<void> {
     return this.queryBus.execute<GetBookmarkedReviewQuery, any>(new GetBookmarkedReviewQuery(user.userId));
   }
 }

@@ -38,11 +38,11 @@ export class Blogreview extends AggregateRoot {
     return this.date;
   }
 
-  addLikeCount(): any {
+  addLikeCount(): void {
     this.likeCount = this.getLikeCount() + 1;
   }
 
-  minusLikeCount(): any {
+  minusLikeCount(): void {
     if (this.likeCount > 0) {
       this.likeCount = this.getLikeCount() - 1;
     }
