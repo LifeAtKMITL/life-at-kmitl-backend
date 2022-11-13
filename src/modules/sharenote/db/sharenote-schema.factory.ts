@@ -38,9 +38,9 @@ export class SharenoteSchemaFactory implements EntitySchemaFactory<SharenoteSche
       sharenoteSchema.viewCount,
       sharenoteSchema.teachers,
       sharenoteSchema.date,
+      sharenoteSchema.description,
       sharenoteSchema.exam,
       sharenoteSchema.year,
-      sharenoteSchema.description,
     );
   }
 }
