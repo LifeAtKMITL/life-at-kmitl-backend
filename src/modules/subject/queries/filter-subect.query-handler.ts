@@ -1,4 +1,5 @@
 import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
+import { remove } from 'lodash';
 import { GenEdRepository } from '../db/gened.repository';
 import { SubjectDtoFactory } from '../db/subject-dto.factory';
 import { SubjectEntityRepository } from '../db/subject-entity.repository';
@@ -37,13 +38,22 @@ export class FilterSubjectQueryHandler implements IQueryHandler {
     }
 
     const allSubjects = await this.genedEntityRepository.findAll();
-    requestSubjects.forEach((subject) => {
-      for (let i = 0; i < allSubjects.length; i++) {
-        if (!subject.checkAvailability(allSubjects[i])) {
-          allSubjects.splice(i, 1);
+    const removeSubjects: Subject[] = [];
+    for (let i = 0; i < requestSubjects.length; i++) {
+      for (let j = 0; j < allSubjects.length; j++) {
+        if (requestSubjects[i].checkAvailability(allSubjects[j]) === false) {
+          removeSubjects.push(allSubjects[j]);
         }
       }
+    }
+
+    removeSubjects.forEach((currSubject) => {
+      remove(allSubjects, (subject) => {
+        return subject.getSubjectId() === currSubject.getSubjectId() && subject.getSec() === currSubject.getSec();
+      });
     });
+
+    console.log(allSubjects.length);
 
     return this.subjectDtoFactory.create(allSubjects);
   }
