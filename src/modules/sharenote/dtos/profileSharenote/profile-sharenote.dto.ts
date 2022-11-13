@@ -1,6 +1,5 @@
 import { LikedNote } from './../../../user/value-objects';
 import { Sharenote } from './../../Sharenote';
-import { User } from 'src/modules/user/User';
 export class ProfileSharenoteDto {
   readonly _id: string;
   readonly userId: string;

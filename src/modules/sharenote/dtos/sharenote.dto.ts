@@ -1,4 +1,3 @@
-import { ObjectId } from 'mongoose';
 export class SharenoteDto {
   readonly userId: string;
   readonly subjectId: string;

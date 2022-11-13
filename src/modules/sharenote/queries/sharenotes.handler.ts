@@ -3,7 +3,6 @@ import { SharenoteDto } from '../dtos/sharenote.dto';
 import { SharenoteDtoRepository } from './../db/sharenote-dto.repository';
 import { SharenotesQuery } from './sharenotes.query';
 import { QueryHandler, IQueryHandler } from '@nestjs/cqrs';
-import { SharenotesDto } from '../dtos/sharenotes.dto';
 import { Sharenote } from '../Sharenote';
 
 @QueryHandler(SharenotesQuery)

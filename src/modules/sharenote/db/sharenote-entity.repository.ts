@@ -1,7 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { forEach } from 'lodash';
-import { Model, Document } from 'mongoose';
+import { Model } from 'mongoose';
 import { BaseEntityRepository } from 'src/database/base-entity.repository';
 import { Sharenote } from '../Sharenote';
 import { SharenoteSchema } from './sharenote-schema';

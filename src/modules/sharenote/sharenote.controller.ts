@@ -8,7 +8,6 @@ import {
   HttpStatus,
   Post,
   Get,
-  UploadedFile,
   UploadedFiles,
   UseInterceptors,
   Param,
@@ -16,7 +15,7 @@ import {
   UseGuards,
 } from '@nestjs/common';
 import { CommandBus, QueryBus } from '@nestjs/cqrs';
-import { FileFieldsInterceptor, FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
+import { FilesInterceptor } from '@nestjs/platform-express';
 import { CreateSharenoteCommand } from './commands/create-sharenote/create-sharenote.command';
 import { CreateSharenoteRequestDTO } from './dtos/request/create-sharenote-request.dto';
 import { extname } from 'path';

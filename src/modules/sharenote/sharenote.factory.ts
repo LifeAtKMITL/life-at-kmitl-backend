@@ -3,7 +3,6 @@ import mongoose from 'mongoose';
 import { EntityFactory } from 'src/ddd/EntityFactory';
 import { SharenoteEntityRepository } from './db/sharenote-entity.repository';
 import { Sharenote } from './Sharenote';
-import { SharenoteProps } from './sharenote.types';
 
 @Injectable()
 export class SharenoteFactory implements EntityFactory<Sharenote> {
