@@ -42,7 +42,7 @@ export class AuthService {
   async register(userId: string): Promise<{ token: string }> {
     try {
       // Generate Username, image
-      const number = Math.floor(Math.random() * 905);
+      const number = Math.floor(1 + Math.random() * 905);
       const username = usernames[number];
       const image = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${number}.png`;
 
