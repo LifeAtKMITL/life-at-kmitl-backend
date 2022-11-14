@@ -65,6 +65,18 @@ export class User extends AggregateRoot {
   }
 
   addFavoriteSubject(addFavoriteSubjectRequest: AddFavoriteSubjectRequest): void {
+    // if the addFavoriteSubjectRequest is already in the favGenEds -> remove
+    if (
+      this.favGenEds.find(({ subjectId, sec }) => {
+        return subjectId === addFavoriteSubjectRequest.subjectId && sec === addFavoriteSubjectRequest.sec;
+      })
+    ) {
+      remove(this.favGenEds, ({ subjectId, sec }) => {
+        return subjectId === addFavoriteSubjectRequest.subjectId && sec === addFavoriteSubjectRequest.sec;
+      });
+      return;
+    }
+
     this.favGenEds.push(addFavoriteSubjectRequest);
   }
 
@@ -121,6 +133,6 @@ export class User extends AggregateRoot {
 
   likeReviews(likeBlogreviewDto: LikeBlogreviewDto): void {
     const review = <LikedReview>(<unknown>likeBlogreviewDto.reviewId);
-    this.likedReviews.push(review)
+    this.likedReviews.push(review);
   }
 }
