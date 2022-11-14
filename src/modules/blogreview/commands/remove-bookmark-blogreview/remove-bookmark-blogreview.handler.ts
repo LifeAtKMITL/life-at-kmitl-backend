@@ -20,7 +20,7 @@ export class RemoveBookmarkedReviewCommandHandler implements ICommandHandler {
   async execute({ userId, removeBookmarkedReviewRequest }: RemoveBookmarkedReviewCommand): Promise<any> {
     const newUser = await this.userEntityRepository.findOneById(userId);
     const { reviewId } = removeBookmarkedReviewRequest;
-    // check if the subject are exist
+
     await this.blogreviewEntityRepository.findById(reviewId)
     newUser.removeBookmarkBlogreview(removeBookmarkedReviewRequest);
     await this.userEntityRepository.findOneAndReplaceById(newUser.getUserId(), newUser);
