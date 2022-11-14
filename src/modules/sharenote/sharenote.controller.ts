@@ -64,12 +64,12 @@ export class SharenoteController {
 
   @Get('profile')
   @UseGuards(AuthGuard())
-  async getAllProfileSharenotes(@CurrentUser() user: UserSchema): Promise<ProfileSharenoteDto[]> {
-    const res = this.queryBus.execute<SharenoteProfileQuery, ProfileSharenoteDto[]>(
-      new SharenoteProfileQuery(user.userId),
-    );
-    if (res === undefined) {
-      throw new HttpException('NOT FOUND', HttpStatus.NOT_FOUND);
+  async getAllProfileSharenotes(@CurrentUser() user: UserSchema): Promise<any> {
+    let res;
+    try {
+      res = this.queryBus.execute<SharenoteProfileQuery, ProfileSharenoteDto[]>(new SharenoteProfileQuery(user.userId));
+    } catch (e) {
+      return new HttpException('Profile NOT FOUND', HttpStatus.NOT_FOUND);
     }
     return res;
   }
@@ -102,15 +102,33 @@ export class SharenoteController {
     }
   }
 
-  @Put('like')
+  @Put('like/:id')
   @UseGuards(AuthGuard())
-  async likeSharenote(@CurrentUser() user: UserSchema, @Body() likeSharenoteDto: LikeSharenoteDto): Promise<any> {
-    this.commandBus.execute<LikeSharenoteCommand, void>(new LikeSharenoteCommand(user.userId, likeSharenoteDto));
+  async likeSharenote(@CurrentUser() user: UserSchema, @Param('id') id: string): Promise<any> {
+    let res;
+    const idType: LikeSharenoteDto = {
+      sharenoteId: id,
+    };
+    try {
+      res = this.commandBus.execute<LikeSharenoteCommand, any>(new LikeSharenoteCommand(user.userId, idType));
+    } catch (e) {
+      return new HttpException('Controller ERROR ', HttpStatus.NOT_FOUND);
+    }
+    return res;
   }
 
-  @Put('view')
+  @Put('view/:id')
   @UseGuards(AuthGuard())
-  async viewSharenote(@CurrentUser() user: UserSchema, @Body() likeSharenoteDto: LikeSharenoteDto): Promise<any> {
-    this.commandBus.execute<ViewSharenoteCommand, void>(new ViewSharenoteCommand(user.userId, likeSharenoteDto));
+  async viewSharenote(@CurrentUser() user: UserSchema, @Param('id') id: string): Promise<any> {
+    let res;
+    const idType: LikeSharenoteDto = {
+      sharenoteId: id,
+    };
+    try {
+      res = this.commandBus.execute<ViewSharenoteCommand, any>(new ViewSharenoteCommand(user.userId, idType));
+    } catch (e) {
+      return new HttpException('Controller ERROR ', HttpStatus.NOT_FOUND);
+    }
+    return res;
   }
 }
