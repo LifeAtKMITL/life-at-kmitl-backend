@@ -135,19 +135,18 @@ export class User extends AggregateRoot {
   }
 
   setLikedReviews(likeblogreviewDto: LikeBlogreviewDto): boolean {
-    let founded = false;
-    this.likedReviews.forEach((element, index) => {
-      if (likeblogreviewDto.reviewId === <string>(<unknown>this.likedReviews[index])) {
-        this.likedReviews.slice(index, 1);
-        founded = true;
-      }
-    });
-
-    if (founded) {
-      return true;
+    if (
+      this.likedReviews.find(({ reviewId }) => {
+        return reviewId === likeblogreviewDto.reviewId;
+      })
+    ) {
+      remove(this.likedReviews, ({ reviewId }) => {
+        return reviewId === likeblogreviewDto.reviewId;
+      });
+      return false;
     }
 
-    this.likeReviews(likeblogreviewDto);
+    this.likedReviews.push(likeblogreviewDto);
     return true;
   }
 
