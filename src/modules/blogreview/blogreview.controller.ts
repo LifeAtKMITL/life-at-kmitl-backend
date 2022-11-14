@@ -77,6 +77,7 @@ export class BlogreviewController {
     );
   }
 
+  // like and unlike at the same time
   @Put('like')
   @UseGuards(AuthGuard())
   async likeBlogreview(@CurrentUser() user: UserSchema, @Body() likeBlogreviewDto: LikeBlogreviewDto): Promise<void> {
@@ -106,6 +107,7 @@ export class BlogreviewController {
     );
   }
 
+  // unusable -> dont know why
   @Delete('like')
   @UseGuards(AuthGuard())
   async removeLikedReview(
