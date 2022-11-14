@@ -49,7 +49,7 @@ export class BlogreviewController {
       new CreateBlogCommand(user.userId, CreateBlogreviewRequest),
     );
     if (blogreview === undefined) {
-      throw new HttpException('NOT FOUND in both SubjectId and GenEdId', HttpStatus.NOT_FOUND);
+      return new HttpException('NOT FOUND in both SubjectId and GenEdId', HttpStatus.NOT_FOUND);
     }
 
     return new HttpException('Blogreview Created', HttpStatus.CREATED);
