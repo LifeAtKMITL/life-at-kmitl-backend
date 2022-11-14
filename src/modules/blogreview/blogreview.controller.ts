@@ -32,6 +32,8 @@ import { GetBookmarkedReviewQuery } from './queries/bookmarked-blogreview-query-
 import { UserBlogreviewQuery } from './queries/user-blogreview-query-handler';
 import { RemoveBookmarkedReviewRequest } from './dtos/remove-bookmarked-blogreview.dto';
 import { RemoveBookmarkedReviewCommand } from './commands/remove-bookmark-blogreview/remove-bookmark-blogreview.handler';
+import { RemoveLikedReviewRequest } from './dtos/remove-liked-blogreview.dto';
+import { RemoveLikedReviewCommand } from './commands/remove-like-review/remove-like-blogreview.handler';
 
 @Controller('blogreview')
 export class BlogreviewController {
@@ -101,6 +103,17 @@ export class BlogreviewController {
   ): Promise<void> {
     return this.commandBus.execute<RemoveBookmarkedReviewCommand, void>(
       new RemoveBookmarkedReviewCommand(user.userId, removeBookmarkedReviewRequest),
+    );
+  }
+
+  @Delete('like')
+  @UseGuards(AuthGuard())
+  async removeLikedReview(
+    @CurrentUser() user: UserSchema,
+    @Body() removeLikedReviewRequest: RemoveLikedReviewRequest,
+  ): Promise<void> {
+    return this.commandBus.execute<RemoveLikedReviewCommand, void>(
+      new RemoveLikedReviewCommand(user.userId, removeLikedReviewRequest),
     );
   }
 }
