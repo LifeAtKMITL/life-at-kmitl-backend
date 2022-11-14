@@ -36,7 +36,7 @@ export class DormController {
     return this.queryBus.execute<DormByIdQuery, any>(new DormByIdQuery(id));
   }
 
-  @Post()
+  @Post('create')
   async createDorm(@Body() createDormRequest: CreateDormRequest): Promise<void> {
     await this.commandBus.execute<CreateDormCommand, void>(new CreateDormCommand(createDormRequest));
   }

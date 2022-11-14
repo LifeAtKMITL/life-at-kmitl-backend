@@ -22,6 +22,7 @@ export class DormEntityRepository extends BaseEntityRepository<DormSchema, Dorm>
     // console.log(fileterOption);
     const minMonthly = fileterOption.monthly[0];
     const maxMonthly = fileterOption.monthly[1];
+    //console.log(maxMonthly);
     const dorms = await this.dormModel.find(
       {
         $and: [
@@ -32,6 +33,7 @@ export class DormEntityRepository extends BaseEntityRepository<DormSchema, Dorm>
       {},
       { lean: true },
     );
+    //console.log(dorms);
     const listHave = [];
     for (let i = 0; i < fileterOption.facilities.length; i++) {
       if (fileterOption.facilities[i].value == true) {
