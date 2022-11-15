@@ -5,6 +5,7 @@ import { LikeSharenoteCommand } from './like-sharenote.command';
 import { UserEntityRepository } from 'src/modules/user/db/user-entity.repository';
 import { HttpException, HttpStatus } from '@nestjs/common';
 import { User } from 'src/modules/user/User';
+import { ProfileSharenoteDto } from '../../dtos/profileSharenote/profile-sharenote.dto';
 
 @CommandHandler(LikeSharenoteCommand)
 export class LikeSharenoteCommandHandler implements ICommandHandler {
@@ -35,6 +36,6 @@ export class LikeSharenoteCommandHandler implements ICommandHandler {
     }
     await this.sharenoteEntityRepository.findOneAndReplaceById(sharenote.getId(), sharenote);
     await this.userEntityRepository.findOneAndReplaceById(newUser.getUserId(), newUser);
-    return sharenote;
+    return newUser;
   }
 }
