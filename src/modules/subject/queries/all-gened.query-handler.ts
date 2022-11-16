@@ -9,6 +9,21 @@ export class AllGenEdQueryHandler implements IQueryHandler {
   constructor(private readonly genedRepository: GenEdRepository) {}
 
   async execute(): Promise<SubjectsDto[]> {
-    return await this.genedRepository.findAllQuery();
+    const allGenEds = await this.genedRepository.findAllQuery();
+    return this.uniq_fast(allGenEds);
+  }
+
+  private uniq_fast(a: SubjectsDto[]): SubjectsDto[] {
+    const seen = {};
+    const out = [];
+    const len = a.length;
+    for (let i = 0; i < len; i++) {
+      const item = a[i];
+      if (seen[item.subjectId] !== 1) {
+        seen[item.subjectId] = 1;
+        out.push(item);
+      }
+    }
+    return out;
   }
 }
