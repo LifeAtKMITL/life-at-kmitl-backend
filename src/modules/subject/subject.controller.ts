@@ -9,6 +9,7 @@ import { SubjectsQuery } from './queries/subjects.query-handler';
 import { FilterSubjectRequest } from './dtos/request/filter-subject-request.dto';
 import { FilterSubjectQuery } from './queries/filter-subect.query-handler';
 import { SubjectByIdResponseDto } from './dtos/subject-by-id-response.dto';
+import { AllGenEdQuery } from './queries/all-gened.query-handler';
 
 @Controller('subject')
 export class SubjectController {
@@ -23,6 +24,17 @@ export class SubjectController {
   @Get()
   async getAllSubjects(): Promise<SubjectsDto[]> {
     return await this.queryBus.execute<SubjectsQuery, SubjectsDto[]>(new SubjectsQuery());
+  }
+
+  /*
+   * DESC: API to get all gened subjects
+   * ROUTE: subject/gened
+   * METHOD: GET
+   * RES: SubjectsDto[]
+   */
+  @Get('gened')
+  async getAllGenEds(): Promise<SubjectsDto[]> {
+    return await this.queryBus.execute<AllGenEdQuery, SubjectsDto[]>(new AllGenEdQuery());
   }
 
   /*

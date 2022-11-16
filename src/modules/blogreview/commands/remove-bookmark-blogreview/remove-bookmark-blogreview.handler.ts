@@ -14,14 +14,14 @@ export class RemoveBookmarkedReviewCommand {
 export class RemoveBookmarkedReviewCommandHandler implements ICommandHandler {
   constructor(
     private readonly userEntityRepository: UserEntityRepository,
-    private readonly blogreviewEntityRepository: BlogreviewEntityRepository
+    private readonly blogreviewEntityRepository: BlogreviewEntityRepository,
   ) {}
 
   async execute({ userId, removeBookmarkedReviewRequest }: RemoveBookmarkedReviewCommand): Promise<any> {
     const newUser = await this.userEntityRepository.findOneById(userId);
     const { reviewId } = removeBookmarkedReviewRequest;
 
-    await this.blogreviewEntityRepository.findById(reviewId)
+    await this.blogreviewEntityRepository.findById(reviewId);
     newUser.removeBookmarkBlogreview(removeBookmarkedReviewRequest);
     await this.userEntityRepository.findOneAndReplaceById(newUser.getUserId(), newUser);
     return;
