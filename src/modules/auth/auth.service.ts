@@ -9,6 +9,7 @@ import { UserSchema } from '../user/db/user-schema';
 import APIFeatures from 'src/utils/apiFeatures.utils';
 import { usernames } from 'src/utils/fakeData.utils';
 import { firstValueFrom } from 'rxjs';
+import * as bcrypt from 'bcryptjs';
 
 @Injectable()
 export class AuthService {
@@ -21,16 +22,18 @@ export class AuthService {
   async login(loginDto: LoginDto): Promise<{ token: string }> {
     const { userId } = loginDto;
 
-    // Get sub from Line
+    // Get tokenId from Line
     const { sub: tokenId } = await this.getLineProfileByTokenId(userId);
     // console.log(name, tokenId);
+
+    const hashedTokenId = await bcrypt.hash(tokenId, 10);
 
     // Find user in DB
     const user = await this.userModel.findOne({ userId: tokenId });
 
     // Register if no user
     if (!user) {
-      return this.register(tokenId);
+      return this.register(hashedTokenId);
     }
 
     // Generate Token
