@@ -29,7 +29,7 @@ export class AuthService {
     const hashedTokenId = await bcrypt.hash(tokenId, 10);
 
     // Find user in DB
-    const user = await this.userModel.findOne({ userId: tokenId });
+    const user = await this.userModel.findOne({ userId: hashedTokenId });
 
     // Register if no user
     if (!user) {
