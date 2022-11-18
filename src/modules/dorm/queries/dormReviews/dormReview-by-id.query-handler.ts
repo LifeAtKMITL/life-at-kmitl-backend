@@ -28,14 +28,14 @@ export class DormReviewByIdQueryHandler implements IQueryHandler {
     const listhave = new Set<string>();
     const listUser: User[] = [];
     for (let i = 0; i < reviews.length; i++) {
-      if (listhave.has(reviews[i].userId) == false) {
-        listhave.add(reviews[i].userId);
+      if (listhave.has(reviews[i].getUserId()) == false) {
+        listhave.add(reviews[i].getUserId());
 
-        listUser.push(await this.userRepository.findOneById(reviews[i].userId));
+        listUser.push(await this.userRepository.findOneById(reviews[i].getUserId()));
       }
 
       const templisthave = [...listhave];
-      const indexHave = templisthave.indexOf(reviews[i].userId);
+      const indexHave = templisthave.indexOf(reviews[i].getUserId());
 
       const temp = {
         ...reviews[i],

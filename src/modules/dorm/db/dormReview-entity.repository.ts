@@ -12,13 +12,21 @@ import { DormReviewSchemaFactory } from './dormReview-schema.factory';
 export class DormReviewEntityRepository extends BaseEntityRepository<DormReviewSchema, DormReview> {
   constructor(
     @InjectModel(DormReviewSchema.name) private readonly dormReviewModel: Model<DormReviewSchema>,
-    dormReviewSchemaFactory: DormReviewSchemaFactory,
+    private readonly dormReviewSchemaFactory: DormReviewSchemaFactory,
   ) {
     super(dormReviewModel, dormReviewSchemaFactory);
   }
 
   //async find function here
   async findAllById(id: string): Promise<DormReview[]> {
-    return await this.dormReviewModel.find({ dormId: id }, {}, { lean: true } as FilterQuery<DormReviewSchema>);
+    const documentReviews = await this.dormReviewModel.find({ dormId: id }, {}, {
+      lean: true,
+    } as FilterQuery<DormReviewSchema>);
+
+    const list = [];
+    documentReviews.forEach((document) => {
+      list.push(this.dormReviewSchemaFactory.createFromSchema(document));
+    });
+    return list;
   }
 }
