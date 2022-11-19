@@ -88,13 +88,8 @@ export class SharenoteController {
     @Body() createSharenoteRequest: CreateSharenoteRequestDTO,
   ) {
     try {
-      const { _id_mongo_user, userId, subjectId, sharenoteCollectionName, teachers, exam, year, description } =
-        createSharenoteRequest;
-      const listObjFile = await this.fileService.uploadsParams(files, user.userId, sharenoteCollectionName);
-      //let ans = await this.fileService.upload(files[i]);
-      // const res: Sharenote;
       const res = await this.commandBus.execute<CreateSharenoteCommand, Sharenote>(
-        new CreateSharenoteCommand(user.userId, createSharenoteRequest, listObjFile),
+        new CreateSharenoteCommand(user.userId, createSharenoteRequest, files),
       );
       return res;
     } catch (e) {
