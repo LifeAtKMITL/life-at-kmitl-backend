@@ -19,11 +19,10 @@ export class AuthService {
   ) {}
 
   async login(loginDto: LoginDto): Promise<{ token: string }> {
-    const { userId } = loginDto;
+    const { userId } = loginDto; // 2
 
-    // Get sub from Line
-    const { sub: tokenId } = await this.getLineProfileByTokenId(userId);
-    // console.log(name, tokenId);
+    // Get tokenId from Line
+    const { sub: tokenId } = await this.getLineProfileByTokenId(userId); // A
 
     // Find user in DB
     const user = await this.userModel.findOne({ userId: tokenId });
