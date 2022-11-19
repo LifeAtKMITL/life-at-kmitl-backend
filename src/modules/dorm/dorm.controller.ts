@@ -43,7 +43,7 @@ export class DormController {
 
   @Put('score')
   @UseGuards(AuthGuard())
-  async saveFavoriteSubject(@CurrentUser() user: UserSchema, @Body() addScoreDto: AddScoreDto): Promise<void> {
+  async addScoreDorm(@CurrentUser() user: UserSchema, @Body() addScoreDto: AddScoreDto): Promise<void> {
     this.commandBus.execute<AddScoreDormCommand, void>(new AddScoreDormCommand(user.userId, addScoreDto));
   }
 }
