@@ -1,4 +1,4 @@
 export class CreateDormReviewDto {
-  dormId: string;
-  textReview: string;
+  readonly dormId: string;
+  readonly textReview: string;
 }
