@@ -2,7 +2,11 @@ import { IQueryHandler, QueryHandler } from '@nestjs/cqrs';
 import { GenEdRepository } from '../db/gened.repository';
 import { SubjectsDto } from '../dtos/subjects.dto';
 
-export class AllGenEdQuery {}
+export class AllGenEdQuery {
+  constructor() {
+    //do nothing
+  }
+}
 
 @QueryHandler(AllGenEdQuery)
 export class AllGenEdQueryHandler implements IQueryHandler {

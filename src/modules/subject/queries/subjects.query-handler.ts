@@ -3,7 +3,11 @@ import { GenEdRepository } from '../db/gened.repository';
 import { SubjectDtoRepository } from '../db/subject-dto.repository';
 import { SubjectsDto } from '../dtos/subjects.dto';
 
-export class SubjectsQuery {}
+export class SubjectsQuery {
+  constructor() {
+    //do nothing
+  }
+}
 
 @QueryHandler(SubjectsQuery)
 export class SubjectsQueryHandler implements IQueryHandler<SubjectsQuery> {
